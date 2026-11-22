@@ -44,7 +44,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <body>
 <header class="site"><div class="bar">
   <a class="brand" href="../../index.html">校園網站 GEO</a>
-  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a> <a href="../../reflection.html">反思</a>
 </div></header>
 <div class="wrap">
 <p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S2｜Google 生成式 AI 指南</h1>
@@ -63,7 +63,8 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <li><strong>適用範圍</strong>：Google 搜尋的生成式 AI 功能（AI Overviews、AI Mode）與網站擁有者優化指引</li>
 </ul>
 <h2>重點</h2>
-<ol>
+<ol start="0">
+<li><strong>為什麼寫這份指南</strong>：原文開頭「people are increasingly gravitating to generative AI experiences to help them find information」，也就是 Google 觀察到越來越多人改用生成式 AI 體驗找資訊 [S2]。</li>
 <li><strong>SEO 最佳實踐仍適用於生成式 AI 搜尋</strong>：Google 指出生成式 AI 功能建立在核心搜尋排名與品質系統之上，因此既有 SEO 最佳實踐持續相關 [S2]。</li>
 <li><strong>生成式 AI 回應依賴 RAG 與查詢擴展</strong>：<br />
    - <strong>檢索增強生成（RAG，也稱 grounding）</strong>：透過核心搜尋排名系統從索引檢索相關、最新網頁，再審閱具體資訊生成更可靠回應，並顯示可點擊連結 [S2]。<br />
@@ -110,10 +111,10 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 </ol>
 <h2>與其他來源的關係</h2>
 <ul>
-<li><strong>S1 (Aggarwal et al., GEO)</strong>：S1 為學術定義 GEO 框架與指標；S2 為平台官方指引，兩者互補。S2 明確表示「優化生成式 AI 搜尋即優化搜尋體驗，仍屬 SEO」，與 S1 將 GEO 視為獨立範式有定義張力（見矛盾記錄）。</li>
+<li><strong>S1 (Aggarwal et al., GEO)</strong>：S1 為學術定義 GEO 框架與指標；S2 為平台官方指引，兩者互補。S2 明確表示「優化生成式 AI 搜尋即優化搜尋體驗，仍屬 SEO」，與 S1 將 GEO 視為獨立範式有定義張力（見 open-questions 矛盾第 1 條）。</li>
 <li><strong>S3 (Google AI features / query fan-out)</strong>：S2 文中已說明 query fan-out 概念；S3 可提供更詳細技術細節對照。</li>
 <li><strong>S4 (Google 結構化資料文件)</strong>：S2 指出結構化資料非生成式 AI 搜尋必要條件；S4 提供 schema.org 技術規範，兩者互補。</li>
-<li><strong>S5 (Google 文件更新 / FAQPage HowTo 變更)</strong>：S2 未提及 FAQPage/HowTo 複合式結果停用；S5 記錄 2023-08 政策變更，補充歷史脈絡。</li>
+<li><strong>S5 (Google 文件更新 / FAQPage HowTo 變更)</strong>：S2 未提及 FAQPage/HowTo 複合式結果停用；S5 的 2023 年 9 月條目移除 How-to 文件（連到 2023 年 8 月的部落格公告），並記錄 FAQ 複合式結果 2026-05-07 起不再顯示，見 open-questions 矛盾第 7 條。</li>
 <li><strong>S6 (llms.txt 提案)</strong>：S2 明確表示 Google 搜尋忽略 llms.txt；S6 為提案標準，不可視為已生效網路標準。</li>
 <li><strong>S7 (OpenAI 爬蟲文件)</strong>：S2 著重 Google 爬蟲與索引；S7 可補充其他 AI 爬蟲行為。</li>
 <li><strong>S8 (學生前期研究)</strong>：S8 參考 S2 指引制定政大網站技術規格（robots.txt、結構化資料、內容策略等），引用 S8 時必標「學生前期研究」並附基準方法限制。</li>
@@ -122,8 +123,8 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <ul>
 <li><strong>策略定調</strong>：以既有 SEO 最佳實踐為基礎，無需另闢「GEO 專用」技術棧；重點在內容品質與技術可及性（推論，基於 S2 核心訊息）[S2]。</li>
 <li><strong>內容優先序</strong>：投入資源創作「非大眾化、專家主導、以人為本」的招生內容（如系所獨特優勢、真實學生見證、可查證統計數據），而非追求關鍵字變體覆蓋或大量同質頁面（推論，基於 S2 內容策略段落）[S2]。</li>
-<li><strong>技術清單</strong>：確保頁面可被索引、符合技術需求、在 Search Console 具備生成式 AI 功能資格、robots.txt 開放 Google-Extended 等爬蟲、語意化 HTML、良好頁面體驗（推論，基於 S2 技術結構段落）[S2]。</li>
-<li><strong>結構化資料</strong>：保留 FAQPage、EducationalOccupationalProgram 等標記作為整體 SEO 與豐富搜尋結果策略，但不預期對生成式 AI 搜尋有額外加分（推論，基於 S2 迷思破除段落）[S2]。</li>
+<li><strong>技術清單</strong>：確保頁面可被索引、符合技術需求、在 Search Console 具備生成式 AI 功能資格、robots.txt 與 CDN／主機不擋 Googlebot、語意化 HTML、良好頁面體驗（推論，基於 S2 技術結構段落；Google-Extended 不影響 Google 搜尋，不放在這張清單，見 S3、S5）[S2]。</li>
+<li><strong>結構化資料</strong>：可保留與頁面內容相符的結構化資料（例如 EducationalOccupationalProgram）作為整體 SEO 的一部分，但不預期對生成式 AI 搜尋有額外加分。FAQ 複合式結果 2026-05-07 起已不再顯示 [S5]，所以 FAQPage 不再算是「豐富搜尋結果策略」（推論，基於 S2 迷思破除段落與 S5）[S2][S5]。</li>
 <li><strong>llms.txt</strong>：可放但非必要，成本低可作為保險，不應列為核心策略（推論，基於 S2 明確忽略聲明）[S2]。</li>
 <li><strong>效能監測</strong>：納入 Search Console 生成式 AI 效能報告作為月度追蹤指標之一（推論，基於 S2 測量段落）[S2]。</li>
 <li><strong>代理型體驗前瞻</strong>：若招生流程涉及表單填寫、文件比對等任務，未來瀏覽器代理可能成為新流量入口，建議關注 agent-friendly 實踐（推論，基於 S2 代理型體驗段落）[S2]。</li>

@@ -44,7 +44,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <body>
 <header class="site"><div class="bar">
   <a class="brand" href="../../index.html">校園網站 GEO</a>
-  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a> <a href="../../reflection.html">反思</a>
 </div></header>
 <div class="wrap">
 <p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S1｜GEO 論文</h1>
@@ -76,7 +76,12 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <li><strong>真實環境驗證</strong>：在 Perplexity.ai 上測試，Quotation Addition 在 Position-Adjusted Word Count 上提升 22%，Statistics Addition 在 Subjective Impression 上提升 37%，驗證方法可泛化至實際部署的生成式引擎 [S1]。S1 Table 5 記錄該實驗的絕對能見度（Position-Adjusted Word Count）：No Optimization 24.1、Keyword Stuffing 21.9、Statistics Addition 26.2、Quotation Addition 29.1；對應 Subjective Impression 為 24.7、28.1、33.9、32.1 [S1]。</li>
 <li><strong>風格優化也有效</strong>：Fluency Optimization（流暢度優化）與 Easy-to-Understand（易懂優化）等風格調整也能帶來 15-30% 的能見度提升，顯示生成式引擎重視內容呈現方式 [S1]。</li>
 <li><strong>領域相依性</strong>：不同 GEO 方法在不同領域效果不同（如 Statistics Addition 在 Law &amp; Gov.、Debate、Opinion 領域表現最佳），建議網站擁有者針對目標領域選擇策略 [S1]。</li>
-<li><strong>組合策略更強</strong>：Fluency Optimization 與 Statistics Addition 組合優於任何單一策略，Cite Sources 與其他方法結合時平均提升 31.4% [S1]。</li>
+<li>
+<p><strong>組合策略更強</strong>：Fluency Optimization 與 Statistics Addition 組合優於任何單一策略，Cite Sources 與其他方法結合時平均提升 31.4% [S1]。</p>
+</li>
+<li>
+<p><strong>評估 9 種 GEO 改寫方法</strong>：原文「We evaluate 9 different proposed GEO methods」。注意 S1 裡的「9」有三種意思：9 種方法、9 個資料集、9 種查詢類型，引用時要寫清楚是哪一個 [S1]。</p>
+</li>
 </ol>
 <h2>數字與日期</h2>
 <table>
@@ -145,8 +150,18 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 </tr>
 <tr>
 <td>9</td>
-<td>查詢類型數</td>
+<td>查詢類型數（&rdquo;9 different types of queries&rdquo;）</td>
 <td>3.2. Benchmark: GEO-bench [S1]</td>
+</tr>
+<tr>
+<td>9</td>
+<td>資料集數（&rdquo;queries from nine different sources&rdquo;）</td>
+<td>3.2. Benchmark: GEO-bench [S1]</td>
+</tr>
+<tr>
+<td>9</td>
+<td>評估的 GEO 改寫方法數（&rdquo;We evaluate 9 different proposed GEO methods&rdquo;）</td>
+<td>4. Experiments [S1]</td>
 </tr>
 <tr>
 <td>7</td>

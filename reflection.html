@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>反思｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="index.html">校園網站 GEO</a>
+  <a href="index.html">首頁</a> <a href="wiki/index.html">Wiki</a> <a href="slides.html">教學簡報</a> <a href="loop_graph.html">流程說明</a> <a href="run_log.html">執行紀錄</a> <a href="sources.html">來源清單</a> <a href="reflection.html">反思</a>
+</div></header>
+<div class="wrap">
+<h1>反思</h1>
+<article class='card'><h1>反思</h1>
+<h2>哪一個節點最常出錯？</h2>
+<p>最常出錯的是生成那一步，也就是 AI 把討論結果寫成 Wiki 頁面的時候（A2/A3），輸出被截斷。</p>
+<p>第一次是 S1。那次回應的 finish_reason 是 length，8192 個 token 全部用完，<code>campus-case-nccu.md</code> 寫到「第一梯隊」的條目中間就斷了。上限調到 16384 之後，10 次生成裡還是有 6 次被截斷（S1、S2、S5、S7、S9、S10）。斷掉的地方多半是每次最後才寫的 <code>open-questions.md</code>。</p>
+<p>如果只算次數，G1 引文對不上而回頭的次數更多，10 篇裡有 9 篇進了第二輪討論。但那是設計好的小迴圈，最多跑兩輪就會停。截斷不一樣，當時流程裡沒有任何一個節點會接住它。</p>
+<h2>發現問題後，把檢查往前移到哪一步？</h2>
+<p>一開始我覺得重跑一次就好。可是回頭看紀錄，被截斷的那幾次其實沒有重跑：程式只是把上限調高，接著跑下一篇，斷掉的頁面留到後面的 C2 才補。最明顯的是 <code>open-questions.md</code>，它停在「10. RAG」，一路留到第一輪外部審查才被抓出來。這讓我知道，只靠事後補救不夠，因為我沒看到的那一頁就會漏掉。</p>
+<p>所以我把檢查往前移到生成剛結束、還沒進入 C1 出處檢查之前，新增一個 A2c 完整性檢查：先看輸出有沒有寫完，沒寫完就不往下走。</p>
+<h2>有沒有因此修改 workflow／graph？為什麼？</h2>
+<p>有改，主要是三件事。</p>
+<ol>
+<li>輸出上限從 8192 調到 16384，減少被截斷的機會。</li>
+<li>在 graph 裡生成之後加上 A2c 節點。只要 finish_reason 是 length，或最後一頁寫到一半，就退回重新生成，最多兩次，還是不行就不寫入、標成待查。這個檢查寫成 <code>check_completeness.py</code>，拿去回掃這次 10 次生成的回應，抓到的正好是那 6 次。其中 S5 那次最後一行是「### 矛盾 3：」，看起來像是寫完了，只有 finish_reason 抓得到。所以兩條規則都要留著。</li>
+<li>「最多重跑兩次」這條停止條件我保留下來，因為紀錄顯示第二輪不一定比較好：S2 的 G1 失敗從 1 筆變成 3 筆，S6 從 1 筆變成 4 筆。</li>
+</ol>
+<p>這樣改的原因是：截斷的頁面一旦進了 Wiki，後面的簡報就會引用到殘缺的內容。越晚發現，要回頭改的地方越多，要同時改簡報、概念頁和來源頁。</p>
+<p>這個檢查也不完美。判斷「寫到一半」的規則曾經把 <code>qa-writing.md</code> 最後一行完整的來源條目誤判成截斷；C1 出處檢查每篇也報出 27 到 64 行「未標出處」，大多是基本資料和檔名清單這類假訊號。所以這些自動檢查只能當提醒，最後還是要有人看過一遍。</p>
+<h2>補充：G1 是程式做的，不是我</h2>
+<p>這次的 G1 是程式把 AI 提出的引文和數字拿到 raw 做字串比對，不是我一篇一篇確認。好處是 10 篇都用同一個標準跑完，而且 S5 第一輪有 16 筆失敗，其實是 <code>2026-05-08</code> 對不到 raw 裡 <code>May 8</code> 的寫法，修正比對規則後同一份討論只剩 3 筆失敗。缺點是它只能確認「這句話 raw 裡有」，不能判斷 AI 有沒有讀懂那句話。所以我把流程圖上的「我確認才准寫」改掉，照實寫成程式比對。</p></article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

@@ -44,7 +44,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <body>
 <header class="site"><div class="bar">
   <a class="brand" href="../../index.html">校園網站 GEO</a>
-  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a> <a href="../../reflection.html">反思</a>
 </div></header>
 <div class="wrap">
 <p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S3｜AI features and your website</h1>
@@ -72,7 +72,12 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <li><strong>來自 AI Overviews 的點擊品質較高，使用者較可能在網站停留更久</strong> [S3]</li>
 <li><strong>結構化資料須與頁面可見文字一致</strong>：SEO 最佳實踐包含「Making sure your structured data matches the visible text on the page」[S3]</li>
 <li><strong>Google-Extended 管的是其他系統，不是搜尋開關</strong>：限制「AI training and grounding in some of Google&rsquo;s other systems」時，另見 Google-Extended；Google 搜尋（含 AI 功能）的存取控制是 Googlebot 與 snippet／noindex 等機制 [S3]</li>
-<li><strong>預覽控制變更後，重新抓取可能要數天到數月</strong>：原文「crawling can take anywhere from several days to several months, depending on how often our systems determine a page needs to be refreshed」[S3]</li>
+<li>
+<p><strong>預覽控制變更後，重新抓取可能要數天到數月</strong>：原文「crawling can take anywhere from several days to several months, depending on how often our systems determine a page needs to be refreshed」[S3]</p>
+</li>
+<li>
+<p><strong>CDN 與主機也要放行</strong>：S3 列 SEO 基本功時寫「Ensuring that crawling is allowed in robots.txt, and by any CDN or hosting infrastructure」[S3]。</p>
+</li>
 </ol>
 <h2>數字與日期</h2>
 <table>
@@ -122,9 +127,9 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <h2>與其他來源的關係</h2>
 <ul>
 <li><strong>S1 (Aggarwal et al., GEO)</strong>：S1 為學術定義 GEO 框架與指標；S3 為 Google 平台官方指引，說明 AI Overviews/AI Mode 運作機制（query fan-out），兩者互補。</li>
-<li><strong>S2 (Google 生成式 AI 指南)</strong>：S2 為較完整的優化指引文件；S3 專注於 AI 功能運作與顯示資格。兩者在 robots.txt 控制範圍與點擊品質主張上有差異（見矛盾記錄）。</li>
+<li><strong>S2 (Google 生成式 AI 指南)</strong>：S2 為較完整的優化指引文件；S3 專注於 AI 功能運作與顯示資格。「robots.txt 之外，CDN 或主機設施也要允許抓取」這一句出自 S3 原文（&rdquo;Ensuring that crawling is allowed in robots.txt, and by any CDN or hosting infrastructure&rdquo;），不是 S2；兩份文件在這點上沒有矛盾 [S3]。</li>
 <li><strong>S4 (Google 結構化資料文件)</strong>：S3 指出無特殊 schema.org 標記需求；S4 提供技術規範，兩者互補。</li>
-<li><strong>S5 (Google 文件更新 / FAQPage HowTo 變更)</strong>：S3 未提及 FAQPage/HowTo 複合式結果停用；S5 記錄 2023-08 政策變更，補充歷史脈絡。</li>
+<li><strong>S5 (Google 文件更新 / FAQPage HowTo 變更)</strong>：S3 未提及 FAQPage/HowTo 複合式結果停用；S5 的 2023 年 9 月條目移除 How-to 文件（連到 2023 年 8 月的部落格公告），並記錄 FAQ 複合式結果 2026-05-07 起不再顯示，見 open-questions 矛盾第 7 條。</li>
 <li><strong>S6 (llms.txt 提案)</strong>：S3 指出無需建立 AI 專用機器可讀檔案；S6 為提案標準，不可視為已生效網路標準。</li>
 <li><strong>S7 (OpenAI 爬蟲文件)</strong>：S3 著重 Google 爬蟲與索引；S7 可補充其他 AI 爬蟲行為。</li>
 <li><strong>S8 (學生前期研究)</strong>：S8 參考 S3 的 query fan-out 概念建議每頁涵蓋主問題與子問題，引用 S8 時必標「學生前期研究」並附基準方法限制。</li>
@@ -134,7 +139,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <li><strong>策略定調</strong>：以既有 SEO 最佳實踐為基礎，無需另闢「GEO 專用」技術棧；重點在內容品質與技術可及性（推論，基於 S3 核心訊息）[S3]。</li>
 <li><strong>內容架構因應 query fan-out</strong>：每頁涵蓋主問題與相關子問題，增加被多個子查詢檢索到的機會（推論，基於 S3 query fan-out 說明）[S3]。</li>
 <li><strong>技術清單</strong>：確保頁面可被索引、符合技術需求、在 Search Console 具備生成式 AI 功能資格、robots.txt 開放 Googlebot、重要內容為 HTML 文字、語意化 HTML、良好頁面體驗（推論，基於 S3 技術要求與 SEO 最佳實踐段落）[S3]。</li>
-<li><strong>結構化資料</strong>：保留 FAQPage、EducationalOccupationalProgram 等標記作為整體 SEO 與豐富搜尋結果策略，但不預期對生成式 AI 搜尋有額外加分（推論，基於 S3 明確指出無特殊 schema 需求）[S3]。</li>
+<li><strong>結構化資料</strong>：可保留與頁面內容相符的結構化資料作為整體 SEO 的一部分，但不預期對生成式 AI 搜尋有額外加分；FAQ 複合式結果 2026-05-07 起已不再顯示，FAQPage 不再算是豐富搜尋結果策略（推論，基於 S3 明確指出無特殊 schema 需求與 S5）[S3][S5]。</li>
 <li><strong>llms.txt</strong>：可放但非必要，成本低可作為保險，不應列為核心策略（推論，基於 S3 明確指出無需建立 AI 專用檔案）[S3]。</li>
 <li><strong>效能監測</strong>：納入 Search Console 效能報告（Web search type）作為月度追蹤指標；注意 AI Overviews 點擊併入自然搜尋流量（推論，基於 S3 測量段落）[S3]。</li>
 <li><strong>點擊品質</strong>：若 S3 主張屬實，AI Overviews 帶來的流量可能具備較高停留時間，有利招生轉換（推論，基於 S3 higher quality clicks 主張，但量化定義待查）[S3]。</li>

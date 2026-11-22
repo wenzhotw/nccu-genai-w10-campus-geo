@@ -44,57 +44,63 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <body>
 <header class="site"><div class="bar">
   <a class="brand" href="index.html">校園網站 GEO</a>
-  <a href="index.html">首頁</a> <a href="wiki/index.html">Wiki</a> <a href="slides.html">教學簡報</a> <a href="loop_graph.html">流程說明</a> <a href="run_log.html">執行紀錄</a> <a href="sources.html">來源清單</a>
+  <a href="index.html">首頁</a> <a href="wiki/index.html">Wiki</a> <a href="slides.html">教學簡報</a> <a href="loop_graph.html">流程說明</a> <a href="run_log.html">執行紀錄</a> <a href="sources.html">來源清單</a> <a href="reflection.html">反思</a>
 </div></header>
 <div class="wrap">
 <h1>loop / graph 流程說明</h1>
-<article class='card'><h1>4｜loop／graph 設計：資訊怎麼被取得、整理、檢查，再變成簡報</h1>
+<article class='card'><h1>loop／graph 設計：資訊怎麼被取得、整理、檢查，再變成簡報（v2）</h1>
 <blockquote>
-<p>這是<strong>設計</strong>，不是執行結果。實際跑一次之後，請依你的檢查紀錄修改這份圖（改了什麼寫進反思與 log）。<br />
+<p>這一版是<strong>跑完一次之後改過的圖</strong>。v1 是動手前的設計；2026-11-22 實際跑完 10 篇 ingest、兩輪外部審查之後，依照真實紀錄（run_log.md）改成 v2：圖上畫的是實際跑過的路線，加上跑完後新增的 A2c 完整性檢查。<br />
 依據：Karpathy〈llm-wiki〉的 raw／wiki／schema 三層，以及 ingest／query／lint 三種操作（https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f ）。</p>
 </blockquote>
 <h2>一句話</h2>
 <p>這不是一條「取得資料 → 產生簡報」的直線，而是兩個會回頭的迴圈：<strong>迴圈 A</strong> 把每篇來源變成 Wiki，<strong>迴圈 B</strong> 只用 Wiki 產生簡報；B 裡發現的錯，一律回到 A 修 Wiki，不在簡報上直接補。</p>
-<h2>流程圖</h2>
-<pre class="mermaid">flowchart TD
-  S0(["開始：主題已定"]) --> A0
+<h2>流程圖（v2）</h2>
+<pre><code class="language-mermaid">flowchart TD
+  S0([&quot;開始：主題已定&quot;]) --&gt; A0
 
-  subgraph ING["迴圈 A：逐篇 ingest（每篇來源跑一次）"]
-    A0["A0 取得資料：存進 raw/，只讀不改"] --> A1["A1 AI 讀 raw，提出重點、數字、範圍、疑問（先不寫頁）"]
-    A1 --> G1{"閘門 G1：我確認了嗎？"}
-    G1 -- "有誤或不同意" --> A1
-    G1 -- "確認，可以寫" --> A2["A2 生成來源頁"]
-    A2 --> A3["A3 交叉更新概念頁、overview、index"]
-    A3 --> C1{"檢查 C1：每句有出處？和其他頁矛盾？"}
-    C1 -- "找不到出處" --> A1
-    C1 -- "來源互相矛盾" --> OQ["寫進 open-questions，註明各自範圍"]
-    OQ --> A4
-    C1 -- "通過" --> A4["A4 寫 log"]
-    A4 --> MORE{"還有來源？"}
-    MORE -- "有" --> A0
+  subgraph ING[&quot;迴圈 A：逐篇 ingest（S1–S10 各跑一次，共 10 次）&quot;]
+    A0[&quot;A0 取得資料：存進 raw/，只讀不改&quot;] --&gt; A1[&quot;A1 AI 讀 raw，提出重點、數字、引文、疑問（先不寫頁）&quot;]
+    A1 --&gt; G1{&quot;G1 程式把引文與數字拿到 raw 做子字串比對：都對得上？&quot;}
+    G1 -- &quot;對不上，且未滿 2 輪&quot; --&gt; A1
+    G1 -- &quot;通過，或 2 輪後刪掉對不上的項目&quot; --&gt; A2[&quot;A2/A3 生成來源頁，交叉更新概念頁、overview、index、open-questions&quot;]
+    A2 --&gt; A2C{&quot;A2c 完整性檢查（v2 新增）：finish_reason=length？最後一頁寫到一半？&quot;}
+    A2C -- &quot;被截斷，未滿 2 次&quot; --&gt; A2
+    A2C -- &quot;2 次後仍截斷&quot; --&gt; OQ1[&quot;不寫入，標待查&quot;]
+    A2C -- &quot;完整&quot; --&gt; C1{&quot;C1 每句有 [S編號]？&quot;}
+    C1 -- &quot;自動檢查只記錄（噪音大）&quot; --&gt; A4
+    C1 -- &quot;來源互相矛盾&quot; --&gt; OQ[&quot;寫進 open-questions，註明各自範圍&quot;]
+    OQ --&gt; A4
+    C1 -- &quot;通過&quot; --&gt; A4[&quot;A4 寫 log&quot;]
+    A4 --&gt; MORE{&quot;還有來源？&quot;}
+    MORE -- &quot;有&quot; --&gt; A0
   end
 
-  MORE -- "沒有，已滿 5 篇以上" --> C2{"檢查 C2：lint 整個 Wiki"}
-  C2 -- "缺資料" --> A0
-  C2 -- "通過" --> B1
+  MORE -- &quot;沒有（10 篇）&quot; --&gt; C2{&quot;C2 lint 整個 Wiki，並對 raw 重讀修錯&quot;}
+  C2 -- &quot;缺資料&quot; --&gt; A0
+  C2 -- &quot;事實錯誤&quot; --&gt; FIX[&quot;依 raw 修頁，記 log&quot;]
+  FIX --&gt; C2
+  C2 -- &quot;通過&quot; --&gt; B0
 
-  subgraph DECK["迴圈 B：用 Wiki 產生簡報"]
-    B1["B1 查詢 Wiki：先讀 index，再讀相關頁"] --> B2["B2 整理重點：排教學大綱，每頁標 Wiki 頁"]
-    B2 --> C3{"檢查 C3：外行人看得懂？順序對？"}
-    C3 -- "否" --> B2
-    C3 -- "是" --> B3["B3 產生 HTML 簡報"]
-    B3 --> C4{"檢查 C4：逐句對 Wiki 與來源"}
-    C4 -- "Wiki 寫錯" --> A1
-    C4 -- "Wiki 沒有，但需要" --> A0
-    C4 -- "Wiki 沒有，也不需要" --> CUT["刪掉那一句"]
-    CUT --> B3
-    C4 -- "說不清楚" --> B3
-    C4 -- "通過" --> C5{"檢查 C5：鍵盤、手機、離線都能看？"}
-    C5 -- "壞掉" --> B3
-    C5 -- "通過" --> PUB["B4 發布，寫檢查紀錄"]
+  subgraph DECK[&quot;迴圈 B：用 Wiki 產生簡報（本次實際路線）&quot;]
+    B0[&quot;B0 既有版面草稿&quot;] --&gt; B1[&quot;B1 查詢 Wiki：先讀 index，再讀相關頁&quot;]
+    B1 --&gt; C4{&quot;C4 簡報每個主張、數字、日期都對得到 Wiki？&quot;}
+    C4 -- &quot;Wiki 寫錯&quot; --&gt; A1
+    C4 -- &quot;Wiki 沒有，但 raw 有、需要&quot; --&gt; A2
+    C4 -- &quot;Wiki 沒有，也不需要&quot; --&gt; CUT[&quot;刪掉或改寫那一句&quot;]
+    CUT --&gt; C4
+    C4 -- &quot;通過&quot; --&gt; C3{&quot;C3 大綱檢查：順序對？術語第一次出現有解釋？&quot;}
+    C3 -- &quot;否&quot; --&gt; B1
+    C3 -- &quot;是&quot; --&gt; C5{&quot;C5 瀏覽測試：真的按鍵、手機寬度、離線&quot;}
+    C5 -- &quot;壞掉&quot; --&gt; B1
+    C5 -- &quot;通過&quot; --&gt; PUB[&quot;B4 發布到 GitHub Pages，寫檢查紀錄&quot;]
   end
-</pre>
-<p>（GitHub 與 Obsidian 會直接把上面的程式碼畫成圖。若你的平台不支援 mermaid，可貼到 https://mermaid.live 匯出圖片。）</p>
+
+  PUB --&gt; RV{&quot;外部審查（Gemini、Claude）&quot;}
+  RV -- &quot;Wiki 的問題&quot; --&gt; A1
+  RV -- &quot;簡報的問題&quot; --&gt; C4
+</code></pre>
+<p>（GitHub 與 Obsidian 會直接把上面的程式碼畫成圖。若平台不支援 mermaid，可貼到 https://mermaid.live 匯出圖片。）</p>
 <h2>和作業範例流程的對應</h2>
 <p>作業例子是「取得資料 → 查詢 Wiki → 整理重點 → 檢查內容 → 產生簡報」。本設計的對應：</p>
 <table>
@@ -113,7 +119,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 </tr>
 <tr>
 <td>（寫進 Wiki）</td>
-<td>A1 → G1 → A2 → A3 → C1 → A4</td>
+<td>A1 → G1 → A2/A3 → A2c → C1 → A4</td>
 <td>作業例子沒寫出來，但「先討論、後生成」就發生在這裡</td>
 </tr>
 <tr>
@@ -123,17 +129,17 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 </tr>
 <tr>
 <td>整理重點</td>
-<td>B2 → C3</td>
-<td>大綱先檢查再生成，省一次整份重做</td>
+<td>B0 → B1</td>
+<td>本次是從既有版面草稿改起，不是從零排大綱</td>
 </tr>
 <tr>
 <td>檢查內容</td>
-<td>C1、C2、C3、C4、C5</td>
-<td>檢查分散在五處，不是最後才檢查一次</td>
+<td>G1、A2c、C1、C2、C3、C4、C5</td>
+<td>檢查分散在七處，不是最後才檢查一次</td>
 </tr>
 <tr>
 <td>產生簡報</td>
-<td>B3 → B4</td>
+<td>B4</td>
 <td>不通過就回頭，見下表</td>
 </tr>
 </tbody>
@@ -144,8 +150,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <tr>
 <th>節點</th>
 <th>做什麼</th>
-<th>輸入</th>
-<th>輸出</th>
+<th>誰做</th>
 <th>不通過時回到哪</th>
 </tr>
 </thead>
@@ -153,178 +158,186 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <tr>
 <td>A0 取得資料</td>
 <td>存原文、填檔頭（URL、取用時間、頁面日期）</td>
-<td>網址或檔案</td>
-<td>raw/ 檔</td>
+<td>本機程式（curl）</td>
 <td>無</td>
 </tr>
 <tr>
 <td>A1 討論</td>
-<td>AI 列重點、數字、適用範圍、與現有 Wiki 的衝突、疑問</td>
-<td>raw 檔＋現有 Wiki</td>
-<td>討論清單（還不寫頁）</td>
+<td>AI 列重點、數字、引文、適用範圍、疑問，先不寫頁</td>
+<td>NVIDIA NIM 模型</td>
 <td>無</td>
 </tr>
 <tr>
-<td>G1 人工閘門</td>
-<td>你逐項確認或否決</td>
-<td>討論清單＋raw</td>
-<td>「確認，可以寫」或修正意見</td>
-<td>A1</td>
+<td>G1 閘門</td>
+<td>把 A1 的引文與數字拿到 raw 做正規化子字串比對；日期接受 <code>May 8</code> 與 <code>2026-05-08</code> 兩種寫法</td>
+<td>本機程式（<strong>不是人工逐篇確認</strong>）</td>
+<td>A1，最多 2 輪；之後刪除對不上的項目</td>
 </tr>
 <tr>
-<td>A2 來源頁</td>
-<td>寫 sources/s編號</td>
-<td>確認後的清單</td>
-<td>一個來源頁</td>
+<td>A2/A3 生成</td>
+<td>一次呼叫寫來源頁，並交叉更新概念頁、overview、index、open-questions</td>
+<td>模型</td>
 <td>無</td>
 </tr>
 <tr>
-<td>A3 交叉更新</td>
-<td>改概念頁、overview、index</td>
-<td>來源頁</td>
-<td>多頁更新</td>
-<td>無</td>
+<td>A2c 完整性（v2 新增）</td>
+<td><code>finish_reason=length</code>，或最後一頁結尾寫到一半</td>
+<td>程式 <code>check_completeness.py</code></td>
+<td>A2，最多重生 2 次；仍不完整就不寫入、標待查</td>
 </tr>
 <tr>
-<td>C1 出處與矛盾</td>
-<td>每句有沒有 [S編號]；和其他頁衝不衝突</td>
-<td>本次改動的頁</td>
-<td>通過／問題清單</td>
-<td>A1，或寫進 open-questions</td>
+<td>C1 出處</td>
+<td>數有沒有 <code>[S編號]</code></td>
+<td>程式</td>
+<td>只記錄；本次每篇報 27～64 行，多數是假訊號，不自動回頭</td>
 </tr>
 <tr>
 <td>A4 log</td>
 <td>記錄本次 ingest</td>
-<td>以上全部</td>
-<td>log.md 一筆</td>
+<td>程式</td>
 <td>無</td>
 </tr>
 <tr>
-<td>C2 lint</td>
-<td>孤兒頁、沒出處的句子、過時說法、待查</td>
-<td>整個 Wiki</td>
-<td>lint 報告</td>
-<td>A0（補來源）或修頁</td>
+<td>C2 lint＋修正</td>
+<td>孤兒頁、沒出處、過時說法、截斷；對 raw 重讀修事實錯誤</td>
+<td>程式 lint＋執行代理對 raw 修頁</td>
+<td>A0 或修頁</td>
+</tr>
+<tr>
+<td>B0 版面草稿</td>
+<td>沿用既有的簡報版面</td>
+<td>既有檔案</td>
+<td>無</td>
 </tr>
 <tr>
 <td>B1 查詢</td>
 <td>只讀 Wiki</td>
-<td>index＋相關頁</td>
-<td>重點清單（附頁名）</td>
+<td>執行代理</td>
 <td>無</td>
 </tr>
 <tr>
-<td>B2 大綱</td>
-<td>排教學順序，每頁標 Wiki 頁</td>
-<td>重點清單</td>
-<td>大綱</td>
-<td>無</td>
+<td>C4 對 Wiki</td>
+<td>每個主張、數字、日期對到 Wiki 頁</td>
+<td>第一輪 11 項主張；第二輪程式抽出投影片 1～18 的 52 個數字與日期，全部對到 Wiki，加上兩份審查列出的不對應</td>
+<td>A1、A2、刪句</td>
 </tr>
 <tr>
-<td>C3 大綱檢查</td>
-<td>外行人看得懂嗎？順序合理嗎？</td>
-<td>大綱</td>
-<td>通過／修改意見</td>
-<td>B2</td>
+<td>C3 大綱</td>
+<td>段落順序、術語第一次出現有沒有解釋</td>
+<td>程式＋執行代理（第二輪補做）</td>
+<td>B1</td>
 </tr>
 <tr>
-<td>B3 生成</td>
-<td>產生 HTML</td>
-<td>大綱＋Wiki</td>
-<td>簡報</td>
-<td>無</td>
-</tr>
-<tr>
-<td>C4 對來源檢查</td>
-<td>每句主張對到 Wiki 頁與來源，再抽查 raw</td>
-<td>簡報＋Wiki＋raw</td>
-<td>檢查表</td>
-<td>A1、A0、刪句，或只重生那一頁</td>
-</tr>
-<tr>
-<td>C5 瀏覽測試</td>
-<td>鍵盤換頁、手機寬度、離線開啟</td>
-<td>HTML 檔</td>
-<td>通過／問題</td>
-<td>B3</td>
+<td>C5 瀏覽</td>
+<td>鍵盤換頁、第 18 頁互動、390px 手機寬度、離線</td>
+<td>第一輪只截圖；第二輪用 headless Chromium 真的按鍵</td>
+<td>B1</td>
 </tr>
 <tr>
 <td>B4 發布</td>
-<td>放到可開啟的連結，寫檢查紀錄</td>
-<td>通過的簡報</td>
-<td>連結＋紀錄</td>
+<td>GitHub Pages，寫檢查紀錄</td>
+<td>執行代理</td>
 <td>無</td>
 </tr>
 </tbody>
 </table>
 <h2>哪些步驟會重複執行</h2>
 <ol>
-<li><strong>每篇來源整個迴圈 A 重跑一次</strong>（A0 到 A4）：至少 5 次，本設計是 8 次。</li>
-<li><strong>A1 ↔ G1 的討論小迴圈</strong>：你不同意，AI 就重讀 raw 再提，直到你確認。</li>
-<li><strong>C1 不通過回 A1</strong>：找不到出處的句子，回 raw 重找；找不到就刪或標待查。</li>
-<li><strong>C2 lint</strong>：全部 ingest 完做一次；之後每次 C4 改到 Wiki，也要再跑。</li>
-<li><strong>迴圈 B 的 B3 → C4 → B3</strong>：每次修正後重新生成受影響的投影片，再檢查一次。</li>
-<li><strong>跨迴圈回頭</strong>：C4 發現「Wiki 寫錯」回 A1，「Wiki 沒有但需要」回 A0。這兩條線讓兩個迴圈連成一張圖，而不是兩條直線。</li>
+<li><strong>每篇來源整個迴圈 A 跑一次</strong>（A0 到 A4）：至少 5 次，本次實際是 10 次（S1–S10）。</li>
+<li><strong>A1 ↔ G1 的小迴圈</strong>：對不上就自動重提，最多 2 輪。10 篇裡只有 S7 第一輪就全部通過；其他 9 篇都進了第二輪（S5 的第二輪請求送出後行程中斷、沒有回應，改用第一輪結果加修正後的 G1）。</li>
+<li><strong>A2 ↔ A2c 的重生迴圈（v2 新增）</strong>：輸出被截斷就退回重生，最多 2 次。</li>
+<li><strong>C2 lint</strong>：全部 ingest 完做一次；之後每次 C4 或審查改到 Wiki，都再跑一次。</li>
+<li><strong>迴圈 B 的 C4 → 修 Wiki 或刪句 → C4</strong>：每次修正後重新檢查受影響的投影片。</li>
+<li><strong>跨迴圈回頭</strong>：C4 或外部審查發現「Wiki 寫錯」回 A1，「Wiki 沒有但 raw 有」回 A2。</li>
 </ol>
 <h2>哪裡要檢查或重新生成</h2>
 <ul>
-<li><strong>G1（寫之前）</strong>：人工確認。這是最便宜的檢查點：一篇來源的錯誤摘要會被 A3 擴散到好幾頁。</li>
-<li><strong>C1（寫之後馬上）</strong>：出處與矛盾。矛盾不讓 AI 自己裁決，寫進 open-questions，由人決定簡報怎麼說。</li>
-<li><strong>C2（Wiki 完成時）</strong>：lint，避免簡報拿到孤兒頁或過時說法。</li>
-<li><strong>C3（生成之前）</strong>：先檢查大綱，避免整份簡報重做。</li>
-<li><strong>C4（生成之後）</strong>：逐句對來源。AI 先做檢查表，你至少親自對照 raw 抽查：所有數字與日期，再加隨機 5 句。</li>
-<li><strong>C5（發布之前）</strong>：瀏覽測試。</li>
+<li><strong>G1（寫之前）</strong>：引文對 raw。這是最便宜的檢查點：一篇來源的錯誤摘要會被 A3 擴散到好幾頁。</li>
+<li><strong>A2c（生成剛結束）</strong>：輸出有沒有寫完。這個檢查本來不存在，是跑完才往前加的，原因見下一節。</li>
+<li><strong>C1（寫之後馬上）</strong>：出處。矛盾不讓 AI 自己裁決，寫進 open-questions。</li>
+<li><strong>C2（Wiki 完成時）</strong>：lint 加上對 raw 重讀。</li>
+<li><strong>C4（簡報對 Wiki）</strong>：簡報上所有數字與日期，加上主張逐項比對。</li>
+<li><strong>C3（大綱）</strong>：外行人跟得上嗎。</li>
+<li><strong>C5（發布之前）</strong>：真的按鍵、真的縮到手機寬度。</li>
 </ul>
-<p><strong>重新生成的範圍：</strong> 只重生有問題的那一頁，不整份重來；每次重生都記一筆 log（<code>deck-fix</code>）。</p>
+<p><strong>重新生成的範圍：</strong> 只重生有問題的那一頁或那一次呼叫，不整份重來；每次都記一筆 log。</p>
 <h2>為什麼這樣設計</h2>
 <ol>
-<li><strong>raw 只讀，是唯一的事實基準。</strong> Wiki 和簡報都可以重生，raw 不能改；任何爭議回 raw 查。</li>
+<li><strong>raw 只讀，是唯一的事實基準。</strong> Wiki 和簡報都可以重生，raw 不能改；任何爭議回 raw 查（例如 FAQ 說明文件移除日維持 2026-06-15，就是回 raw 和現場頁確認的）。</li>
 <li><strong>檢查往前放。</strong> 錯誤越晚發現越貴：在 G1 擋下一個錯數字只要改一句；到了簡報才發現，要同時改簡報、概念頁、來源頁。</li>
-<li><strong>簡報的錯回頭修 Wiki，不在簡報上補。</strong> 否則 Wiki 和簡報會分岔，評分標準要求的「Wiki 與簡報有明確對應」就會失效。</li>
-<li><strong>矛盾交給人。</strong> 例如「GEO 是新東西還是仍是 SEO」、「llms.txt 有沒有用」，來源各有適用範圍；讓 AI 自行選邊，等於讓它編造結論。</li>
-<li><strong>這是一個有狀態的 agent graph。</strong> 狀態存在檔案裡（raw/、wiki/、log.md、檢查紀錄），條件邊決定下一步去哪，人在 G1、C3、C4 介入。這對應本週 Agentic AI 談的 loop：觀察（讀 raw 或 Wiki）→ 行動（寫頁或生成）→ 檢查結果 → 決定下一步。</li>
+<li><strong>簡報的錯回頭修 Wiki，不在簡報上補。</strong> 否則 Wiki 和簡報會分岔。</li>
+<li><strong>矛盾交給人。</strong> 例如「GEO 是新東西還是仍是 SEO」，來源各有適用範圍；讓 AI 自行選邊，等於讓它編造結論。</li>
+<li><strong>這是一個有狀態的 agent graph。</strong> 狀態存在檔案裡（raw/、wiki/、log.md、checks/），條件邊決定下一步去哪。這對應本週 Agentic AI 談的 loop：觀察 → 行動 → 檢查結果 → 決定下一步。</li>
 </ol>
 <h2>停止條件（避免無限迴圈）</h2>
 <ul>
-<li>同一個檢查點同一個問題最多重跑 2 次；還不過就標「待查」寫進 open-questions，由你決定刪除或保留並加註。</li>
-<li>迴圈 A 停止：已 ingest 至少 5 篇，且 C2 lint 沒有「沒出處的句子」。</li>
-<li>迴圈 B 停止：C4 檢查表沒有「Wiki 沒有」或「Wiki 寫錯」的項目，且 C5 通過。</li>
+<li>同一個檢查點同一個問題最多重跑 2 次；還不過就標「待查」寫進 open-questions。紀錄顯示這條限制是必要的：第二輪討論不一定比較好，S2 的 G1 失敗從 1 筆變 3 筆，S6 從 1 筆變 4 筆。</li>
+<li>迴圈 A 停止：已 ingest 至少 5 篇，且 C2 lint 沒有「沒出處的事實句」。</li>
+<li>迴圈 B 停止：C4 沒有「Wiki 沒有」或「Wiki 寫錯」的項目，且 C5 通過。</li>
 </ul>
+<h2>v1 → v2 改了什麼（跑完之後）</h2>
+<table>
+<thead>
+<tr>
+<th>改動</th>
+<th>原因（真實紀錄）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新增 <strong>A2c 完整性檢查</strong>，放在 A2/A3 之後、C1 之前，被截斷就退回重生</td>
+<td>S1 第一次生成在 8192 tokens 用完（finish=length），<code>campus-case-nccu.md</code> 斷在「第一梯隊」。調到 16384 後，S2、S5、S7、S9、S10 仍然用完上限。v1 沒有這個節點，截斷頁一路流到 C2 和審查；<code>open-questions.md</code> 停在「10. RAG」，直到第一輪外部審查才被抓到。新節點回掃這 10 次生成，抓到 6 次</td>
+</tr>
+<tr>
+<td>A2/A3 的 <code>max_tokens</code> 從 8192 調到 16384</td>
+<td>同上，S1 之後就改</td>
+</tr>
+<tr>
+<td>G1 改寫成「程式對 raw 子字串比對」，不再寫成「我確認」</td>
+<td>實際上 G1 是本機程式代跑，不是人工逐篇確認；v1 的寫法和事實不符</td>
+</tr>
+<tr>
+<td>G1 的日期比對接受 <code>May 8</code> 與 <code>2026-05-08</code> 兩種寫法</td>
+<td>S5 第一輪 19 筆失敗裡，16 筆是 ISO 日期對不到 raw 的月名寫法；修正後同一份討論重跑 G1，失敗降到 3 筆</td>
+</tr>
+<tr>
+<td>C1 改成「只記錄」</td>
+<td>每篇報 27～64 行「未標出處」，多數是基本資料條、檔名清單，不能當自動回頭的依據；事實錯誤是在 C2 對 raw 重讀時修的</td>
+</tr>
+<tr>
+<td>迴圈 B 照實畫成「既有版面草稿 → C4 → C3 → C5」</td>
+<td>簡報不是從零照 B1→B2→B3 生成的，而是沿用既有版面再對 Wiki 修正；C3 是第二輪才補做</td>
+</tr>
+<tr>
+<td>C4 從 11 項擴大到全部數字與日期</td>
+<td>第二輪審查指出第一輪只核 11 項；第二輪程式抽出 52 個數字與日期，全部對到 Wiki</td>
+</tr>
+<tr>
+<td>C5 改成真的按鍵、加手機寬度</td>
+<td>第一輪 C5 只截圖，沒有實際按鍵</td>
+</tr>
+</tbody>
+</table>
 <h2>純文字版（給不支援 mermaid 的地方）</h2>
-<pre><code class="language-text">迴圈 A（每篇來源一次）
-  A0 存 raw → A1 AI 提重點與疑問 → G1 我確認？
-     ├─ 否 → 回 A1
-     └─ 是 → A2 寫來源頁 → A3 更新概念頁與 index → C1 有出處？無矛盾？
-            ├─ 找不到出處 → 回 A1
-            ├─ 來源矛盾 → 寫進 open-questions → A4
-            └─ 通過 → A4 寫 log → 還有來源？有 → 回 A0
-  全部完成 → C2 lint → 缺資料回 A0；通過進入迴圈 B
+<pre><code class="language-text">迴圈 A（每篇來源一次，共 10 次）
+  A0 存 raw → A1 AI 提重點、引文與疑問 → G1 程式對 raw 比對引文
+     ├─ 對不上（未滿 2 輪）→ 回 A1
+     └─ 通過／2 輪後刪掉對不上的 → A2/A3 寫來源頁、更新概念頁與 index
+        → A2c 輸出完整嗎？（v2 新增）
+            ├─ finish_reason=length 或寫到一半 → 回 A2 重生（最多 2 次）→ 仍不行就標待查
+            └─ 完整 → C1 有出處？（只記錄）
+                 ├─ 來源矛盾 → 寫進 open-questions → A4
+                 └─ A4 寫 log → 還有來源？有 → 回 A0
+  全部完成 → C2 lint＋對 raw 修錯 → 缺資料回 A0；通過進入迴圈 B
 
-迴圈 B
-  B1 查 Wiki → B2 大綱 → C3 看得懂？否 → 回 B2
-  → B3 生成 HTML → C4 逐句對來源
+迴圈 B（本次實際路線）
+  B0 既有版面草稿 → B1 查 Wiki → C4 主張、數字、日期對 Wiki
      ├─ Wiki 寫錯 → 回 A1
-     ├─ Wiki 沒有但需要 → 回 A0
-     ├─ Wiki 沒有也不需要 → 刪句 → 回 B3
-     ├─ 說不清楚 → 回 B3
-     └─ 通過 → C5 瀏覽測試 → 壞掉回 B3；通過 → B4 發布＋紀錄
-</code></pre>
-<h2>跑完之後要改的地方（你填）</h2>
-<ul>
-<li>實際最常回頭的那條邊：A1 ↔ G1（10 篇裡只有 S7 第一輪 G1 就全部通過；其餘都是 confirm_with_deletions，多數還重跑了第二輪討論）</li>
-<li>把哪個檢查往前移到哪個節點：把「日期寫法」檢查放進 G1（ISO <code>2026-05-08</code> 對不到 raw 的 <code>May 8</code>）。S5 第一輪因此出現 16 筆假失敗；修正匹配規則後重跑同一份討論 JSON，失敗從 19 降到 3。另外，A2/A3 的 max_tokens 從 8192 提到 16384，因為 S1 第一次生成被截斷。</li>
-<li>圖改成 v2 了嗎？主流程沒改。實作上新增：G1 由本機代理人做 raw 子字串核對（不是學生本人點確認）；C2 人工／程式對 raw 修錯（FAQ 文件移除日、失敗 verbatim）；A2/A3 若 finish=length，不自動整頁重跑，改在 C2 補修。</li>
-</ul>
-<h2>與本次真實執行的差異（2026-11-22 12:35:16 CST (Asia/Taipei)）</h2>
-<ol>
-<li><strong>模型</strong>：NVIDIA NIM <code>nvidia/nemotron-3-ultra-550b-a55b</code>（OpenAI 相容 API：<code>https://integrate.api.nvidia.com/v1</code>），與課程 SimpleAgent 範例設定相同。</li>
-<li><strong>G1 操作者</strong>是本機執行代理人，方法是把討論 JSON 的 verbatim／value 拿到不可改的 raw 做正規化子字串比對，不是學生本人逐段勾選。</li>
-<li><strong>最常出錯、也最常回頭的是 G1</strong>：除 S7 外，各篇都有 verbatim 對不上的情況，觸發 A1 第二輪或「刪除／改待查後才准寫」。</li>
-<li><strong>A2/A3 多次 <code>finish=length</code></strong>（S1 在 8192；其後已改 16384，仍有 S2、S5、S7、S9、S10 用盡上限）。這沒有自動回到 A1，是後來在 C2 才補。</li>
-<li><strong>S5 第二輪討論的請求檔已寫出，但沒有 response</strong>：行程在等待 API 時中斷。後來用同一份 r1 討論 JSON，修正日期格式後進入寫頁，沒有虛構 r2 的模型輸出。</li>
-<li><strong>C1 自動檢查噪音很大</strong>（基本資料條、檔名清單也被算成「未標出處」），不能當唯一依據；事實錯誤是在 C2 對 raw 重讀後才修的。</li>
-<li><strong>C2 已修正的事實錯誤</strong>：把 FAQ 說明文件的移除日從 2026-06-12 改為 2026-06-15（raw 中該節是 June 15 條目，June 12 是另一則田納西小型企業通知）；刪除 S5 頁上 G1 未通過的省略號拼句，改回 raw 連續句；S1 頁上提前寫入的 FAQ 日期補上 [S5]；campus-case 來源標籤更正；並依 S8 §3.1 補寫 qa-writing 概念頁。</li>
-</ol></article>
+     ├─ Wiki 沒有但 raw 有 → 回 A2 補進 Wiki
+     ├─ 不需要 → 刪句
+     └─ 通過 → C3 大綱與術語 → C5 真的按鍵、390px 手機寬度 → B4 發布
+  外部審查 → Wiki 的問題回 A1；簡報的問題回 C4
+</code></pre></article>
 </div>
 <footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
 </body>

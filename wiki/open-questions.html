@@ -44,7 +44,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <body>
 <header class="site"><div class="bar">
   <a class="brand" href="../index.html">校園網站 GEO</a>
-  <a href="../index.html">首頁</a> <a href="index.html">Wiki</a> <a href="../slides.html">教學簡報</a> <a href="../loop_graph.html">流程說明</a> <a href="../run_log.html">執行紀錄</a> <a href="../sources.html">來源清單</a>
+  <a href="../index.html">首頁</a> <a href="index.html">Wiki</a> <a href="../slides.html">教學簡報</a> <a href="../loop_graph.html">流程說明</a> <a href="../run_log.html">執行紀錄</a> <a href="../sources.html">來源清單</a> <a href="../reflection.html">反思</a>
 </div></header>
 <div class="wrap">
 <p class='meta'><a href='index.html'>Wiki 目錄</a></p><h1>待查與矛盾</h1>
@@ -52,7 +52,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <h1>待查與矛盾</h1>
 <blockquote>
 <p>開始時是空的，只在真實檢查時往下加。</p>
-<p>補記（2026-11-22 審查後修訂）：本頁在 A2/A3-S2 生成時因 <code>finish=length</code> 截斷於「10. RAG」。以下條目都是從各來源頁、概念頁與 overview 既有「待查」整理過來，沒有另外發明新問題。第 10 項依 overview 既有條目補完。</p>
+<p>補記（2026-11-22 審查後修訂）：本頁最後一次被整頁覆寫是 A2/A3-S10，該次 <code>finish=length</code>，頁面停在「10. RAG」（2026-11-22 第二輪修訂時用 A2c 完整性檢查回掃 llm_raw 才確認是 S10；先前寫成 S2 是誤記。S2、S5、S7、S9 那幾次也都截斷在本頁）。以下條目都是從各來源頁、概念頁與 overview 既有「待查」整理過來，沒有另外發明新問題。第 10 項依 overview 既有條目補完。</p>
 </blockquote>
 <h2>待查項目</h2>
 <h3>來自 S1 (Aggarwal et al., GEO)</h3>
@@ -140,13 +140,22 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <li>「x-default value」的 verbatim 確切位置 [S10]。</li>
 <li>「If it becomes difficult to maintain a complete set of bidirectional links for every language, you can omit some languages on some pages」的實際容忍度與邊界條件 [S10]。</li>
 </ol>
+<h3>跨來源</h3>
+<ol start="59">
+<li>ChatGPT 搜尋、Perplexity 實際怎麼挑選要引用哪些來源：S1 把生成式引擎當成黑箱來做最佳化；S7、S9 只說明爬蟲與使用者代理怎麼抓取，沒有說明引用怎麼挑選。已 ingest 的 10 篇都沒有回答這一題 [S1][S7][S9]。</li>
+</ol>
 <h2>矛盾或張力（不硬改成單一說法）</h2>
 <ol>
 <li><strong>GEO 與 SEO 的關係</strong>：S1 把 GEO 寫成獨立的最佳化框架與指標；S2/S3 從 Google 搜尋出發，認為生成式 AI 功能建立在既有 SEO 與排名系統上。兩者並存，見 geo-vs-seo [S1][S2][S3]。</li>
 <li><strong>llms.txt</strong>：S6 描述採用現象；S2/S5 明確寫 Google 搜尋不使用、對排名無正負影響。不把「有人在用」寫成「對 Google 有效」[S6][S2][S5]。</li>
 <li><strong>FAQPage 的保留理由</strong>：S8 寫「保留標記僅為讓 AI 解析問答」；S2/S3 則說生成式 AI 功能不需要特殊 schema，也沒有證明 FAQPage 能增加 AI 解析或引用。Wiki 改把 S8 這句視為學生研究的自我定位，不當作官方效果 [S8][S2][S3][S5]。</li>
 <li><strong>Google-Extended</strong>：舊稿曾寫成「生成式 AI 功能訓練／顯示」。S3 區分 Googlebot（搜尋，含 AI 功能）與 Google-Extended（其他系統的訓練與 grounding）；S5 於 2024-02-08 條目寫明 &ldquo;Google-Extended doesn&rsquo;t affect Google Search&rdquo;。已依這兩處修正，不再把它當成 AI Overviews 的開關 [S3][S5]。</li>
+<li><strong>使用者觸發的代理與 robots.txt</strong>：S7 說 ChatGPT-User 由使用者觸發，robots.txt 規則可能不適用；S9 說 Perplexity-User 一般會忽略 robots.txt。S8 原型的 robots.txt 仍把兩者列為「開放」。適用範圍不同：S7、S9 是平台說明機制，S8 是學生原型的設定選擇。簡報只說「使用者觸發，robots.txt 可能不適用」[S7][S9][S8]。</li>
+<li><strong>結構化資料的定位</strong>：S2/S3 說 Google 的生成式 AI 功能不需要特殊 schema；S4 說結構化資料幫 Google 理解頁面、取得豐富搜尋結果。兩者講的是不同功能，互補，不當成衝突 [S2][S3][S4]。</li>
+<li><strong>HowTo／FAQ 的時間點</strong>：S8 寫 HowTo 複合式結果「2023-09 已停用」、FAQ「從 2023 年起只對政府、醫療類權威網站顯示」。S5 的 2023 年 9 月條目移除 How-to 文件並連到 2023 年 8 月部落格（raw 擷取破碎，看不清是哪一天）；FAQ 複合式結果 2026-05-07 起完全不再顯示，說明文件 2026-06-15 移除。這是不同時期的兩次變更，不是同一個日期寫錯 [S8][S5]。</li>
+<li><strong>hreflang 雙向連結</strong>：S10 寫明兩頁要互相指向，否則標記會被忽略；S8 規格寫「每頁的 <head> 都要放互相對應的 hreflang」。兩者一致，列在這裡是因為舊版概念頁曾把它寫成矛盾 [S10][S8]。</li>
 </ol>
+<p>補記（2026-11-22 第二輪審查修訂）：第 5～8 條是為了讓各頁原本的「見矛盾記錄」都指到真的條目而補上的，內容來自各頁既有段落與 raw，沒有新增來源。原本 robots-ai-crawlers 頁有一條「S3 對 S2（CDN）」的張力，核對 raw 後發現那句其實出自 S3，不是 S2，所以刪掉那一條，不另立矛盾。</p>
 </article>
 </div>
 <footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>

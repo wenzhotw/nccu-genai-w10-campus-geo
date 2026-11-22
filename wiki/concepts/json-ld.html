@@ -44,14 +44,14 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <body>
 <header class="site"><div class="bar">
   <a class="brand" href="../../index.html">校園網站 GEO</a>
-  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a> <a href="../../reflection.html">反思</a>
 </div></header>
 <div class="wrap">
 <p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>概念｜JSON-LD</h1>
 <article class='card'>
 <h1>概念：JSON-LD 結構化資料</h1>
 <h2>一句話定義</h2>
-<p>JSON-LD（JavaScript Object Notation for Linked Data）是以 JSON 格式在網頁中嵌入 schema.org 結構化資料的標準做法，幫助搜尋引擎與 AI 系統理解頁面實體屬性與關係，支援豐富搜尋結果與生成式 AI 內容解析。</p>
+<p>JSON-LD（JavaScript Object Notation for Linked Data）是以 JSON 格式在網頁中嵌入 schema.org 結構化資料的標準做法，幫助搜尋引擎理解頁面實體屬性與關係，並讓頁面有機會取得豐富搜尋結果。S2/S3 說 Google 的生成式 AI 功能不需要特殊 schema [S4][S2][S3]。</p>
 <h2>重點</h2>
 <ol>
 <li><strong>Google 官方立場（S2）</strong>：結構化資料<strong>非</strong>生成式 AI 搜尋必要條件，沒有特殊 schema.org 標記需求；但建議保留作為整體 SEO 策略一環，有助符合 Google 搜尋豐富搜尋結果資格[S2]。</li>
@@ -101,7 +101,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 </tr>
 <tr>
 <td><strong>S2/S3「結構化資料非生成式 AI 必要」vs S4「結構化資料助 Google 理解頁面」</strong></td>
-<td>S2/S3 針對生成式 AI 搜尋功能；S4 針對傳統搜尋豐富結果。適用範圍不同，兩者互補而非衝突。見矛盾記錄。</td>
+<td>S2/S3 針對生成式 AI 搜尋功能；S4 針對傳統搜尋豐富結果。適用範圍不同，兩者互補而非衝突。見 open-questions 矛盾第 6 條。</td>
 </tr>
 </tbody>
 </table>
@@ -132,6 +132,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <h2>來源</h2>
 <ul>
 <li>[S2] Google: Optimizing your website for generative AI features on Google Search</li>
+<li>[S3] Google: AI features and your website</li>
 <li>[S4] Google: Intro to How Structured Data Markup Works</li>
 <li>[S5] Google Search Central: Latest documentation updates</li>
 <li>[S8] 政大國際招生網站 GEO 策略／提案（學生前期研究，非正式出版）</li>

@@ -44,7 +44,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <body>
 <header class="site"><div class="bar">
   <a class="brand" href="index.html">校園網站 GEO</a>
-  <a href="index.html">首頁</a> <a href="wiki/index.html">Wiki</a> <a href="slides.html">教學簡報</a> <a href="loop_graph.html">流程說明</a> <a href="run_log.html">執行紀錄</a> <a href="sources.html">來源清單</a>
+  <a href="index.html">首頁</a> <a href="wiki/index.html">Wiki</a> <a href="slides.html">教學簡報</a> <a href="loop_graph.html">流程說明</a> <a href="run_log.html">執行紀錄</a> <a href="sources.html">來源清單</a> <a href="reflection.html">反思</a>
 </div></header>
 <div class="wrap">
 <h1>實際執行與檢查紀錄</h1>
@@ -56,7 +56,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <ul>
 <li>已從 personal Drive 讀取作業說明；本題固定為校園網站 GEO。</li>
 <li>來源 URL 於 2026-11-22 以 curl 實抓，皆 HTTP 200（S8 為本機既有研究檔）。</li>
-<li>LLM：NVIDIA NIM <code>nvidia/nemotron-3-ultra-550b-a55b</code>（與課程 SimpleAgent 範例設定相同；呼叫所用的 API 金鑰未寫入本紀錄，也未上傳到本站）。</li>
+<li>LLM：NVIDIA NIM <code>nvidia/nemotron-3-ultra-550b-a55b</code>（與課程 SimpleAgent 範例設定相同；金鑰來自 /workspace/api_keys/api_keys.txt 的 NVIDIA_API_KEY，不寫入本紀錄）。</li>
 <li>探測呼叫成功（短提示回覆 OK-NEMOTRON）。</li>
 <li>wiki/ 從空白開始；Claude 草稿只放在 run/_reference/ 對照。</li>
 <li>G1 由本機執行代理人對 raw 做字串核對，不是學生本人點確認。</li>
@@ -782,6 +782,56 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <li>報告：<code>/workspace/genai_w10/run/checks/c2_lint_post_review.json</code>（同步寫入 <code>c2_lint.json</code>）</li>
 <li>20 頁；孤兒頁與 index 缺漏為空。</li>
 <li>自動 lint 列出 10 筆：9 筆仍是「不可視為已生效的網路標準」被正則誤判（否定句）；1 筆仍是 S8 方法限制用語對不上「不是直接測 ChatGPT」字樣（頁面已有等同意）。啟發式仍把 qa-writing.md 最後一行完整條目標成 truncated。以上都沒有改正文去遷就正則。</li>
+</ul>
+<h1>第二輪審查修訂 at 2026-11-22 22:16 CST (Asia/Taipei)</h1>
+<p>審查來源：Claude（Opus 5.5，Extra）A=8／B=9；Gemini（深入分析，思考等級高）A=8／B=9，兩者都說三件事修完可達 10 分。逐項接受或不接受的理由見 <code>review_summary.md</code> 的「第二輪審查修訂」。本段只記實際做了的檢查與修改。</p>
+<h2>A2c 完整性檢查（新增節點，回掃）at 2026-11-22 22:07:51 CST (Asia/Taipei)</h2>
+<ul>
+<li>程式：<code>run/scripts/check_completeness.py</code>；報告：<code>run/checks/a2c_completeness_retro.json</code></li>
+<li>規則：<code>finish_reason=length</code>，或最後一個 <code>&lt;!-- FILE: --&gt;</code> 區塊的最後一行沒有收尾標點（寫到一半）→ FAIL，退回 A2。</li>
+<li>對本次 10 個 A2/A3 回應回掃：FAIL 6、PASS 4。</li>
+<li>A2A3-S1：finish=length，completion=8192，最後一頁 campus-case-nccu.md 斷在「第一梯隊……生活資訊/住宿」。</li>
+<li>A2A3-S2、S7、S9、S10：finish=length，completion=16384，最後一頁 open-questions.md 寫到一半；S10 停在「10. RAG」，這就是第一輪審查時 open-questions.md 的截斷狀態（之前誤記為 S2，已更正）。</li>
+<li>A2A3-S5-resume：finish=length，completion=16384；最後一行是「### 矛盾 3：」，結尾規則不會判 FAIL，只有 finish_reason 抓得到。</li>
+<li>S8、S3、S4、S6：finish=stop，PASS。</li>
+<li>這是<strong>事後回掃</strong>，不是當時就有的節點。<code>run/scripts/ingest.py</code> 已加上 A2c 與最多 2 次重生的迴圈（原執行版本保留為 <code>ingest_v1_as_run.py</code>）；本次沒有重跑 ingest，Wiki 不是由新版程式重新生成的。</li>
+</ul>
+<h2>C4 簡報對 Wiki（第二輪，全部數字與日期）at 2026-11-22 22:15:50 CST (Asia/Taipei)</h2>
+<ul>
+<li>程式：<code>run/scripts/c4_numbers.py</code>；報告：<code>run/checks/c4_numbers_round2.json</code></li>
+<li>抽出第 1～18 頁畫面上的 52 個數字與日期 token，在 wiki.md 中全部找得到（0 筆找不到）。小數字（如 5、10）用子字串比對太寬，所以另外逐一看了上下文：10 篇來源、10 題、5／1／4 題、10,000 題、9 種方法、40%、Table 5 的 24.1／21.9／26.2／29.1、Table 2 的 −30.3%／+115.1%／−22.9%／+99.7%／−20.6%／+97.9%、24 小時、2026-05-07、2026-06-15、2026-11-12，都對到 Wiki 的對應頁；附錄 B 的 2024-06-28、2026-07-10、2025-12-10、2024-09-03、2026-09-21、August 2026 也都在 Wiki。</li>
+<li>加上兩份審查列出的主張不對應，逐項處理（Wiki 改了什麼見 <a href="wiki/log.html">wiki/log.md</a> 同日條目）：</li>
+<li>第 6 頁第 1 點：raw S2 開頭有「people are increasingly gravitating to generative AI experiences」，回 A2 補進 s2 頁，標籤改為 s2-google-genai-guide。</li>
+<li>第 9、13 頁：「40 到 60 字」改為「40～60 個英文單字」；範例改成 43 個英文單字、主詞用 National Chengchi University (NCCU)。</li>
+<li>第 8 頁問答體：標籤由青色「實驗支持＋Google 建議」改為黃色「可做；本案寫作規格，不是官方 AI 規格」，和 campus-case 對照表一致。</li>
+<li>第 12 頁 CDN 那句：核對 raw，出處是 S3（&rdquo;Ensuring that crawling is allowed in robots.txt, and by any CDN or hosting infrastructure&rdquo;），簡報原本標 S3 是對的，錯的是 Wiki（標成 S2），回 A1 修 Wiki。生效時間那句改寫清楚是「改了預覽控制後」的重新抓取。</li>
+<li>第 3 頁標籤改為 s2、s3 來源頁與 overview；第 7、14 頁改為「5 題出現在答案、另 1 題只在來源」；第 15 頁拿掉「（推論，待確認原意）」；第 17 頁拿掉 June 12 的審查備註，第 3 點補 open-questions 第 59 條與 S1／S7／S9；第 12 頁補 PerplexityBot（S9）；頁尾與附錄 A 補 S5、S9、S10。</li>
+<li>結果：沒有「Wiki 沒有」或「Wiki 寫錯」的剩餘項目。</li>
+</ul>
+<h2>C3 大綱檢查（第二輪補做）at 2026-11-22 22:15:50 CST (Asia/Taipei)</h2>
+<ul>
+<li>程式：<code>run/scripts/c3_outline.py</code>；報告：<code>run/checks/c3_outline_round2.json</code></li>
+<li>C3 在第一輪沒有做，這是第一次。簡報已經存在，所以是對現成簡報做大綱檢查，不是生成前檢查。</li>
+<li>段落順序：開始之前 → A（3～5）→ B（6～7）→ C（8～12）→ D（13～15）→ E（16～17）→ 回顧（18）→ 附錄，和第 2 頁的路線一致。</li>
+<li>術語第一次出現有沒有解釋：query fan-out、grounding、JSON-LD、robots.txt、hreflang、OAI-SearchBot、GPTBot、Position-Adjusted Word Count 都在第一次出現的那頁就有解釋。兩個問題已修：SEO 第一次出現在第 2 頁卻沒解釋（第 2 頁學習目標補上一句定義）；第 8 頁「schema」比第 10 頁的解釋早出現（第 8 頁改成「特殊標記」）。</li>
+<li>第 2 頁寫「三個步驟」、第 3 頁畫四步：改為「四個步驟」。</li>
+</ul>
+<h2>C5 瀏覽測試（第二輪，真的按鍵）at 2026-11-22 22:15:25–22:15:35 CST (Asia/Taipei)</h2>
+<ul>
+<li>工具：Playwright 1.65.2 ＋ headless Chromium（chromium-headless-shell 159.0.8154.6），程式 <code>run/scripts/c5_browse.py</code>，報告 <code>run/checks/c5_round2.json</code>。對象：<code>file:///workspace/genai_w10/final/slides.html</code>。</li>
+<li>鍵盤（1280×720）：載入 1/21 → ArrowRight 2/21 → Space 3/21 → ArrowLeft 2/21 → PageDown 3/21 → PageUp 2/21 → End 21/21 → Home 1/21，全部符合；在最後一頁再按 ArrowRight 仍是 21/21；連按 17 次 ArrowRight 到 18/21。</li>
+<li>第 18 頁互動問答：Q1～Q3 三個 <code>&lt;details&gt;</code> 點開後都是 open，答案可見；焦點在問題上按 Space 只會收合答案，不會換頁（仍是 18/21）。</li>
+<li>版面：逐頁檢查內容是否壓到頁尾或超出右邊界。第一次跑（22:12 左右）有 5 頁超出：第 3、9、11、12、21 頁。第 11 頁的文字是第一輪 13:17 修訂時加長的，第一輪 12:42 的截圖早於那次修訂，所以當時沒看到。縮短文字、調整第 9 頁範例字級後重跑，21 頁都沒有超出。</li>
+<li>手機寬度（390×844，is_mobile、has_touch）：自動切成捲動閱讀模式；<code>scrollWidth</code> = 390，沒有橫向捲動；21 頁都顯示；表格與程式碼框之外沒有超出寬度的元素。</li>
+<li>離線：整個測試期間對 file:／data: 以外的請求數為 0。</li>
+<li>截圖：<code>final/preview/c5r2_desktop_s09.png</code>、<code>c5r2_desktop_s12.png</code>、<code>c5r2_desktop_s21.png</code>、<code>c5r2_desktop_s18_qa_open.png</code>、<code>c5r2_mobile_390.png</code>、<code>c5r2_mobile_390_s09.png</code>、<code>c5r2_mobile_390_s12.png</code>；21 頁桌面截圖與手機整頁長圖在 <code>run/checks/c5_round2/</code>。<code>final/preview/</code> 裡沒有 c5r2 前綴的是第一輪舊圖。</li>
+<li>限制：這是 headless 瀏覽器的自動按鍵，不是有人在實體手機上滑。</li>
+</ul>
+<h2>其他</h2>
+<ul>
+<li>loop_graph.md 改為 v2：圖照實際路線畫（G1 程式比對、A2c、C1 只記錄、迴圈 B 從既有版面草稿開始），拿掉「（你填）」，「8 次」改為實際的 10 次。</li>
+<li>簡報第 21 頁：拿掉「反思仍待作者用自己的話改寫」與「我確認才准寫」，流程方塊照 v2 改。</li>
+<li>反思：<code>final/reflection.md</code>（依作者訪談回答整理，數字都對過本紀錄）。訪談時作者說當時「叫它重跑一次」，但紀錄顯示被截斷的生成沒有重跑，所以反思寫成「一開始覺得重跑一次就好」，再說明實際上發生了什麼。</li>
 </ul></article>
 </div>
 <footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>

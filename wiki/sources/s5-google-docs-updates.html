@@ -44,7 +44,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <body>
 <header class="site"><div class="bar">
   <a class="brand" href="../../index.html">校園網站 GEO</a>
-  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a> <a href="../../reflection.html">反思</a>
 </div></header>
 <div class="wrap">
 <p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S5｜Google 文件更新</h1>
@@ -197,7 +197,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <li><strong>S3（Google AI 功能）</strong>：S5 記錄 S3 相關文件更新（如 2026-05-27 preferred sources 推出），兩者互補 [S3][S5]。</li>
 <li><strong>S4（結構化資料文件）</strong>：S5 記錄 FAQPage/HowTo 結構化資料文件的移除與更新，S4 為技術規範本體 [S4][S5]。</li>
 <li><strong>S6（llms.txt 提案）</strong>：S5 記錄 Google 官方對 llms.txt 的立場（不需、無影響），S6 為提案標準本身 [S6][S5]。</li>
-<li><strong>S8（學生前期研究）</strong>：S8 引用 2023-08 作為 FAQ/HowTo 停用時間點，與 S5 的 2026-05-07 生效日期不同，屬不同時期政策，見矛盾記錄 [S8][S5]。</li>
+<li><strong>S8（學生前期研究）</strong>：S8 寫 HowTo 的 Google 複合式結果「在 2023-09 已停用」（連到網址路徑為 2023/08 的部落格），FAQ 寫「從 2023 年起只對政府、醫療類權威網站顯示」。S5 這邊，How-to 文件移除列在 2023 年 9 月的條目（raw 擷取破碎，看不清是哪一天），同一條目連到 2023 年 8 月的部落格公告；FAQ 複合式結果則是 2026-05-07 起完全不再顯示。兩者講的是不同時期，不是同一個日期寫錯，見 open-questions 矛盾第 7 條 [S8][S5]。</li>
 <li><strong>校園案例（campus-case-nccu）</strong>：S5 提供政策變更時間軸，校園案例需依最新政策調整結構化資料部署策略 [S5]。</li>
 </ul>
 <h2>對校園網站 GEO 的意義（推論）</h2>
@@ -206,7 +206,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <li><strong>llms.txt 非必要</strong>：Google 明確表示不使用 llms.txt，校網可低成本部署作為保險，但不應列為核心策略 [S5]。</li>
 <li><strong>首選來源功能</strong>：2026-05-27 起向 AI Overviews/AI Mode 推出，若校網符合資格可爭取成為首選來源，提升生成式回應中的引用機會（資格條件待查） [S5]。</li>
 <li><strong>Google-Extended 控制</strong>：可透過 robots.txt 管理內容是否用於 Bard／Vertex AI 等其他系統，不應把它當成 Google 搜尋或 AI Overviews 的開關（S5：「doesn&rsquo;t affect Google Search」）[S5][S3]。</li>
-<li><strong>HowTo 結構化資料</strong>：2023-09 起文件已移除，校網不應再為複合式結果部署 HowTo，保留僅為 AI 解析步驟結構 [S5]。</li>
+<li><strong>HowTo 結構化資料</strong>：S5 記錄 How-to 結構化資料文件已移除，這個複合式結果不再顯示 [S5]。所以校網不應為了 Google 複合式結果部署 HowTo。S5 沒有說 HowTo 有助 AI 解析步驟，S2/S3 也說生成式 AI 功能不需要特殊 schema，本 Wiki 不寫這種效果（推論）[S5][S2][S3]。</li>
 </ul>
 <h2>待查</h2>
 <ol>

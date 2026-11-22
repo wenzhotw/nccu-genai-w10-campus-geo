@@ -44,7 +44,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <body>
 <header class="site"><div class="bar">
   <a class="brand" href="../../index.html">校園網站 GEO</a>
-  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a> <a href="../../reflection.html">反思</a>
 </div></header>
 <div class="wrap">
 <p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>概念｜AI 爬蟲與 robots</h1>
@@ -61,7 +61,7 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <li><strong>Google 官方指引（S2、S3、S5）</strong>：<br />
    - 重要內容必須為 HTML 文字，才能被生成式 AI 系統理解與引用[S2][S3]。<br />
    - robots.txt 指令控制 Googlebot 爬取是網站擁有者管理搜尋存取的方式[S3]。<br />
-   - robots.txt 以外的主機設定（CDN、防火牆、WAF、伺服器端封鎖）也可能擋住爬蟲，需確認整個鏈路開放[S2]。<br />
+   - robots.txt 之外，CDN 或主機設施也要允許抓取（原文：「Ensuring that crawling is allowed in robots.txt, and by any CDN or hosting infrastructure」）[S3]。<br />
    - 網站必須在 Search Console 具備「included in Search generative AI features」資格，才能在生成式 AI 功能中顯示[S2]。<br />
    - <strong>Google-Extended</strong>：2023-09-28 新增權杖，供網站管理內容是否用於改進 Bard／Vertex AI 生成式 API [S5]。S5 於 2024-02-08 寫明 &ldquo;Google-Extended doesn&rsquo;t affect Google Search&rdquo; [S5]。S3：限制「AI training and grounding in some of Google&rsquo;s other systems」時才看 Google-Extended；搜尋（含 AI 功能）仍用 Googlebot 與 snippet／noindex 等控制 [S3]。<br />
    - <strong>重新抓取時間</strong>：S3 寫預覽控制變更後，「crawling can take anywhere from several days to several months」[S3]。OpenAI 約 24 小時生效 [S7]。</li>
@@ -121,20 +121,16 @@ footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mut
 <td>S2、S3 強調重要內容須為 HTML 文字；PDF/圖片文字可被索引但可及性較低，不建議作為關鍵資訊唯一載體[S2][S3]。</td>
 </tr>
 <tr>
-<td><strong>S3「robots.txt 指令控制 Googlebot 爬取是管理搜尋存取的方式」vs S2「robots.txt 以外的主機設定也可能擋住爬蟲」</strong></td>
-<td>S3 強調 robots.txt 為控制方式；S2 補充需確認整個鏈路（CDN、防火牆、WAF、伺服器端）開放。適用範圍：S3 為 AI 功能專頁指引；S2 為完整優化指引。兩者互補而非衝突，但操作上需同時滿足。見矛盾記錄。</td>
-</tr>
-<tr>
 <td><strong>S7「ChatGPT-User robots.txt 可能不適用」vs S8「robots.txt 開放 ChatGPT-User」</strong></td>
-<td>S7 明確說明 ChatGPT-User 由用戶觸發，robots.txt 規則可能不適用；S8 仍在 robots.txt 中開放 ChatGPT-User。適用範圍：S7 為 OpenAI 官方文件說明機制限制；S8 為學生前期研究的實作選擇，以示善意或相容性考量。見矛盾記錄。</td>
+<td>S7 明確說明 ChatGPT-User 由用戶觸發，robots.txt 規則可能不適用；S8 仍在 robots.txt 中開放 ChatGPT-User。適用範圍：S7 為 OpenAI 官方文件說明機制限制；S8 為學生前期研究的實作選擇。見 open-questions 矛盾第 5 條。</td>
 </tr>
 <tr>
 <td><strong>S9「Perplexity-User 一般忽略 robots.txt」vs S8「robots.txt 開放 Perplexity-User」</strong></td>
-<td>S9 明確說明 Perplexity-User 由用戶觸發，一般忽略 robots.txt 規則；S8 仍在 robots.txt 中開放 Perplexity-User。適用範圍：S9 為 Perplexity 官方文件說明機制限制；S8 為學生前期研究的實作選擇。見矛盾記錄。</td>
+<td>S9 明確說明 Perplexity-User 由用戶觸發，一般忽略 robots.txt 規則；S8 仍在 robots.txt 中開放 Perplexity-User。適用範圍：S9 為 Perplexity 官方文件說明機制限制；S8 為學生前期研究的實作選擇。見 open-questions 矛盾第 5 條。</td>
 </tr>
 <tr>
-<td><strong>S10「hreflang 標記需雙向連結，缺少回連結會導致標記被忽略」vs 現有頁面未明確記錄此強制要求</strong></td>
-<td>S10 明確規定雙向連結為強制，否則標記被忽略；既有概念頁未強調此點。適用範圍：S10 為 Google 國際化 SEO 官方文件；既有頁面綜合多來源。見矛盾記錄。</td>
+<td>「hreflang 單向標就好」</td>
+<td>S10 寫明兩頁要互相指向，否則標記會被忽略；S8 規格也要求「互相對應的 hreflang」。不是矛盾，見 open-questions 矛盾第 8 條 [S10][S8]。</td>
 </tr>
 </tbody>
 </table>
