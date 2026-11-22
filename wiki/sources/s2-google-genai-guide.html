@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S2｜Google 生成式 AI 指南｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../../index.html">校園網站 GEO</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S2｜Google 生成式 AI 指南</h1>
+<article class='card'>
+<h1>來源：S2 - Optimizing your website for generative AI features on Google Search</h1>
+<h2>基本資料</h2>
+<ul>
+<li><strong>標題</strong>：Optimizing your website for generative AI features on Google Search</li>
+<li><strong>發布單位</strong>：Google Search Central（Google 官方開發者文件）</li>
+<li><strong>URL</strong>：https://developers.google.com/search/docs/fundamentals/ai-optimization-guide</li>
+<li><strong>來源類型</strong>：平台官方指引文件</li>
+<li><strong>頁面日期（page_date）</strong>：2026-07-10 UTC [S2]</li>
+<li><strong>擷取日期（fetched_at）</strong>：2026-11-22 11:32:49 CST [S2]</li>
+<li><strong>HTTP 狀態碼</strong>：200 [S2]</li>
+<li><strong>SHA256</strong>：b028767b234c8d5bb87ce5995f8f625052be8fe5338d6213d9b336af2093f459 [S2]</li>
+<li><strong>適用範圍</strong>：Google 搜尋的生成式 AI 功能（AI Overviews、AI Mode）與網站擁有者優化指引</li>
+</ul>
+<h2>重點</h2>
+<ol>
+<li><strong>SEO 最佳實踐仍適用於生成式 AI 搜尋</strong>：Google 指出生成式 AI 功能建立在核心搜尋排名與品質系統之上，因此既有 SEO 最佳實踐持續相關 [S2]。</li>
+<li><strong>生成式 AI 回應依賴 RAG 與查詢擴展</strong>：<br />
+   - <strong>檢索增強生成（RAG，也稱 grounding）</strong>：透過核心搜尋排名系統從索引檢索相關、最新網頁，再審閱具體資訊生成更可靠回應，並顯示可點擊連結 [S2]。<br />
+   - <strong>查詢擴展（query fan-out）</strong>：模型產生一組並行相關查詢，抓取更多搜尋結果以回應使用者原始問題 [S2]。</li>
+<li><strong>Google 官方立場：AEO/GEO 仍屬 SEO 範疇</strong>：從 Google 搜尋角度看，針對生成式 AI 搜尋優化即是優化搜尋體驗，因此仍屬 SEO；若考慮第三方 AEO/GEO 建議或服務，應參考 Google 評估第三方 SEO 建議的指引 [S2]。</li>
+<li><strong>無需建立 llms.txt 等專用機器可讀檔案</strong>：Google 搜尋不使用這些檔案，建立與否對 Google 搜尋的能見度或排名無助也無害；若為其他服務需求可自行維護 [S2]。</li>
+<li><strong>內容無需為 AI 刻意切塊或改寫</strong>：Google 系統能理解同義詞與語意，無需將內容拆成極小片段，也無需為生成式 AI 搜尋採用特定寫法 [S2]。</li>
+<li><strong>結構化資料非生成式 AI 搜尋必要條件</strong>：沒有特殊 schema.org 標記需求，但建議保留作為整體 SEO 策略一環，有助符合 Google 搜尋豐富搜尋結果資格 [S2]。</li>
+<li><strong>優先創作非大眾化、有專家觀點、以人為本的內容</strong>：提供獨特視角、超越常識的專家或經驗分享、結構清晰、輔以高品質圖影片，避免為操縱排名大量產出同質內容 [S2]。</li>
+<li><strong>技術基礎仍以既有 SEO 為主</strong>：符合搜尋技術需求、被索引且符合片段顯示資格、可被爬取、語意化 HTML 有助無障礙與代理型體驗、JavaScript SEO 最佳實踐、良好頁面體驗、減少重複內容 [S2]。</li>
+<li><strong>本地商家與電商細節可透過 Merchant Center、Google Business Profiles 強化</strong>：在生成式 AI 回應中顯示產品清單、商家資訊 [S2]。</li>
+<li><strong>效能測量：使用 Search Console 的生成式 AI 效能報告</strong>：可了解內容在生成式 AI 功能中的表現；警惕宣稱擁有 Google 內部指標的第三方工具 [S2]。</li>
+<li><strong>代理型體驗</strong>：瀏覽器代理可能存取網站完成任務；可參考 agent-friendly website best practices 與新興協定（如 UCP）[S2]。</li>
+</ol>
+<h2>數字與日期</h2>
+<table>
+<thead>
+<tr>
+<th>數值</th>
+<th>單位/脈絡</th>
+<th>來源位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-07-10 UTC</td>
+<td>page_date metadata</td>
+<td>metadata page_date [S2]</td>
+</tr>
+<tr>
+<td>2026-11-22 11:32:49 CST</td>
+<td>fetched_at metadata</td>
+<td>metadata fetched_at [S2]</td>
+</tr>
+</tbody>
+</table>
+<h2>作者或文件自述限制</h2>
+<ol>
+<li><strong>僅代表 Google 搜尋官方立場</strong>：不代表其他生成式引擎（Bing Copilot、Perplexity.ai 等）的運作方式 [S2]。</li>
+<li><strong>索引與顯示不保證</strong>：符合所有需求、最佳實踐與政策，不代表 Google 會爬取、索引或顯示內容 [S2]。</li>
+<li><strong>生成式 AI 功能資格需在 Search Console 確認</strong>：網站必須「included in Search generative AI features in Search Console」才具備顯示資格 [S2]。</li>
+<li><strong>第三方工具無法存取 Google 內部排名或 AI 系統</strong>：官方建議以 Search Console 效能報告為準 [S2]。</li>
+<li><strong>代理型體驗為新興領域</strong>：最佳實踐仍在演進，文件提供參考連結供自行探索 [S2]。</li>
+</ol>
+<h2>與其他來源的關係</h2>
+<ul>
+<li><strong>S1 (Aggarwal et al., GEO)</strong>：S1 為學術定義 GEO 框架與指標；S2 為平台官方指引，兩者互補。S2 明確表示「優化生成式 AI 搜尋即優化搜尋體驗，仍屬 SEO」，與 S1 將 GEO 視為獨立範式有定義張力（見矛盾記錄）。</li>
+<li><strong>S3 (Google AI features / query fan-out)</strong>：S2 文中已說明 query fan-out 概念；S3 可提供更詳細技術細節對照。</li>
+<li><strong>S4 (Google 結構化資料文件)</strong>：S2 指出結構化資料非生成式 AI 搜尋必要條件；S4 提供 schema.org 技術規範，兩者互補。</li>
+<li><strong>S5 (Google 文件更新 / FAQPage HowTo 變更)</strong>：S2 未提及 FAQPage/HowTo 複合式結果停用；S5 記錄 2023-08 政策變更，補充歷史脈絡。</li>
+<li><strong>S6 (llms.txt 提案)</strong>：S2 明確表示 Google 搜尋忽略 llms.txt；S6 為提案標準，不可視為已生效網路標準。</li>
+<li><strong>S7 (OpenAI 爬蟲文件)</strong>：S2 著重 Google 爬蟲與索引；S7 可補充其他 AI 爬蟲行為。</li>
+<li><strong>S8 (學生前期研究)</strong>：S8 參考 S2 指引制定政大網站技術規格（robots.txt、結構化資料、內容策略等），引用 S8 時必標「學生前期研究」並附基準方法限制。</li>
+</ul>
+<h2>對校園網站 GEO 的意義（推論）</h2>
+<ul>
+<li><strong>策略定調</strong>：以既有 SEO 最佳實踐為基礎，無需另闢「GEO 專用」技術棧；重點在內容品質與技術可及性（推論，基於 S2 核心訊息）[S2]。</li>
+<li><strong>內容優先序</strong>：投入資源創作「非大眾化、專家主導、以人為本」的招生內容（如系所獨特優勢、真實學生見證、可查證統計數據），而非追求關鍵字變體覆蓋或大量同質頁面（推論，基於 S2 內容策略段落）[S2]。</li>
+<li><strong>技術清單</strong>：確保頁面可被索引、符合技術需求、在 Search Console 具備生成式 AI 功能資格、robots.txt 開放 Google-Extended 等爬蟲、語意化 HTML、良好頁面體驗（推論，基於 S2 技術結構段落）[S2]。</li>
+<li><strong>結構化資料</strong>：保留 FAQPage、EducationalOccupationalProgram 等標記作為整體 SEO 與豐富搜尋結果策略，但不預期對生成式 AI 搜尋有額外加分（推論，基於 S2 迷思破除段落）[S2]。</li>
+<li><strong>llms.txt</strong>：可放但非必要，成本低可作為保險，不應列為核心策略（推論，基於 S2 明確忽略聲明）[S2]。</li>
+<li><strong>效能監測</strong>：納入 Search Console 生成式 AI 效能報告作為月度追蹤指標之一（推論，基於 S2 測量段落）[S2]。</li>
+<li><strong>代理型體驗前瞻</strong>：若招生流程涉及表單填寫、文件比對等任務，未來瀏覽器代理可能成為新流量入口，建議關注 agent-friendly 實踐（推論，基於 S2 代理型體驗段落）[S2]。</li>
+</ul>
+<h2>待查</h2>
+<ol>
+<li>Generative AI performance report 在 Search Console 具體呈現哪些指標、如何解讀 [S2]。</li>
+<li>「included in Search generative AI features in Search Console」的技術啟用條件與審核流程 [S2]。</li>
+<li>RAG 具體如何呼叫核心排名系統檢索、以及 grounding 過程的細節 [S2]。</li>
+<li>Agentic experiences（瀏覽器代理、UCP 協定）未來是否會成為能見度排名因子 [S2]。</li>
+<li>Google 所謂「non-commodity content」在教育/招生領域的具體判斷標準 [S2]。</li>
+<li>S2 文件中「best practices for SEO continue to be relevant」等關鍵字串的 verbatim 確切位置（G1 核對未找到完全相符字串，標記待查）[S2]。</li>
+</ol>
+<h2>影響的頁面</h2>
+<ul>
+<li><a href="../concepts/geo-vs-seo.html">wiki/concepts/geo-vs-seo.md</a></li>
+<li><a href="../concepts/llms-txt.html">wiki/concepts/llms-txt.md</a></li>
+<li><a href="../concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a></li>
+<li><a href="../concepts/json-ld.html">wiki/concepts/json-ld.md</a></li>
+<li><a href="../overview.html">wiki/overview.md</a></li>
+<li><a href="../index.html">wiki/index.md</a></li>
+<li><a href="../open-questions.html">wiki/open-questions.md</a></li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

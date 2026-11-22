@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主題總覽｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../index.html">校園網站 GEO</a>
+  <a href="../index.html">首頁</a> <a href="index.html">Wiki</a> <a href="../slides.html">教學簡報</a> <a href="../loop_graph.html">流程說明</a> <a href="../run_log.html">執行紀錄</a> <a href="../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='index.html'>Wiki 目錄</a></p><h1>主題總覽</h1>
+<article class='card'>
+<h1>總覽：校園網站 GEO（以政大國際招生為例）</h1>
+<h2>主題定義</h2>
+<p><strong>生成式引擎優化（GEO，Generative Engine Optimization）</strong> 是針對生成式搜尋引擎（如 Google AI Overviews、Bing Copilot、Perplexity.ai）優化網頁內容能見度的新興範式。不同於傳統 SEO 追求關鍵字排名，GEO 關注內容在生成式回應中被引用的<strong>長度、位置、可信度與主觀印象</strong>。</p>
+<h2>核心來源</h2>
+<ul>
+<li><strong>S1</strong>：Aggarwal et al., &ldquo;GEO: Generative Engine Optimization&rdquo;, arXiv 2311.09735 v3 (KDD 2024) — 奠基性學術工作，定義 GEO 框架、GEO-bench 基準、9 種優化方法、兩大能見度指標，並實證 top-3 方法可提升 30-40% 能見度。</li>
+<li><strong>S2</strong>：Google, &ldquo;Optimizing your website for generative AI features on Google Search&rdquo; — 平台官方指引，說明 AI 摘要運作（RAG、query fan-out）、SEO 重構、內容策略、迷思破除（llms.txt、切塊、結構化資料）、效能測量與代理型體驗。</li>
+<li><strong>S3</strong>：Google, &ldquo;AI features and your website&rdquo; — 解釋 AI Overviews/AI Mode 運作（query fan-out）、顯示資格（需被索引且符合片段資格）、SEO 最佳實踐仍適用無額外要求、robots.txt 控制、點擊品質較高。</li>
+<li><strong>S4</strong>：Google, &ldquo;Intro to How Structured Data Markup Works&rdquo; — schema.org 結構化資料技術規範，說明 JSON-LD、Microdata、RDFa 格式、一般指引、驗證工具與案例研究。</li>
+<li><strong>S5</strong>：Google Search Central, &ldquo;Latest Google Search documentation updates&rdquo; — 官方文件更新記錄，記錄 FAQPage/HowTo 複合式結果政策變更（2023-08、2026-05）、llms.txt 澄清（2026-06-15）、Google-Extended（2023-09-28）、preferred sources 推出（2026-05-27）、AI 優化指南新增（2026-05-15）等。</li>
+<li><strong>S6</strong>：llms.txt proposal (llmstxt.org) — 新興提案標準，<strong>不可視為已生效網路標準</strong>。</li>
+<li><strong>S7</strong>：OpenAI, &ldquo;Crawlers documentation&rdquo; — AI 爬蟲用途與控制說明。</li>
+<li><strong>S8</strong>：政大國際招生網站 GEO 策略／提案（學生前期研究，非正式出版） — 提供政大招生情境的基準測試數據、網站規格、衡量指標、多語言規劃與對齊既有計畫文件的具體細節。</li>
+<li><strong>S9</strong>：Perplexity, &ldquo;Perplexity Crawlers&rdquo; — Perplexity 官方文件，說明 PerplexityBot、Perplexity-User 兩種代理的用途、User-Agent、IP 範圍 JSON、robots.txt 行為與 WAF 設定指引。</li>
+<li><strong>S10</strong>：Google, &ldquo;Tell Google about localized versions of your page&rdquo; — 國際化 SEO 官方文件，說明 hreflang 三種實作方式、雙向連結強制要求、x-default 回退值、語言/地區代碼標準（ISO 639-1、ISO 3166-1 Alpha 2、ISO 15924）。</li>
+</ul>
+<h2>關鍵發現（來自 S1）</h2>
+<ol>
+<li><strong>GEO ≠ SEO</strong>：關鍵字堆砌在生成式引擎無效（verbatim 待查）；高效方法為 Cite Sources、Quotation Addition、Statistics Addition [S1]。</li>
+<li><strong>指標體系</strong>：Position-Adjusted Word Count（位置調整字數）與 Subjective Impression（主觀印象，七面向經 G-Eval 正規化）[S1]。</li>
+<li><strong>民主化潛力</strong>：低排名網站受益大（第 5 名 +115.1%），高排名網站可能被擠下（第 1 名 -30.3%）[S1]。</li>
+<li><strong>領域相依</strong>：同一方法在不同領域效果差異大，需領域適配 [S1]。</li>
+<li><strong>組合更強</strong>：Fluency Optimization + Statistics Addition 最佳；Cite Sources 結合其他方法平均 +31.4% [S1]。</li>
+<li><strong>真實環境驗證</strong>：Perplexity.ai 上 Quotation Addition +22% PAWC、Statistics Addition +37% SI [S1]。</li>
+</ol>
+<h2>Google 官方指引關鍵點（來自 S2、S3、S4、S5、S10）</h2>
+<ol>
+<li><strong>SEO 最佳實踐仍適用</strong>：生成式 AI 功能建立在核心排名系統之上，既有 SEO 最佳實踐持續相關 [S2][S3]。</li>
+<li><strong>RAG 與查詢擴展</strong>：生成式回應依賴檢索增強生成（RAG/grounding）與查詢擴展從索引取得內容 [S2]。</li>
+<li><strong>Query fan-out</strong>：AI Overviews 與 AI Mode 使用 query fan-out 技術拆解子查詢以發展回應 [S3]。</li>
+<li><strong>AEO/GEO 仍屬 SEO</strong>：從 Google 搜尋角度看，優化生成式 AI 搜尋即優化搜尋體驗，因此仍屬 SEO [S2]。</li>
+<li><strong>無需 llms.txt</strong>：Google 搜尋忽略 llms.txt 等專用機器可讀檔案 [S2][S5]。</li>
+<li><strong>無需為 AI 切塊或改寫</strong>：Google 系統理解同義詞與語意 [S2]。</li>
+<li><strong>結構化資料非必要</strong>：但建議保留作為整體 SEO 策略一環 [S2][S3]。</li>
+<li><strong>結構化資料技術規範（S4）</strong>：Google 建議使用 JSON-LD，最易實作維護且可動態注入；必須描述使用者可見內容，不得標記隱藏資訊；需遵循一般指引與類型專屬指引；可用 Rich Results Test 驗證、Search Console 監控 [S4]。</li>
+<li><strong>優先非大眾化、專家、以人為本內容</strong>：獨特視角、超越常識、結構清晰、輔以圖影片 [S2]。</li>
+<li><strong>技術基礎</strong>：可索引、可爬取、HTML 文字呈現關鍵資訊、語意化 HTML、良好頁面體驗 [S2][S3]。</li>
+<li><strong>顯示資格</strong>：頁面必須先被索引且合乎 Google 搜尋片段顯示資格，才能出現在 AI 功能中 [S3]。</li>
+<li><strong>robots.txt 控制</strong>：robots.txt 指令控制 Googlebot 爬取是網站擁有者管理搜尋存取的方式 [S3]。</li>
+<li><strong>效能測量</strong>：Search Console 生成式 AI 效能報告（Web search type）[S2][S3]。</li>
+<li><strong>點擊品質</strong>：來自 AI Overviews 的點擊品質較高，使用者較可能在網站停留更久 [S3]。</li>
+<li><strong>代理型體驗</strong>：瀏覽器代理、UCP 協定為新興趨勢 [S2]。</li>
+<li><strong>FAQPage/HowTo 複合式結果政策演進（S5）</strong>：<ul>
+<li>2023-08 部落格宣佈 HowTo 棄用、FAQ 僅限政府/醫療權威網站 [S5]。</li>
+<li>2023-09 文件移除 HowTo 文件、更新 FAQ 文件說明 [S5]。</li>
+<li>2026-05-07 起 FAQ 複合式結果不再顯示，2026-05-08 發布棄用通知，2026-06-15 移除 FAQ 文件 [S5]。</li>
+<li>S8 曾把保留 FAQPage 寫成「僅為讓 AI 解析問答結構」；S2/S3 並未證明 FAQPage 能提升生成式 AI 的解析或引用，因此不把它列成 GEO 必要作法 [S5][S8][S2][S3]。</li>
+</ul>
+</li>
+<li><strong>Google-Extended（S3、S5）</strong>：2023-09-28 新增權杖，供網站管理內容是否用於 Bard／Vertex AI 等生成式 API 的改進 [S5]。S5 於 2024-02-08 補充：「Google-Extended doesn&rsquo;t affect Google Search」[S5]。S3 將 Googlebot（搜尋，含 AI 功能）與 Google-Extended（其他系統的訓練與 grounding）分開 [S3]。不應把它當成 AI Overviews 或 Google 搜尋的索引開關。</li>
+<li><strong>Preferred sources（S5）</strong>：2026-05-27 起向 AI Overviews/AI Mode 推出，資格條件待查 [S5]。</li>
+<li><strong>AI 優化指南新增（S5）</strong>：2026-05-15 新增，含非大眾化內容、AEO/GEO 迷思破除、AI 代理初步指引 [S5]。</li>
+<li><strong>國際化多語言導向（S10）</strong>：<ul>
+<li>三種等效方法：HTML link 標籤、HTTP Header、XML Sitemap，三選一即可 [S10]。</li>
+<li>每個語言版本必須列出自身與所有其他版本，且需雙向連結，否則標記被忽略 [S10]。</li>
+<li>替代網址必須為完整合格網址（含 http/https）[S10]。</li>
+<li>保留值 x-default 用於無符合語言/地區時的回退頁面，建議用於語言選擇頁 [S10]。</li>
+<li>語言代碼需符合 ISO 639-1，地區代碼需符合 ISO 3166-1 Alpha 2，腳本代碼可用 ISO 15924 [S10]。</li>
+<li>Google 不使用 hreflang 或 HTML lang 屬性偵測頁面語言，而是演算法判斷（verbatim 待查）[S10]。</li>
+<li>常見錯誤：缺少回連結、語言/地區代碼錯誤 [S10]。</li>
+</ul>
+</li>
+</ol>
+<h2>llms.txt 提案關鍵點（來自 S6）</h2>
+<ol>
+<li><strong>提案而非標準</strong>：llms.txt 為社群提案（v2 於 2026 年 8 月發布），非 IETF/W3C 正式標準，Google 搜尋明確忽略 [S6][S2][S5]。</li>
+<li><strong>格式規範</strong>：H1 專案名稱（必要）、blockquote 簡短摘要、可選細節、H2 分組的檔案清單（含超連結與可選備註）[S6]。</li>
+<li><strong>v2 新增可發現性機制</strong>：<code>rel="alternate" type="text/markdown"</code> 指向頁面 Markdown 版本，<code>rel="describedby"</code> 指向涵蓋該頁的 llms.txt；允許兩種 Markdown URL 形式（<code>page.html.md</code> 或 <code>page.md</code>）[S6]。</li>
+<li><strong>採用現象</strong>：數千網站發布、文件平台自動生成、Chrome Lighthouse 納入稽核、AI 實驗室自家文件發布 [S6]。</li>
+<li><strong>與現有標準共存</strong>：與 robots.txt、sitemap.xml 用途不同，互補不取代 [S6]。</li>
+<li><strong>政大部署</strong>：S8 採用提案格式但誠實標註非必要、非標準、成本低可放 [S8]。</li>
+</ol>
+<h2>OpenAI 爬蟲控制關鍵點（來自 S7）</h2>
+<ol>
+<li><strong>四種獨立爬蟲/用戶代理</strong>：OAI-SearchBot（搜尋檢索）、OAI-AdsBot（廣告驗證）、GPTBot（模型訓練）、ChatGPT-User（用戶即時請求）[S7]。</li>
+<li><strong>搜尋與訓練獨立控制</strong>：OAI-SearchBot 控制 ChatGPT 搜尋結果顯示，GPTBot 控制模型訓練使用，兩者可分別設定 [S7]。</li>
+<li><strong>合併爬取可能</strong>：若同時開放 OAI-SearchBot 與 GPTBot，OpenAI 可能合併爬取避免重複 [S7]。</li>
+<li><strong>ChatGPT-User 非自動爬取</strong>：由用戶動作觸發，robots.txt 規則可能不適用 [S7]。</li>
+<li><strong>IP 範圍 JSON 驗證</strong>：各爬蟲發布 IP 範圍 JSON（searchbot.json、gptbot.json、adsbot.json、chatgpt-user.json）供防火牆白名單驗證 [S7]。</li>
+<li><strong>robots.txt 約 24 小時生效</strong>：OpenAI 系統約需 24 小時調整 [S7]。</li>
+</ol>
+<h2>Perplexity 爬蟲控制關鍵點（來自 S9）</h2>
+<ol>
+<li><strong>兩種獨立代理</strong>：PerplexityBot（搜尋索引）、Perplexity-User（用戶即時請求）[S9]。</li>
+<li><strong>用途區分</strong>：PerplexityBot 用於搜尋結果呈現與連結，不作為 AI 基礎模型訓練爬蟲；Perplexity-User 支援用戶動作，非自動爬取 [S9]。</li>
+<li><strong>robots.txt 行為差異</strong>：PerplexityBot 建議在 robots.txt 允許；Perplexity-User 一般忽略 robots.txt 規則 [S9]。</li>
+<li><strong>IP 範圍 JSON 驗證</strong>：兩種代理皆發布 IP 範圍 JSON（perplexitybot.json、perplexity-user.json）供防火牆白名單驗證 [S9]。</li>
+<li><strong>WAF 設定指引</strong>：提供 Cloudflare WAF 與 AWS WAF 具體配置步驟，建議結合 User-Agent 比對與 IP 範圍驗證 [S9]。</li>
+</ol>
+<h2>政大國際招生網站的實測基準線（來自 S8 學生前期研究）</h2>
+<ul>
+<li><strong>基準測試日期</strong>：2026-11-12，約 19:20–19:40（台北時間）[S8]。</li>
+<li><strong>方法</strong>：WebSearch 工具（搜尋結果 + AI 自動摘要）作為替代指標，非 ChatGPT、非 Google AI 摘要、非 Perplexity.ai；單一時間點快照 [S8]。</li>
+<li><strong>結果</strong>：10 題中政大出現在 AI 摘要答案 5 題（B2、B5、B6、B9 明確推薦，B10 次要提及）、僅來源 1 題（B8）、完全缺席 4 題（B1、B3、B4、B7）[S8]。</li>
+<li><strong>關鍵洞察</strong>：政大在精準利基問題（台灣研究、兩岸研究、英語 MBA、日本研究）有出現；在廣泛選校問題（東亞讀國際關係、台灣適合國際生、台灣英語授課碩士、台灣學漢學）完全缺席，答案由台大、師大、清大、陽明交大、成大主導 [S8]。</li>
+<li><strong>強項分散</strong>：IMPIS、IMAS、IMBA、國關中心、華語中心、日本研究學位學程等官網資訊存在，但散落各系所，缺乏 AI 易引用的整合入口 [S8]。</li>
+</ul>
+<h2>對政大國際招生網站的啟示（推論）</h2>
+<ul>
+<li><strong>優先動作</strong>：在關鍵招生頁面導入「引用官方來源」、「學生/教授真實引語」、「關鍵指標量化」[S1][S8]。</li>
+<li><strong>風格優化</strong>：提升可讀性、流暢度、結構化呈現（問答體、40–60 字直接答案）[S1][S8]。</li>
+<li><strong>長尾頁面優先</strong>：系所專頁、獎學金、生活資訊等低排名頁面潛在獲益最大 [S1][S8]。</li>
+<li><strong>避免舊習慣</strong>：停止關鍵字堆砌，轉向內容可信度與呈現品質 [S1][S8]。</li>
+<li><strong>因應 query fan-out</strong>：每頁涵蓋主問題與相關子問題，增加被多個子查詢檢索到的機會 [S3][S8]。</li>
+<li><strong>技術規格落地</strong>：JSON-LD（FAQPage、EducationalOccupationalProgram 等）、robots.txt 開放 AI 爬蟲、hreflang 多語、llms.txt 索引、sitemap.xml [S8][S10]。</li>
+<li><strong>結構化資料部署</strong>：依 S4 規範採用 JSON-LD，內容與可見文字一致，經 Rich Results Test 驗證、Search Console 監控 [S4][S8]。</li>
+<li><strong>FAQPage 策略調整</strong>：FAQ 複合式結果已於 2026-05-07 起不再顯示，說明文件於 2026-06-15 移除 [S5]。現有官方來源不足以證明保留 FAQPage 能增加生成式 AI 的解析或引用，故不列為 GEO 必要項目；S8 原型若仍放置 FAQPage，應視為與可見問答一致的標記，而不是已證實的 AI 效果 [S5][S8][S2][S3]。</li>
+<li><strong>llms.txt 部署</strong>：低成本放置但非核心策略，誠實標註 Google 忽略 [S5][S8]。</li>
+<li><strong>監測與驗證</strong>：每月重跑基準 10 題、GA4 建立 AI Referral 管道、Search Console 追蹤目標問題趨勢、每季檢查第三方引用 [S8]。</li>
+<li><strong>分期建置</strong>：原型（P1 三語）→ 內容轉換（P2 + ko/vi/id）→ 上線優化（3 個月基準追蹤）→ 擴充（百年校慶、第三方引用）[S8]。</li>
+<li><strong>資料查核機制</strong>：國合處指定窗口每學期確認招生時程、學程清單、獎學金、人數統計；上線前統一數字落差 [S8]。</li>
+<li><strong>平台差異策略</strong>：針對 Google 搜尋遵循 S2/S3 以既有 SEO 為基礎；針對其他 GE 參考 S1 方法論適配（推論，基於 S1、S2、S3 定義張力）[S1][S2][S3]。</li>
+<li><strong>OpenAI 爬蟲策略</strong>：允許 OAI-SearchBot 讓招生內容出現在 ChatGPT 搜尋，視政策決定是否允許 GPTBot 訓練使用，確保基礎設施放行 ChatGPT-User IP 範圍（推論，基於 S7、S8）[S7][S8]。</li>
+<li><strong>Perplexity 爬蟲策略</strong>：允許 PerplexityBot 讓招生內容出現在 Perplexity 搜尋，確保基礎設施（CDN/WAF）放行 Perplexity-User IP 範圍以支援用戶即時請求（推論，基於 S9、S8）[S9][S8]。</li>
+<li><strong>hreflang 部署策略</strong>：採用 HTML link 標籤法（或 Sitemap 法），每語言版本列出自身與所有其他版本，確保雙向連結完整；代碼遵循 ISO 639-1、ISO 3166-1 Alpha 2、ISO 15924；首頁與語言選擇頁設定 x-default；CMS 自動化產生避免人工疏漏（推論，基於 S10、S8）[S10][S8]。</li>
+</ul>
+<h2>待查與風險</h2>
+<ol>
+<li>Education/招生領域的具體最佳方法（S1 未涵蓋 Education 標籤）[S1]。</li>
+<li>學術指標與實際招生轉換率的關聯 [S1][S8]。</li>
+<li>Google AI Overviews、Bing Copilot 等主流 GE 的實際反應 [S1][S8]。</li>
+<li>GEO 方法對傳統搜尋排名的副作用 [S1]。</li>
+<li>關鍵字堆砌 verbatim 確切出處（G1 待查）[S1]。</li>
+<li>S8 基準測試結果在不同時段、不同工具的一致性 [S8]。</li>
+<li>WebSearch 工具 AI 摘要生成機制細節 [S8]。</li>
+<li>政大英文簡介與系所頁面數字落差的官方統一版本 [S8]。</li>
+<li>IMPIS 兩方向官方中英文名稱 [S8]。</li>
+<li>國關中心是否保留 China Studies Center [S8]。</li>
+<li>學院數官方計算方式 [S8]。</li>
+<li>GA4 AI Referral 管道正規表示式的長期維護 [S8]。</li>
+<li>Generative AI performance report 在 Search Console 具體指標與解讀 [S2]。</li>
+<li>「included in Search generative AI features」的技術啟用條件與審核流程 [S2]。</li>
+<li>RAG 具體呼叫核心排名系統與 grounding 細節 [S2]。</li>
+<li>Agentic experiences 是否會成為能見度排名因子 [S2]。</li>
+<li>Google 所謂「non-commodity content」在教育/招生領域的具體判斷標準 [S2]。</li>
+<li>query fan-out 具體運作細節（並行查詢數量、子主題選擇邏輯）[S3]。</li>
+<li>higher quality clicks 的量化定義與測量方法 [S3]。</li>
+<li>indexed and eligible to be shown in Google Search with a snippet 的具體技術門檻 [S3]。</li>
+<li>AI 功能顯示與否的決定因素（何時觸發、何時不觸發）[S3]。</li>
+<li>robots.txt 指令 verbatim &ldquo;for Googlebot is&rdquo; 在 S3 原文確切位置（G1 核對未找到，標記待查）[S3]。</li>
+<li>S4 未提及生成式 AI 功能，結構化資料對 RAG/grounding 的具體影響不明 [S4]。</li>
+<li>案例研究數據（25%、35%、1.5x、3.6x、82%）年代未標註，是否反映現況待查 [S4]。</li>
+<li>JSON-LD 動態注入對生成式 AI 系統檢索的實際影響 [S4]。</li>
+<li>schema.org 詞彙中 Google 不要求的屬性/物件，是否會被生成式 AI 系統利用 [S4]。</li>
+<li>Data-vocabulary.org 停用對現有部署的遷移期限與影響範圍 [S4]。</li>
+<li>案例研究網站具體實施時間與測量方法細節 [S4]。</li>
+<li>FAQ 棄用公告日期 (2026-05-08) 晚於生效日期 (2026-05-07) 的時間順序是否為 changelog 記錄順序導致 [S5]。</li>
+<li>llms.txt 澄清「aren&rsquo;t needed for Google Search」是否代表完全忽略，還是僅不作為排名因子 [S5][S2]。</li>
+<li>Preferred sources 功能的具體資格條件、申請流程、對招生網站的適用性 [S5]。</li>
+<li>Google-Extended 在各產品上的精確名單（S3、S5 已區分搜尋與其他系統；2026-11-22 核對官方爬蟲說明頁語意一致，但該頁不是本次 ingest 來源）[S5][S3]。</li>
+<li>2023-08 HowTo/FAQ 變更部落格的確切發布日期（raw 僅有月份）[S5]。</li>
+<li>S5 中 2026-09-24、2026-09-18 等條目重複出現兩次，是否為 raw 擷取重複 [S5]。</li>
+<li>v2 確切發布日期（Changes 頁僅標示 &ldquo;August 2026&rdquo;，無日）[S6]。</li>
+<li>llms.txt 是否會演進為 IETF/W3C 正式標準，或被主要 AI 平台正式採納為必要機制 [S6]。</li>
+<li>OpenAI、Perplexity、Anthropic 等主流 AI 平台實際讀取 llms.txt 的頻率、方式與影響程度（缺乏公開實證）[S6][S7][S9]。</li>
+<li>Google 官方是否會在未來改變立場（目前 S2/S5 明確忽略）[S2][S5]。</li>
+<li>教育/招生領域網站部署 llms.txt 的實際效益（無公開案例研究）[S6][S8]。</li>
+<li>Optional 區段在 v2 中移除機械語意後，各工具實際處理方式是否一致 [S6]。</li>
+<li><code>rel="describedby"</code> 與 <code>rel="alternate" type="text/markdown"</code> 在主流瀏覽器/爬蟲/代理中的實際支援度 [S6]。</li>
+<li>ChatGPT-User 實際上是否完全忽略 robots.txt，還是部分遵循？[S7]</li>
+<li>OpenAI 合併爬取（one crawl for both use cases）的具體觸發條件與頻率 [S7]。</li>
+<li>OAI-AdsBot 是否與政大招生網站相關（僅廣告落地頁驗證）[S7]。</li>
+<li>IP 範圍 JSON 更新頻率與通知機制 [S7][S9]。</li>
+<li>User-Agent 版本號變更頻率與向後相容性 [S7][S9]。</li>
+<li>PerplexityBot 是否完全遵循 robots.txt（文件僅建議允許，未明確聲明遵循）[S9]。</li>
+<li>Perplexity-User 實際上是否完全忽略 robots.txt，還是部分遵循 [S9]。</li>
+<li><strong>hreflang 對 Google 生成式 AI 功能（AI Overviews、AI Mode）的具體影響</strong> [S10]。</li>
+<li><strong>x-default 頁面在生成式 AI 回應中的顯示邏輯</strong> [S10]。</li>
+<li><strong>多語言網站在 query fan-out 機制下，子查詢如何匹配語言版本</strong> [S10][S3]。</li>
+<li><strong>第三方除錯工具（Aleyda Solis、Merkle SEO）可靠度</strong> [S10]。</li>
+<li><strong>「Google 不使用 hreflang 或 HTML lang 屬性偵測頁面語言」的 verbatim 確切位置</strong> [S10]。</li>
+<li><strong>「x-default value」的 verbatim 確切位置</strong> [S10]。</li>
+<li><strong>「If it becomes difficult to maintain a complete set of bidirectional links for every language, you can omit some languages on some pages」的實際容忍度與邊界條件</strong> [S10]。</li>
+</ol>
+<h2>相關概念頁</h2>
+<ul>
+<li><a href="concepts/geo-vs-seo.html">GEO vs SEO</a></li>
+<li><a href="concepts/qa-writing.html">問答式寫作</a></li>
+<li><a href="concepts/json-ld.html">JSON-LD 結構化資料</a></li>
+<li><a href="concepts/llms-txt.html">llms.txt</a>（注意：不可視為已生效網路標準）</li>
+<li><a href="concepts/robots-ai-crawlers.html">AI 爬蟲與 robots</a></li>
+<li><a href="concepts/campus-case-nccu.html">校園案例：政大國際招生</a></li>
+</ul>
+<h2>來源清單</h2>
+<ul>
+<li>[S1] GEO: Generative Engine Optimization (Aggarwal et al., arXiv 2311.09735 v3)</li>
+<li>[S2] Google: Optimizing your website for generative AI features on Google Search</li>
+<li>[S3] Google: AI features and your website</li>
+<li>[S4] Google: Intro to How Structured Data Markup Works</li>
+<li>[S5] Google Search Central: Latest documentation updates</li>
+<li>[S6] llms.txt proposal (llmstxt.org)</li>
+<li>[S7] OpenAI crawlers documentation</li>
+<li>[S8] 政大國際招生網站 GEO 策略／提案（學生前期研究，非正式出版）</li>
+<li>[S9] Perplexity Crawlers</li>
+<li>[S10] Google: Tell Google about localized versions of your page</li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

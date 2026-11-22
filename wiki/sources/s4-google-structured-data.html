@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S4｜結構化資料入門｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../../index.html">校園網站 GEO</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S4｜結構化資料入門</h1>
+<article class='card'>
+<h1>來源：S4 - Intro to How Structured Data Markup Works</h1>
+<h2>基本資料</h2>
+<ul>
+<li><strong>標題</strong>：Intro to How Structured Data Markup Works</li>
+<li><strong>發布單位</strong>：Google Search Central（Google 官方開發者文件）</li>
+<li><strong>URL</strong>：https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data</li>
+<li><strong>來源類型</strong>：平台官方技術文件</li>
+<li><strong>頁面日期（page_date）</strong>：2025-12-10 UTC [S4]</li>
+<li><strong>擷取日期（fetched_at）</strong>：2026-11-22 11:32:51 CST [S4]</li>
+<li><strong>HTTP 狀態碼</strong>：200 [S4]</li>
+<li><strong>來源檔案大小</strong>：188659 bytes [S4]</li>
+<li><strong>SHA256</strong>：41c23ea263a8ebd60fcf539cc147d82cfa62fbd161b9d01e67d063de6dacb773 [S4]</li>
+<li><strong>適用範圍</strong>：Google 搜尋結構化資料技術文件：說明為何加入結構化資料、運作方式、schema.org 詞彙與支援格式（JSON-LD、Microdata、RDFa）、一般指引、入門與效果測量。適用於 Google 搜尋豐富搜尋結果，非專門針對生成式 AI 功能。</li>
+</ul>
+<h2>重點</h2>
+<ol>
+<li><strong>結構化資料為標準化格式，提供頁面資訊並分類內容，幫助 Google 理解頁面</strong> [S4]。</li>
+<li><strong>加入結構化資料可啟用豐富搜尋結果，多個案例研究顯示點擊率、造訪數、停留時間顯著提升</strong> [S4]。</li>
+<li><strong>Google 建議使用 JSON-LD 格式，最易實作維護，且可動態注入頁面</strong> [S4]。</li>
+<li><strong>結構化資料必須描述使用者可見的頁面內容，不得標記隱藏或不可見資訊</strong> [S4]。</li>
+<li><strong>需遵循一般結構化資料指引與類型專屬指引，否則可能不符合豐富搜尋結果資格</strong> [S4]。</li>
+<li><strong>可用 Rich Results Test 驗證結構化資料，部署後透過 Search Console 監控效果</strong> [S4]。</li>
+</ol>
+<h2>數字與日期</h2>
+<table>
+<thead>
+<tr>
+<th>數值</th>
+<th>單位/脈絡</th>
+<th>來源位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025-12-10 UTC</td>
+<td>page_date metadata</td>
+<td>metadata page_date [S4]</td>
+</tr>
+<tr>
+<td>2026-11-22 11:32:51 CST</td>
+<td>fetched_at metadata</td>
+<td>metadata fetched_at [S4]</td>
+</tr>
+<tr>
+<td>200</td>
+<td>HTTP status code</td>
+<td>metadata http_code [S4]</td>
+</tr>
+<tr>
+<td>188659</td>
+<td>source file size in bytes</td>
+<td>metadata source_bytes [S4]</td>
+</tr>
+<tr>
+<td>25%</td>
+<td>Rotten Tomatoes 頁面點擊率提升</td>
+<td>Why add structured data to a page? [S4]</td>
+</tr>
+<tr>
+<td>35%</td>
+<td>The Food Network 造訪數增加</td>
+<td>Why add structured data to a page? [S4]</td>
+</tr>
+<tr>
+<td>1.5x</td>
+<td>Rakuten 使用者停留時間倍數</td>
+<td>Why add structured data to a page? [S4]</td>
+</tr>
+<tr>
+<td>3.6x</td>
+<td>Rakuten AMP 頁面互動率倍數</td>
+<td>Why add structured data to a page? [S4]</td>
+</tr>
+<tr>
+<td>82%</td>
+<td>Nestlé 豐富搜尋結果頁面點擊率提升</td>
+<td>Why add structured data to a page? [S4]</td>
+</tr>
+<tr>
+<td>400ml</td>
+<td>食譜範例：鳳梨果汁用量</td>
+<td>Recipe JSON-LD example [S4]</td>
+</tr>
+<tr>
+<td>100ml</td>
+<td>食譜範例：椰奶用量</td>
+<td>Recipe JSON-LD example [S4]</td>
+</tr>
+<tr>
+<td>120 calories</td>
+<td>食譜範例：熱量</td>
+<td>Recipe JSON-LD example [S4]</td>
+</tr>
+<tr>
+<td>5</td>
+<td>食譜範例：評分</td>
+<td>Recipe JSON-LD example [S4]</td>
+</tr>
+<tr>
+<td>18</td>
+<td>食譜範例：評分人數</td>
+<td>Recipe JSON-LD example [S4]</td>
+</tr>
+<tr>
+<td>4 servings</td>
+<td>食譜範例：份量</td>
+<td>Recipe JSON-LD example [S4]</td>
+</tr>
+<tr>
+<td>2347</td>
+<td>食譜範例：影片互動次數</td>
+<td>Recipe JSON-LD example [S4]</td>
+</tr>
+</tbody>
+</table>
+<h2>作者或文件自述限制</h2>
+<ol>
+<li><strong>僅代表 Google 搜尋官方立場</strong>：不代表其他搜尋引擎或生成式 AI 系統的運作方式 [S4]。</li>
+<li><strong>索引與顯示不保證</strong>：符合所有需求、最佳實踐與政策，不代表 Google 會爬取、索引或顯示內容 [S4]。</li>
+<li><strong>Data-vocabulary.org 已停用</strong>：不再符合 Google 豐富搜尋結果資格 [S4]。</li>
+<li><strong>schema.org 詞彙較 Google 文件廣泛</strong>：Google 文件為準，schema.org 有更多屬性/物件 Google 不要求 [S4]。</li>
+<li><strong>案例研究數據年代未標註</strong>：文件未說明各案例研究的執行時間，數據是否反映現況待查 [S4]。</li>
+<li><strong>效果測量建議為前後對照測試</strong>：但承認頁面瀏覽量會因季節性等因素波動，測試有一定難度 [S4]。</li>
+</ol>
+<h2>與其他來源的關係</h2>
+<ul>
+<li><strong>S2（Google 生成式 AI 指南）</strong>：S2 指出結構化資料非生成式 AI 搜尋必要條件，無特殊 schema 需求，但建議保留作為整體 SEO 策略一環；S4 為結構化資料技術規範，兩者互補但定位不同（見矛盾記錄）[S2][S4]。</li>
+<li><strong>S3（Google AI 功能）</strong>：S3 確認無特殊 schema.org 標記需求；S4 提供技術實作細節，兩者互補 [S3][S4]。</li>
+<li><strong>S5（Google 文件更新 / FAQPage HowTo 變更）</strong>：S5 記錄 FAQPage/HowTo 複合式結果政策變更（2023-08），S4 未涵蓋此政策變更 [S5][S4]。</li>
+<li><strong>S8（學生前期研究）</strong>：S8 採用 schema.org JSON-LD（FAQPage、EducationalOccupationalProgram 等），並遵循 S4 原則：結構化資料內容必須與頁面可見文字一致 [S8][S4]。</li>
+<li><strong>json-ld 概念頁</strong>：S4 為 JSON-LD 技術規範主要來源，概念頁引用 S4 定義格式、詞彙、指引與驗證工具。</li>
+</ul>
+<h2>對校園網站 GEO 的意義（推論）</h2>
+<ul>
+<li><strong>技術基礎建設</strong>：JSON-LD 結構化資料為校網頁面提供機器可讀的實體描述，輔助搜尋引擎與 AI 系統理解招生資訊結構（推論，基於 S4 運作方式說明）[S4]。</li>
+<li><strong>豐富搜尋結果機會</strong>：正確部署 EducationalOccupationalProgram、CollegeOrUniversity 等類型，在傳統搜尋可能獲得豐富結果（推論，基於 S4 案例研究）[S4]。FAQPage 不應再期待 FAQ 複合式搜尋結果（該功能自 2026-05-07 起不再顯示）[S5]。</li>
+<li><strong>內容一致性要求</strong>：S4 明確禁止標記不可見內容，校網 CMS 需確保 JSON-LD 與前端可見文字同步更新，避免違規（推論，基於 S4 一般指引）[S4]。</li>
+<li><strong>非生成式 AI 專用</strong>：S2/S3 指出結構化資料非生成式 AI 搜尋必要條件，校網不應過度期待其對 AI Overviews 的直接加分，應視為整體 SEO 基礎建設一環（推論，基於 S2、S3、S4 綜合）[S2][S3][S4]。</li>
+<li><strong>驗證與監控流程</strong>：導入 Rich Results Test 開發期驗證、Search Console 部署後監控，建立結構化資料品質把關機制（推論，基於 S4 驗證與測量段落）[S4]。</li>
+</ul>
+<h2>待查</h2>
+<ol>
+<li>S4 未提及生成式 AI 功能（AI Overviews、AI Mode），結構化資料對 RAG/grounding 的具體影響不明 [S4]。</li>
+<li>案例研究數據（25%、35%、1.5x、3.6x、82%）年代未標註，是否反映現況待查 [S4]。</li>
+<li>JSON-LD 動態注入對生成式 AI 系統檢索的實際影響未在 S4 闡述 [S4]。</li>
+<li>schema.org 詞彙中 Google 不要求的屬性/物件，是否會被生成式 AI 系統利用待查 [S4]。</li>
+<li>Data-vocabulary.org 停用對現有部署的遷移期限與影響範圍待查 [S4]。</li>
+<li>案例研究網站（Rotten Tomatoes、The Food Network、Rakuten、Nestlé）的具體實施時間與測量方法細節待查 [S4]。</li>
+</ol>
+<h2>影響的頁面</h2>
+<ul>
+<li><a href="../concepts/json-ld.html">wiki/concepts/json-ld.md</a></li>
+<li><a href="../overview.html">wiki/overview.md</a></li>
+<li><a href="../index.html">wiki/index.md</a></li>
+<li><a href="../open-questions.html">wiki/open-questions.md</a></li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

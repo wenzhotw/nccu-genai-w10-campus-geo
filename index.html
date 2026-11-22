@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>首頁｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="index.html">校園網站 GEO</a>
+  <a href="index.html">首頁</a> <a href="wiki/index.html">Wiki</a> <a href="slides.html">教學簡報</a> <a href="loop_graph.html">流程說明</a> <a href="run_log.html">執行紀錄</a> <a href="sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+
+<p class="warning">這是課程作業網站，不是政治大學官方網站。案例中的國際招生網站原型為學生自製。</p>
+<h1>讓 AI 找得到、引用得到：校園網站的 GEO 入門</h1>
+<p class="lead">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業。作者：何則文（學號 113506023，日本語文學系三年級）。主題是生成式引擎最佳化（GEO），以政大國際招生網站為教學案例。</p>
+<p class="meta">知識庫實際 ingest 了 10 篇來源；簡報是單檔 HTML，可用鍵盤 ← → 換頁。</p>
+<ul class="cards">
+  <li><a href="wiki/index.html"><strong>LLM Wiki</strong>可瀏覽的 20 頁知識庫：來源頁、概念頁、總覽、待查與操作紀錄。</a></li>
+  <li><a href="slides.html"><strong>教學簡報</strong>21 頁 HTML 簡報〈讓 AI 找得到、引用得到：校園網站的 GEO 入門〉。建議全螢幕開啟，用方向鍵翻頁。</a></li>
+  <li><a href="loop_graph.html"><strong>loop / graph 流程說明</strong>迴圈 A（逐篇 ingest）與迴圈 B（產生簡報），以及實際執行時調整過的檢查節點。</a></li>
+  <li><a href="run_log.html"><strong>實際執行與檢查紀錄</strong>本機以 NVIDIA NIM 跑過的 ingest、引文核對、審查後修訂與最終 lint。不是虛構紀錄。</a></li>
+  <li><a href="sources.html"><strong>來源清單</strong>S1–S10 的取用日期與出處。</a></li>
+</ul>
+
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

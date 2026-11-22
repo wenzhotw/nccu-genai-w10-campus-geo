@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>概念｜JSON-LD｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../../index.html">校園網站 GEO</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>概念｜JSON-LD</h1>
+<article class='card'>
+<h1>概念：JSON-LD 結構化資料</h1>
+<h2>一句話定義</h2>
+<p>JSON-LD（JavaScript Object Notation for Linked Data）是以 JSON 格式在網頁中嵌入 schema.org 結構化資料的標準做法，幫助搜尋引擎與 AI 系統理解頁面實體屬性與關係，支援豐富搜尋結果與生成式 AI 內容解析。</p>
+<h2>重點</h2>
+<ol>
+<li><strong>Google 官方立場（S2）</strong>：結構化資料<strong>非</strong>生成式 AI 搜尋必要條件，沒有特殊 schema.org 標記需求；但建議保留作為整體 SEO 策略一環，有助符合 Google 搜尋豐富搜尋結果資格[S2]。</li>
+<li><strong>schema.org 技術規範（S4）</strong>：提供完整詞彙與屬性定義，包含 EducationalOccupationalProgram、CollegeOrUniversity、Course、FAQPage、Event、BreadcrumbList 等教育/招生相關類型[S4]。</li>
+<li><strong>Google 建議使用 JSON-LD 格式（S4）</strong>：最易實作維護，標記不與使用者可見文字交錯，巢狀資料項目較易表達，且可動態注入頁面[S4]。</li>
+<li><strong>內容一致性原則（S4、S8）</strong>：結構化資料內容<strong>必須與頁面可見文字一致</strong>，不得標記使用者看不到的內容，否則違反 Google 結構化資料政策[S4][S8]。</li>
+<li><strong>FAQPage/HowTo 複合式結果政策變更（S5）</strong>：<br />
+   - 2023-08 部落格宣佈 HowTo 複合式結果棄用，FAQ 僅保留給知名權威政府/醫療網站 [S5]。<br />
+   - 2023-09 文件同步移除 HowTo 文件並更新 FAQ 文件說明 [S5]。<br />
+   - 2026-05-07 起 FAQ 複合式結果不再顯示，2026-05-08 發布棄用通知，2026-06-15 移除 FAQ 文件 [S5]。<br />
+   - FAQ 複合式結果已於 2026-05-07 起不再顯示；現有來源沒有證明保留 FAQPage 能提升生成式 AI 的解析或引用，因此不把它當成 GEO 必要策略 [S5][S2][S3]。S8 原型若仍標記 FAQPage，須與可見問答一致，且不得宣稱有 AI 引用效果 [S8][S4]。</li>
+<li><strong>Data-vocabulary.org 已停用（S4）</strong>：不再符合 Google 豐富搜尋結果資格，現有部署需遷移至 schema.org[S4]。</li>
+<li><strong>驗證與監控工具（S4）</strong>：開發期用 Rich Results Test 驗證，部署後用 Search Console 豐富搜尋結果狀態報告監控[S4]。</li>
+<li><strong>政大案例採用類型（S8）</strong>：<br />
+   - <strong>BreadcrumbList</strong>：全站麵包屑導航<br />
+   - <strong>FAQPage</strong>：FAQ 頁面與各主題頁的 H2 問答對<br />
+   - <strong>EducationalOccupationalProgram</strong>：學位學程頁（含學程名稱、描述、門檻、學費、學制、授課語言、職涯出路）<br />
+   - <strong>CollegeOrUniversity</strong>：首頁與學院層級頁面<br />
+   - <strong>Course</strong>：個別課程頁<br />
+   - <strong>Event</strong>：招生說明會、百年校慶活動</li>
+<li><strong>部署方式（S8）</strong>：每頁 <code>&lt;head&gt;</code> 內嵌單一 <code>&lt;script type="application/ld+json"&gt;</code> 陣列，含所有適用類型；內容與可見區塊一一對應；上線前經 Google Rich Results Test 驗證[S8]。</li>
+</ol>
+<h2>張力或誤解</h2>
+<table>
+<thead>
+<tr>
+<th>誤解/張力</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「加了 JSON-LD 就能進 AI 摘要」</td>
+<td>S2/S3 明確指出生成式 AI 功能不需要特殊 schema；JSON-LD 仍可作為傳統 SEO／豐富結果的一部分，但不能宣稱會增加 AI 引用[S2][S3][S4]。</td>
+</tr>
+<tr>
+<td>「FAQPage 能帶來 FAQ 複合式結果，或能讓 AI 更好地解析問答」</td>
+<td>2023-08 後一般網站已不再顯示 FAQ 複合式結果；2026-05-07 起完全不再顯示 [S5]。S2/S3 並說生成式 AI 功能不需要特殊 schema，現有資料不足以支持「保留 FAQPage 有助 AI 解析或引用」[S2][S3][S5]。</td>
+</tr>
+<tr>
+<td>「結構化資料可隱藏關鍵字」</td>
+<td>違反 Google 政策；結構化資料必須反映可見內容[S4][S8]。</td>
+</tr>
+<tr>
+<td>「所有頁面都要加滿所有類型」</td>
+<td>僅在頁面真實對應實體時標記；濫用可能導致人工處置[S4]。</td>
+</tr>
+<tr>
+<td><strong>S2/S3「結構化資料非生成式 AI 必要」vs S4「結構化資料助 Google 理解頁面」</strong></td>
+<td>S2/S3 針對生成式 AI 搜尋功能；S4 針對傳統搜尋豐富結果。適用範圍不同，兩者互補而非衝突。見矛盾記錄。</td>
+</tr>
+</tbody>
+</table>
+<h2>本案怎麼用（政大國際招生網站）</h2>
+<ol>
+<li><strong>依頁面類型套用對應 schema</strong>：<br />
+   - 首頁：CollegeOrUniversity + BreadcrumbList<br />
+   - 學程頁：EducationalOccupationalProgram + FAQPage + BreadcrumbList<br />
+   - FAQ 彙整頁：FAQPage + BreadcrumbList<br />
+   - 活動頁：Event + BreadcrumbList<br />
+   - 課程頁：Course + BreadcrumbList</li>
+<li><strong>內容同步機制</strong>：CMS 後台編輯可見內容時，自動同步更新 JSON-LD；人工編輯頁面時同步檢查結構化資料一致性[S8]。</li>
+<li><strong>驗證流程</strong>：上線前跑 Google Rich Results Test、Schema Markup Validator；Search Console 結構化資料報告定期檢查錯誤[S8]。</li>
+<li><strong>多語言版本</strong>：各語言頁面 JSON-LD 設 <code>inLanguage</code> 屬性，內容為在地化文案而非直譯[S8]。</li>
+<li><strong>不預期生成式 AI 直接加分</strong>：視為整體 SEO 與 AI 可理解度的基礎建設，非 GEO 核心槓桿[S2][S8]。</li>
+</ol>
+<h2>待查</h2>
+<ol>
+<li>Google 生成式 AI 系統（RAG/grounding）實際上如何使用結構化資料作為檢索與解析輔助[S2][S4]。</li>
+<li>EducationalOccupationalProgram 在 AI Overviews 中的實際顯示與引用行為[S2][S4]。</li>
+<li>政大現有頁面結構化資料覆蓋率與錯誤率基準線（需掃描後建立）[S8]。</li>
+<li>FAQPage 標記在非複合式結果情境下，對 AI 理解問答結構的量化幫助[S5][S8]。</li>
+<li>案例研究數據（25%、35%、1.5x、3.6x、82%）年代未標註，是否反映現況待查[S4]。</li>
+<li>JSON-LD 動態注入對生成式 AI 系統檢索的實際影響[S4]。</li>
+<li>schema.org 詞彙中 Google 不要求的屬性/物件，是否會被生成式 AI 系統利用[S4]。</li>
+<li>Data-vocabulary.org 停用對現有部署的遷移期限與影響範圍[S4]。</li>
+</ol>
+<h2>來源</h2>
+<ul>
+<li>[S2] Google: Optimizing your website for generative AI features on Google Search</li>
+<li>[S4] Google: Intro to How Structured Data Markup Works</li>
+<li>[S5] Google Search Central: Latest documentation updates</li>
+<li>[S8] 政大國際招生網站 GEO 策略／提案（學生前期研究，非正式出版）</li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

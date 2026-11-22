@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>實際執行與檢查紀錄｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="index.html">校園網站 GEO</a>
+  <a href="index.html">首頁</a> <a href="wiki/index.html">Wiki</a> <a href="slides.html">教學簡報</a> <a href="loop_graph.html">流程說明</a> <a href="run_log.html">執行紀錄</a> <a href="sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<h1>實際執行與檢查紀錄</h1>
+<article class='card'><h1>真實執行紀錄（run_log）</h1>
+<blockquote>
+<p>本檔只記錄實際發生的事。時間皆為 Asia/Taipei。API 金鑰不寫入本檔。</p>
+</blockquote>
+<h2>準備工作 at 2026-11-22 11:38:01 CST (Asia/Taipei)</h2>
+<ul>
+<li>已從 personal Drive 讀取作業說明；本題固定為校園網站 GEO。</li>
+<li>來源 URL 於 2026-11-22 以 curl 實抓，皆 HTTP 200（S8 為本機既有研究檔）。</li>
+<li>LLM：NVIDIA NIM <code>nvidia/nemotron-3-ultra-550b-a55b</code>（與課程 SimpleAgent 範例設定相同；呼叫所用的 API 金鑰未寫入本紀錄，也未上傳到本站）。</li>
+<li>探測呼叫成功（短提示回覆 OK-NEMOTRON）。</li>
+<li>wiki/ 從空白開始；Claude 草稿只放在 run/_reference/ 對照。</li>
+<li>G1 由本機執行代理人對 raw 做字串核對，不是學生本人點確認。</li>
+</ul>
+<h1>批次開始 at 2026-11-22 11:38:06 CST (Asia/Taipei)</h1>
+<ul>
+<li>順序：[&lsquo;S1&rsquo;]</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+</ul>
+<h2>迴圈 A 開始 ingest S1  GEO: Generative Engine Optimization (Aggarwal et al., arXiv 2311.09735 v3)  at 2026-11-22 11:38:06 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s1-aggarwal-geo-v3.md</li>
+<li>模型看到完整 raw 檔。</li>
+</ul>
+<h3>A1 討論 S1 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S1-r1</code>  at 2026-11-22 11:38:58 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=51.464s  finish=stop</li>
+<li>tokens：prompt=30769  completion=3540  total=34309  reasoning=887</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-113806_A1-S1-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-113806_A1-S1-r1_response.json</code></li>
+<li>content 字數：6634  reasoning 字數：3512</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S1_r1.json</li>
+</ul>
+<h3>G1 驗證 S1 round=1  at 2026-11-22 11:38:58 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 35，失敗 5</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S1.json</code></li>
+</ul>
+<h3>A1 討論 S1 round=2</h3>
+<h3>LLM 呼叫 <code>A1-S1-r2</code>  at 2026-11-22 11:40:11 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=72.705s  finish=stop</li>
+<li>tokens：prompt=31066  completion=7640  total=38706  reasoning=5275</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-113858_A1-S1-r2_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-113858_A1-S1-r2_response.json</code></li>
+<li>content 字數：8288  reasoning 字數：18632</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S1_r2.json</li>
+</ul>
+<h3>G1 驗證 S1 round=2  at 2026-11-22 11:40:11 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 52，失敗 1</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S1.json</code></li>
+<li>已達討論重跑上限。未通過的 verbatim 將在 G1 意見中要求刪除或改標待查，然後仍進入寫頁（只准寫通過的內容）。</li>
+<li>G1 決定：confirm_with_deletions</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S1</h3>
+<h3>LLM 呼叫 <code>A2A3-S1</code>  at 2026-11-22 11:42:24 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=133.155s  finish=length</li>
+<li>tokens：prompt=20938  completion=8192  total=29130  reasoning=911</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114011_A2A3-S1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114011_A2A3-S1_response.json</code></li>
+<li>content 字數：11469  reasoning 字數：3437</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s1-aggarwal-geo.md](wiki/sources/s1-aggarwal-geo.html)</code></li>
+<li><code>[wiki/concepts/geo-vs-seo.md](wiki/concepts/geo-vs-seo.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/index.md](wiki/index.html)</code></li>
+<li><code>[wiki/concepts/campus-case-nccu.md](wiki/concepts/campus-case-nccu.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S1  at 2026-11-22 11:42:24 CST (Asia/Taipei)</h3>
+<ul>
+<li>未標 [S編號] 且看起來像事實句的行數：32</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S1.json</code></li>
+</ul>
+<h1>批次結束 at 2026-11-22 11:42:24 CST (Asia/Taipei)</h1>
+<ul>
+<li>摘要：<code>/workspace/genai_w10/run/checks/ingest_summary.json</code></li>
+</ul>
+<h2>過程註記 at 2026-11-22 11:43:01 CST (Asia/Taipei)</h2>
+<ul>
+<li>S1 的 A2/A3 回應 finish=length（max_tokens=8192 用盡，completion=8192，其中 reasoning=911）。<code>campus-case-nccu.md</code> 在「第一梯隊」條目中間被截斷，頁面不完整。後續呼叫改為 max_tokens=16384，並在 C2／迴圈 B 前補完截斷頁。</li>
+<li>C1 對 S1 報了 32 行未標出處，其中多數是基本資料條目、檔名清單，以及「與其他來源的關係」裡對尚未 ingest 來源的預告。這些會在 C2 再人工分類。</li>
+<li>實質問題：S1 來源頁「與其他來源的關係」寫了「S5 記錄 FAQPage 等結構化資料政策變更（2026-05-08 公告、2026-05-07 起不再顯示）」。此日期不是 S1 raw 裡的事實，而是生成提示裡的寫作規則被模型抄進頁面。這是一次真實的檢查失敗。將在 ingest S5 並核對 raw 後，把該句改為附 [S5] 的出處，或在 S5 完成前先刪句。已修正生成提示，避免再對未 ingest 來源預寫日期。</li>
+<li>G1 對 S1 第二輪仍有 1 處失敗：verbatim <code>offer little to no improvement on generative engine's responses</code> 在完整 raw 中找不到連續字串（部分片語分別存在）。已要求刪除或標待查；來源頁待查第 3 項有記錄此事。</li>
+</ul>
+<h1>批次開始 at 2026-11-22 11:43:01 CST (Asia/Taipei)</h1>
+<ul>
+<li>順序：[&lsquo;S8&rsquo;, &lsquo;S2&rsquo;, &lsquo;S3&rsquo;, &lsquo;S4&rsquo;, &lsquo;S5&rsquo;, &lsquo;S6&rsquo;, &lsquo;S7&rsquo;, &lsquo;S9&rsquo;, &lsquo;S10&rsquo;]</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+</ul>
+<h2>迴圈 A 開始 ingest S8  學生 2026-11-12 GEO 策略／提案（非正式出版）  at 2026-11-22 11:43:01 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s8-student-geo-strategy-2026-11-12.md</li>
+<li>模型看到完整 raw 檔。</li>
+</ul>
+<h3>A1 討論 S8 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S8-r1</code>  at 2026-11-22 11:44:02 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=61.655s  finish=stop</li>
+<li>tokens：prompt=26134  completion=5298  total=31432  reasoning=967</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114301_A1-S8-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114301_A1-S8-r1_response.json</code></li>
+<li>content 字數：8658  reasoning 字數：3061</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S8_r1.json</li>
+</ul>
+<h3>G1 驗證 S8 round=1  at 2026-11-22 11:44:02 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 69，失敗 7</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S8.json</code></li>
+</ul>
+<h3>A1 討論 S8 round=2</h3>
+<h3>LLM 呼叫 <code>A1-S8-r2</code>  at 2026-11-22 11:44:50 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=47.923s  finish=stop</li>
+<li>tokens：prompt=26679  completion=5147  total=31826  reasoning=1907</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114402_A1-S8-r2_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114402_A1-S8-r2_response.json</code></li>
+<li>content 字數：5900  reasoning 字數：5807</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S8_r2.json</li>
+</ul>
+<h3>G1 驗證 S8 round=2  at 2026-11-22 11:44:50 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 40，失敗 6</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S8.json</code></li>
+<li>已達討論重跑上限。未通過的 verbatim 將在 G1 意見中要求刪除或改標待查，然後仍進入寫頁（只准寫通過的內容）。</li>
+<li>G1 決定：confirm_with_deletions</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S8</h3>
+<h3>LLM 呼叫 <code>A2A3-S8</code>  at 2026-11-22 11:47:23 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=152.718s  finish=stop</li>
+<li>tokens：prompt=29706  completion=13260  total=42966  reasoning=1221</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114450_A2A3-S8_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114450_A2A3-S8_response.json</code></li>
+<li>content 字數：17639  reasoning 字數：3869</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s8-student-strategy.md](wiki/sources/s8-student-strategy.html)</code></li>
+<li><code>[wiki/concepts/campus-case-nccu.md](wiki/concepts/campus-case-nccu.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/index.md](wiki/index.html)</code></li>
+<li><code>[wiki/open-questions.md](wiki/open-questions.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S8  at 2026-11-22 11:47:23 CST (Asia/Taipei)</h3>
+<ul>
+<li>未標 [S編號] 且看起來像事實句的行數：27</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S8.json</code></li>
+</ul>
+<h2>迴圈 A 開始 ingest S2  Google: Optimizing your website for generative AI features on Google Search  at 2026-11-22 11:47:23 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s2-google-genai-guide_2026-11-22.md</li>
+<li>模型看到完整 raw 檔。</li>
+</ul>
+<h3>A1 討論 S2 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S2-r1</code>  at 2026-11-22 11:48:10 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=47.186s  finish=stop</li>
+<li>tokens：prompt=24725  completion=3085  total=27810  reasoning=1471</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114723_A1-S2-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114723_A1-S2-r1_response.json</code></li>
+<li>content 字數：3498  reasoning 字數：5356</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S2_r1.json</li>
+</ul>
+<h3>G1 驗證 S2 round=1  at 2026-11-22 11:48:10 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 11，失敗 1</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S2.json</code></li>
+</ul>
+<h3>A1 討論 S2 round=2</h3>
+<h3>LLM 呼叫 <code>A1-S2-r2</code>  at 2026-11-22 11:49:10 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=60.238s  finish=stop</li>
+<li>tokens：prompt=24833  completion=3851  total=28684  reasoning=1993</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114810_A1-S2-r2_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114810_A1-S2-r2_response.json</code></li>
+<li>content 字數：4633  reasoning 字數：7771</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S2_r2.json</li>
+</ul>
+<h3>G1 驗證 S2 round=2  at 2026-11-22 11:49:10 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 10，失敗 3</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S2.json</code></li>
+<li>已達討論重跑上限。未通過的 verbatim 將在 G1 意見中要求刪除或改標待查，然後仍進入寫頁（只准寫通過的內容）。</li>
+<li>G1 決定：confirm_with_deletions</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S2</h3>
+<h3>LLM 呼叫 <code>A2A3-S2</code>  at 2026-11-22 11:52:03 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=172.146s  finish=length</li>
+<li>tokens：prompt=26860  completion=16384  total=43244  reasoning=1212</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114910_A2A3-S2_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-114910_A2A3-S2_response.json</code></li>
+<li>content 字數：23294  reasoning 字數：4698</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s2-google-genai-guide.md](wiki/sources/s2-google-genai-guide.html)</code></li>
+<li><code>[wiki/concepts/geo-vs-seo.md](wiki/concepts/geo-vs-seo.html)</code></li>
+<li><code>[wiki/concepts/llms-txt.md](wiki/concepts/llms-txt.html)</code></li>
+<li><code>[wiki/concepts/robots-ai-crawlers.md](wiki/concepts/robots-ai-crawlers.html)</code></li>
+<li><code>[wiki/concepts/json-ld.md](wiki/concepts/json-ld.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/index.md](wiki/index.html)</code></li>
+<li><code>[wiki/open-questions.md](wiki/open-questions.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S2  at 2026-11-22 11:52:03 CST (Asia/Taipei)</h3>
+<ul>
+<li>未標 [S編號] 且看起來像事實句的行數：64</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S2.json</code></li>
+</ul>
+<h2>迴圈 A 開始 ingest S3  Google: AI features and your website  at 2026-11-22 11:52:03 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s3-google-ai-features_2026-11-22.md</li>
+<li>模型看到完整 raw 檔。</li>
+</ul>
+<h3>A1 討論 S3 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S3-r1</code>  at 2026-11-22 11:52:47 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=44.573s  finish=stop</li>
+<li>tokens：prompt=30905  completion=2857  total=33762  reasoning=1195</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115203_A1-S3-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115203_A1-S3-r1_response.json</code></li>
+<li>content 字數：4096  reasoning 字數：4805</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S3_r1.json</li>
+</ul>
+<h3>G1 驗證 S3 round=1  at 2026-11-22 11:52:47 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 15，失敗 3</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S3.json</code></li>
+</ul>
+<h3>A1 討論 S3 round=2</h3>
+<h3>LLM 呼叫 <code>A1-S3-r2</code>  at 2026-11-22 11:53:44 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=57.288s  finish=stop</li>
+<li>tokens：prompt=31114  completion=5085  total=36199  reasoning=3688</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115247_A1-S3-r2_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115247_A1-S3-r2_response.json</code></li>
+<li>content 字數：3510  reasoning 字數：12326</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S3_r2.json</li>
+</ul>
+<h3>G1 驗證 S3 round=2  at 2026-11-22 11:53:44 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 16，失敗 1</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S3.json</code></li>
+<li>已達討論重跑上限。未通過的 verbatim 將在 G1 意見中要求刪除或改標待查，然後仍進入寫頁（只准寫通過的內容）。</li>
+<li>G1 決定：confirm_with_deletions</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S3</h3>
+<h3>LLM 呼叫 <code>A2A3-S3</code>  at 2026-11-22 11:56:49 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=184.142s  finish=stop</li>
+<li>tokens：prompt=32542  completion=14186  total=46728  reasoning=623</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115344_A2A3-S3_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115344_A2A3-S3_response.json</code></li>
+<li>content 字數：21240  reasoning 字數：2084</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s3-google-ai-features.md](wiki/sources/s3-google-ai-features.html)</code></li>
+<li><code>[wiki/concepts/geo-vs-seo.md](wiki/concepts/geo-vs-seo.html)</code></li>
+<li><code>[wiki/concepts/robots-ai-crawlers.md](wiki/concepts/robots-ai-crawlers.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/index.md](wiki/index.html)</code></li>
+<li><code>[wiki/open-questions.md](wiki/open-questions.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S3  at 2026-11-22 11:56:49 CST (Asia/Taipei)</h3>
+<ul>
+<li>未標 [S編號] 且看起來像事實句的行數：46</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S3.json</code></li>
+</ul>
+<h2>迴圈 A 開始 ingest S4  Google: Intro to how structured data markup works  at 2026-11-22 11:56:49 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s4-google-structured-data_2026-11-22.md</li>
+<li>模型看到完整 raw 檔。</li>
+</ul>
+<h3>A1 討論 S4 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S4-r1</code>  at 2026-11-22 11:57:24 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=35.283s  finish=stop</li>
+<li>tokens：prompt=35835  completion=3363  total=39198  reasoning=1143</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115649_A1-S4-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115649_A1-S4-r1_response.json</code></li>
+<li>content 字數：5832  reasoning 字數：4073</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S4_r1.json</li>
+</ul>
+<h3>G1 驗證 S4 round=1  at 2026-11-22 11:57:24 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 28，失敗 2</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S4.json</code></li>
+</ul>
+<h3>A1 討論 S4 round=2</h3>
+<h3>LLM 呼叫 <code>A1-S4-r2</code>  at 2026-11-22 11:57:58 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=33.980s  finish=stop</li>
+<li>tokens：prompt=36047  completion=3102  total=39149  reasoning=949</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115724_A1-S4-r2_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115724_A1-S4-r2_response.json</code></li>
+<li>content 字數：5213  reasoning 字數：3479</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S4_r2.json</li>
+</ul>
+<h3>G1 驗證 S4 round=2  at 2026-11-22 11:57:58 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 39，失敗 1</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S4.json</code></li>
+<li>已達討論重跑上限。未通過的 verbatim 將在 G1 意見中要求刪除或改標待查，然後仍進入寫頁（只准寫通過的內容）。</li>
+<li>G1 決定：confirm_with_deletions</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S4</h3>
+<h3>LLM 呼叫 <code>A2A3-S4</code>  at 2026-11-22 12:00:21 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=143.419s  finish=stop</li>
+<li>tokens：prompt=38220  completion=13190  total=51410  reasoning=397</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115758_A2A3-S4_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-115758_A2A3-S4_response.json</code></li>
+<li>content 字數：19921  reasoning 字數：1596</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s4-google-structured-data.md](wiki/sources/s4-google-structured-data.html)</code></li>
+<li><code>[wiki/concepts/json-ld.md](wiki/concepts/json-ld.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/index.md](wiki/index.html)</code></li>
+<li><code>[wiki/open-questions.md](wiki/open-questions.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S4  at 2026-11-22 12:00:21 CST (Asia/Taipei)</h3>
+<ul>
+<li>未標 [S編號] 且看起來像事實句的行數：39</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S4.json</code></li>
+</ul>
+<h2>迴圈 A 開始 ingest S5  Google Search Central: Latest documentation updates  at 2026-11-22 12:00:21 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s5-google-docs-updates_2026-11-22.md</li>
+<li>模型看到的是摘錄檔 /workspace/genai_w10/run/meta/s5_prompt_excerpt.md；完整 raw 仍是 /workspace/genai_w10/run/raw/s5-google-docs-updates_2026-11-22.md。G1/C1 驗證一律用完整 raw。</li>
+</ul>
+<h3>A1 討論 S5 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S5-r1</code>  at 2026-11-22 12:01:41 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=79.648s  finish=stop</li>
+<li>tokens：prompt=68913  completion=5372  total=74285  reasoning=2089</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-120021_A1-S5-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-120021_A1-S5-r1_response.json</code></li>
+<li>content 字數：7786  reasoning 字數：7337</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S5_r1.json</li>
+</ul>
+<h3>G1 驗證 S5 round=1  at 2026-11-22 12:01:41 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 29，失敗 19</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S5.json</code></li>
+</ul>
+<h3>A1 討論 S5 round=2</h3>
+<h2>中斷與續跑 at 2026-11-22 12:16:55 CST (Asia/Taipei)</h2>
+<ul>
+<li>S5 第一輪討論已完成（A1-S5-r1，HTTP 200，elapsed=79.648s）。G1 用嚴格子字串比對時：ok=29, fail=19。</li>
+<li>失敗項裡有 16 個是 ISO 日期（如 <code>2026-05-08</code>），完整 raw 寫的是 <code>May 8</code> 這類月名形式，不是模型捏造日期。已把 G1 改成：若 value 是 YYYY-MM-DD / YYYY-MM，也接受 raw 中的 <code>May 8</code>、<code>May 8, 2026</code> 等寫法。舊報告備份為 <code>checks/g1_S5_r1_strict_iso.json</code>。</li>
+<li>用同一份 a1_S5_r1.json 重跑 G1 後：ok=45, fail=3。剩下 3 項是帶省略號或兩句拼在一起的 verbatim，在 raw 中找不到連續字串，將刪除或標待查。</li>
+<li>接著寫出的 <code>A1-S5-r2</code> 請求檔（<code>llm_raw/20261122-120141_A1-S5-r2_request.json</code>，242195 bytes）已落盤，但沒有對應的 response 檔。2026-11-22 12:15:55（Asia/Taipei）檢查時 ingest 行程已不在，run_log 也沒有例外紀錄；很可能在等待該次 API（S5 摘錄很大）時行程被中斷。因此沒有發明 r2 的模型輸出。</li>
+<li>決定：不再重跑可能再次超時的 S5 第二輪討論，改用已存在的 r1 JSON + 修正後的 G1，進入 A2/A3 寫頁。然後續跑 S6、S7、S9、S10。</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S5（續跑）</h3>
+<ul>
+<li>G1 決定：confirm_with_deletions（修正日期格式後 fail=3）</li>
+</ul>
+<h3>LLM 呼叫 <code>A2A3-S5-resume</code>  at 2026-11-22 12:19:24 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=148.867s  finish=length</li>
+<li>tokens：prompt=54684  completion=16384  total=71068  reasoning=753</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-121655_A2A3-S5-resume_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-121655_A2A3-S5-resume_response.json</code></li>
+<li>content 字數：24552  reasoning 字數：2469</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s5-google-docs-updates.md](wiki/sources/s5-google-docs-updates.html)</code></li>
+<li><code>[wiki/concepts/json-ld.md](wiki/concepts/json-ld.html)</code></li>
+<li><code>[wiki/concepts/llms-txt.md](wiki/concepts/llms-txt.html)</code></li>
+<li><code>[wiki/concepts/robots-ai-crawlers.md](wiki/concepts/robots-ai-crawlers.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/open-questions.md](wiki/open-questions.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S5  at 2026-11-22 12:19:24 CST (Asia/Taipei)</h3>
+<ul>
+<li>unsourced=46</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S5.json</code></li>
+</ul>
+<h1>批次開始 at 2026-11-22 12:19:27 CST (Asia/Taipei)</h1>
+<ul>
+<li>順序：[&lsquo;S6&rsquo;, &lsquo;S7&rsquo;, &lsquo;S9&rsquo;, &lsquo;S10&rsquo;]</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+</ul>
+<h2>迴圈 A 開始 ingest S6  llms.txt proposal (llmstxt.org) + Changes page  at 2026-11-22 12:19:27 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s6-llmstxt_2026-11-22.md, s6-llmstxt-changes_2026-11-22.md</li>
+<li>模型看到完整 raw 檔。</li>
+</ul>
+<h3>A1 討論 S6 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S6-r1</code>  at 2026-11-22 12:20:00 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=32.671s  finish=stop</li>
+<li>tokens：prompt=44127  completion=3228  total=47355  reasoning=1254</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-121927_A1-S6-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-121927_A1-S6-r1_response.json</code></li>
+<li>content 字數：4200  reasoning 字數：4412</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S6_r1.json</li>
+</ul>
+<h3>G1 驗證 S6 round=1  at 2026-11-22 12:20:00 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 22，失敗 1</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S6.json</code></li>
+</ul>
+<h3>A1 討論 S6 round=2</h3>
+<h3>LLM 呼叫 <code>A1-S6-r2</code>  at 2026-11-22 12:20:31 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=30.774s  finish=stop</li>
+<li>tokens：prompt=44245  completion=2696  total=46941  reasoning=812</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122000_A1-S6-r2_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122000_A1-S6-r2_response.json</code></li>
+<li>content 字數：4506  reasoning 字數：2918</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S6_r2.json</li>
+</ul>
+<h3>G1 驗證 S6 round=2  at 2026-11-22 12:20:31 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 17，失敗 4</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S6.json</code></li>
+<li>已達討論重跑上限。未通過的 verbatim 將在 G1 意見中要求刪除或改標待查，然後仍進入寫頁（只准寫通過的內容）。</li>
+<li>G1 決定：confirm_with_deletions</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S6</h3>
+<h3>LLM 呼叫 <code>A2A3-S6</code>  at 2026-11-22 12:22:49 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=138.344s  finish=stop</li>
+<li>tokens：prompt=46356  completion=16036  total=62392  reasoning=807</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122031_A2A3-S6_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122031_A2A3-S6_response.json</code></li>
+<li>content 字數：23181  reasoning 字數：2331</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s6-llmstxt.md](wiki/sources/s6-llmstxt.html)</code></li>
+<li><code>[wiki/concepts/llms-txt.md](wiki/concepts/llms-txt.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/index.md](wiki/index.html)</code></li>
+<li><code>[wiki/open-questions.md](wiki/open-questions.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S6  at 2026-11-22 12:22:49 CST (Asia/Taipei)</h3>
+<ul>
+<li>未標 [S編號] 且看起來像事實句的行數：29</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S6.json</code></li>
+</ul>
+<h2>迴圈 A 開始 ingest S7  OpenAI: Overview of OpenAI Crawlers  at 2026-11-22 12:22:49 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s7-openai-crawlers_2026-11-22.md</li>
+<li>模型看到完整 raw 檔。</li>
+</ul>
+<h3>A1 討論 S7 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S7-r1</code>  at 2026-11-22 12:23:17 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=27.751s  finish=stop</li>
+<li>tokens：prompt=46986  completion=2727  total=49713  reasoning=1130</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122249_A1-S7-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122249_A1-S7-r1_response.json</code></li>
+<li>content 字數：3476  reasoning 字數：4086</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S7_r1.json</li>
+</ul>
+<h3>G1 驗證 S7 round=1  at 2026-11-22 12:23:17 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 17，失敗 0</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S7.json</code></li>
+<li>G1 決定：confirm</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S7</h3>
+<h3>LLM 呼叫 <code>A2A3-S7</code>  at 2026-11-22 12:25:25 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=127.584s  finish=length</li>
+<li>tokens：prompt=48812  completion=16384  total=65196  reasoning=260</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122317_A2A3-S7_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122317_A2A3-S7_response.json</code></li>
+<li>content 字數：24507  reasoning 字數：1035</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s7-openai-crawlers.md](wiki/sources/s7-openai-crawlers.html)</code></li>
+<li><code>[wiki/concepts/robots-ai-crawlers.md](wiki/concepts/robots-ai-crawlers.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/index.md](wiki/index.html)</code></li>
+<li><code>[wiki/open-questions.md](wiki/open-questions.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S7  at 2026-11-22 12:25:25 CST (Asia/Taipei)</h3>
+<ul>
+<li>未標 [S編號] 且看起來像事實句的行數：39</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S7.json</code></li>
+</ul>
+<h2>迴圈 A 開始 ingest S9  Perplexity Crawlers  at 2026-11-22 12:25:25 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s9-perplexity-crawlers_2026-11-22.md</li>
+<li>模型看到完整 raw 檔。</li>
+</ul>
+<h3>A1 討論 S9 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S9-r1</code>  at 2026-11-22 12:25:50 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=25.078s  finish=stop</li>
+<li>tokens：prompt=50154  completion=1962  total=52116  reasoning=611</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122525_A1-S9-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122525_A1-S9-r1_response.json</code></li>
+<li>content 字數：3275  reasoning 字數：2117</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S9_r1.json</li>
+</ul>
+<h3>G1 驗證 S9 round=1  at 2026-11-22 12:25:50 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 12，失敗 3</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S9.json</code></li>
+</ul>
+<h3>A1 討論 S9 round=2</h3>
+<h3>LLM 呼叫 <code>A1-S9-r2</code>  at 2026-11-22 12:26:19 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=29.042s  finish=stop</li>
+<li>tokens：prompt=50389  completion=2063  total=52452  reasoning=898</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122550_A1-S9-r2_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122550_A1-S9-r2_response.json</code></li>
+<li>content 字數：2607  reasoning 字數：3484</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S9_r2.json</li>
+</ul>
+<h3>G1 驗證 S9 round=2  at 2026-11-22 12:26:19 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 10，失敗 1</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S9.json</code></li>
+<li>已達討論重跑上限。未通過的 verbatim 將在 G1 意見中要求刪除或改標待查，然後仍進入寫頁（只准寫通過的內容）。</li>
+<li>G1 決定：confirm_with_deletions</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S9</h3>
+<h3>LLM 呼叫 <code>A2A3-S9</code>  at 2026-11-22 12:28:28 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=129.012s  finish=length</li>
+<li>tokens：prompt=51570  completion=16384  total=67954  reasoning=1273</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122619_A2A3-S9_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122619_A2A3-S9_response.json</code></li>
+<li>content 字數：23583  reasoning 字數：4285</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s9-perplexity-crawlers.md](wiki/sources/s9-perplexity-crawlers.html)</code></li>
+<li><code>[wiki/concepts/robots-ai-crawlers.md](wiki/concepts/robots-ai-crawlers.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/index.md](wiki/index.html)</code></li>
+<li><code>[wiki/open-questions.md](wiki/open-questions.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S9  at 2026-11-22 12:28:28 CST (Asia/Taipei)</h3>
+<ul>
+<li>未標 [S編號] 且看起來像事實句的行數：31</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S9.json</code></li>
+</ul>
+<h2>迴圈 A 開始 ingest S10  Google: Localized versions of your page (hreflang)  at 2026-11-22 12:28:28 CST (Asia/Taipei)</h2>
+<ul>
+<li>raw 檔：s10-google-hreflang_2026-11-22.md</li>
+<li>模型看到完整 raw 檔。</li>
+</ul>
+<h3>A1 討論 S10 round=1</h3>
+<h3>LLM 呼叫 <code>A1-S10-r1</code>  at 2026-11-22 12:28:49 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=20.911s  finish=stop</li>
+<li>tokens：prompt=54690  completion=2195  total=56885  reasoning=551</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122828_A1-S10-r1_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122828_A1-S10-r1_response.json</code></li>
+<li>content 字數：3825  reasoning 字數：1886</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S10_r1.json</li>
+</ul>
+<h3>G1 驗證 S10 round=1  at 2026-11-22 12:28:49 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 13，失敗 4</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S10.json</code></li>
+</ul>
+<h3>A1 討論 S10 round=2</h3>
+<h3>LLM 呼叫 <code>A1-S10-r2</code>  at 2026-11-22 12:29:31 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=42.184s  finish=stop</li>
+<li>tokens：prompt=54967  completion=3975  total=58942  reasoning=2202</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122849_A1-S10-r2_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122849_A1-S10-r2_response.json</code></li>
+<li>content 字數：4114  reasoning 字數：7423</li>
+<li>已解析討論 JSON，存 /workspace/genai_w10/run/checks/a1_S10_r2.json</li>
+</ul>
+<h3>G1 驗證 S10 round=2  at 2026-11-22 12:29:31 CST (Asia/Taipei)</h3>
+<ul>
+<li>操作者：box executor agent on this computer, not the student in person</li>
+<li>方法：normalized substring search of verbatim/value strings in the immutable full raw files</li>
+<li>通過片段 21，失敗 3</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/g1_S10.json</code></li>
+<li>已達討論重跑上限。未通過的 verbatim 將在 G1 意見中要求刪除或改標待查，然後仍進入寫頁（只准寫通過的內容）。</li>
+<li>G1 決定：confirm_with_deletions</li>
+</ul>
+<h3>A2/A3 生成來源頁並交叉更新 S10</h3>
+<h3>LLM 呼叫 <code>A2A3-S10</code>  at 2026-11-22 12:31:47 CST (Asia/Taipei)</h3>
+<ul>
+<li>模型（請求 / 回應）：<code>nvidia/nemotron-3-ultra-550b-a55b</code> / <code>nvidia/nemotron-3-ultra-550b-a55b</code></li>
+<li>HTTP 200  elapsed=136.347s  finish=length</li>
+<li>tokens：prompt=56758  completion=16384  total=73142  reasoning=866</li>
+<li>請求檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122931_A2A3-S10_request.json</code></li>
+<li>回應檔：<code>/workspace/genai_w10/run/llm_raw/20261122-122931_A2A3-S10_response.json</code></li>
+<li>content 字數：24507  reasoning 字數：2887</li>
+<li>寫入檔案：</li>
+<li><code>[wiki/sources/s10-google-hreflang.md](wiki/sources/s10-google-hreflang.html)</code></li>
+<li><code>[wiki/concepts/robots-ai-crawlers.md](wiki/concepts/robots-ai-crawlers.html)</code></li>
+<li><code>[wiki/overview.md](wiki/overview.html)</code></li>
+<li><code>[wiki/index.md](wiki/index.html)</code></li>
+<li><code>[wiki/open-questions.md](wiki/open-questions.html)</code></li>
+</ul>
+<h3>C1 出處檢查 S10  at 2026-11-22 12:31:47 CST (Asia/Taipei)</h3>
+<ul>
+<li>未標 [S編號] 且看起來像事實句的行數：32</li>
+<li>報告：<code>/workspace/genai_w10/run/checks/c1_S10.json</code></li>
+</ul>
+<h1>批次結束 at 2026-11-22 12:31:47 CST (Asia/Taipei)</h1>
+<ul>
+<li>摘要：<code>/workspace/genai_w10/run/checks/ingest_summary.json</code></li>
+</ul>
+<h1>對話中斷說明 at 2026-11-22 12:36:22 CST (Asia/Taipei)</h1>
+<p>這不是一次被殺掉的 ingest 呼叫，不要把它寫成「S6 的 A2/A3 沒跑完」。</p>
+<ul>
+<li>對話／上層工作階段大約在 2026-11-22 12:20–12:21（Asia/Taipei）中斷時，run_log 當時最後可見的段落是「A2/A3 生成來源頁並交叉更新 S6」。那一刻 <code>A2A3-S6</code> 其實已經送出請求（請求檔 <code>llm_raw/20261122-122031_A2A3-S6_request.json</code>）。</li>
+<li>本機行程 <code>ingest.py --only S6 S7 S9 S10</code>（後來核對到的 PID 9172）並沒有被殺掉，繼續跑完：S6 的 A2/A3 在 12:22:49 寫完並做了 C1；接著 S7、S9、S10 依序 ingest，整批在 2026-11-22 12:31:47 CST (Asia/Taipei) 以 exit 0 結束。</li>
+<li>已完成的 S1、S2、S3、S4、S5、S8 <strong>沒有重跑</strong>。S6 也沒有重跑；本段只是把中斷當時還在跑、後來已經寫進 log 的結果講清楚。</li>
+<li>真正中斷過、而且沒有模型回應的是更早的 <code>A1-S5-r2</code>（見 12:16:55 的「中斷與續跑」）：請求檔在、response 不在。那一筆仍然沒有補造。</li>
+</ul>
+<h1>C2 lint（第一次，修頁前）at 2026-11-22 12:32:04 CST (Asia/Taipei)</h1>
+<ul>
+<li>報告：<code>/workspace/genai_w10/run/checks/c2_lint_123204.json</code>（當時寫在 <code>c2_lint.json</code>；12:35 再跑 lint 後改存此備份）</li>
+<li>當時 19 頁；截斷啟發式沒有命中。</li>
+<li>自動 lint 列出 9 筆：8 筆是 llms.txt「不可視為已生效的網路標準」被正則誤判為 overclaim（句子是否定，不是宣稱它已是標準）；1 筆是 S8 方法限制用語，程式在找「不是直接測 ChatGPT」，但頁面已寫「基準測試使用 WebSearch 工具作為替代指標，非 ChatGPT 或 Google AI 摘要本身」。以上 9 筆都沒有改正文去遷就正則。</li>
+</ul>
+<h1>C2 依 raw 修正 Wiki at 2026-11-22 12:33:28 CST (Asia/Taipei)</h1>
+<ul>
+<li>紀錄：<code>/workspace/genai_w10/run/checks/c2_fixes.txt</code></li>
+<li>對 S5 raw 重讀後：FAQ rich result 說明文件的移除日從 2026-06-12 改為 2026-06-15（June 12 條目是另一則田納西小型企業通知；June 15 條目同時有 llms.txt 澄清與 Removing documentation for the FAQ rich result feature）。</li>
+<li>修正位置：<code>[wiki/overview.md](wiki/overview.html)</code>、<code>[wiki/concepts/json-ld.md](wiki/concepts/json-ld.html)</code>、<code>[wiki/sources/s5-google-docs-updates.md](wiki/sources/s5-google-docs-updates.html)</code>。</li>
+<li>S5 頁另外把 G1 未通過的省略號／拼接引文改回 raw 連續句。</li>
+<li>S1 頁上因生成提示洩漏而提前寫入的 FAQ 日期，補上 [S5]（S5 已 ingest 且日期已對 raw）。</li>
+<li>campus-case-nccu 的 S2–S5 來源標籤更正。</li>
+<li>新寫 <code>[wiki/concepts/qa-writing.md](wiki/concepts/qa-writing.html)</code>（依 S8 §3.1），並更新 index。</li>
+</ul>
+<h1>C2 lint（修頁後）at 2026-11-22 12:35:42 CST (Asia/Taipei)</h1>
+<ul>
+<li>報告：<code>/workspace/genai_w10/run/checks/c2_lint.json</code>（另存 <code>c2_lint_after_fixes.json</code>）</li>
+<li>20 頁（含 qa-writing）；孤兒頁與 index 缺漏為空。</li>
+<li>同一組 9 筆 lint 假訊號仍在，判斷同上，未改正文。</li>
+<li>啟發式把 <code>qa-writing.md</code> 最後一行（<code>- [S5] Google Search Central documentation updates</code>）標成 truncated。該行是完整條目，不是寫到一半被截斷。</li>
+</ul>
+<h1>C4 簡報對 Wiki 檢查 與 C5 瀏覽測試 at 2026-11-22 12:42:28 CST (Asia/Taipei)</h1>
+<h2>C4</h2>
+<ul>
+<li>報告：<code>/workspace/genai_w10/run/checks/c4_slides.json</code></li>
+<li>設計沿用 Claude 的 3_slides.html；內容改對真實 Wiki 與 raw。</li>
+<li>對了 11 項主張：8 項原本就過；3 項在打包前修正（來源改為 10 篇並補 S9/S10；S6 v2 日期改為 August 2026、不寫 2026-08-10；hreflang 改引用 S10，不再寫 Wiki 待查）。0 項不過。</li>
+<li>sitemap.xml 在簡報仍標 Wiki 待查（Wiki 沒有獨立官方依據頁，保留）。</li>
+</ul>
+<h2>C5</h2>
+<ul>
+<li>試圖用 <code>google-chrome --headless --screenshot</code>（含 classic / new / print-to-pdf）。連 <code>/tmp/t.html</code> 這種極簡頁也會在「Created TensorFlow Lite XNNPACK delegate for CPU」之後掛住，直到 timeout；<code>--dump-dom</code> 可以結束。沒有產出假圖檔。</li>
+<li>改用本機桌面 Chrome（DISPLAY=:5，CDP <code>127.0.0.1:9227</code>）開啟 <code>file:///workspace/genai_w10/final/slides.html</code>，以 Page.captureScreenshot 在 1280×720 截圖。預覽時暫時隱藏換頁控制器。</li>
+<li>產出：<code>final/preview/s01.png</code>、<code>s04.png</code>、<code>s10.png</code>、<code>s11.png</code>、<code>s14.png</code>、<code>s16.png</code>、<code>s17.png</code>、<code>s20.png</code>（皆 1280×720 RGB）。</li>
+<li>第一次截到附錄 B：10 筆來源與頁尾重疊。已在簡報加上附錄 B 專用縮小間距／字級，並重截 s20。s17、s14、s01 目視確認：10 篇來源、FAQ 文件移除日 2026-06-15、S8 替代指標限制、S6 不寫 August 10。</li>
+<li>鍵盤：程式碼有 ←/→、PageUp/Down、空白鍵、Home/End；窄螢幕會切到捲動閱讀。這次截圖沒有再實際按鍵，只核對了腳本與單檔離線條件（無外部字體或腳本；來源網址是引用連結）。</li>
+<li>截完後已關閉簡報分頁，沒有關掉整個桌面 Chrome。</li>
+</ul>
+<h2>繳交包</h2>
+<p>寫入 <code>/workspace/genai_w10/final/</code>：wiki.md、slides.html、loop_graph.md、run_log.md、reflection_draft.md、sources.md、preview/*.png。run_log.md 是本檔完整副本。</p>
+<h1>審查後修訂 at 2026-11-22 13:17:33 CST (Asia/Taipei)</h1>
+<p>本段是 Gemini（Neon／深入分析，看過完整 7 檔）與 ChatGPT（免費方案，只看了 spec.md、wiki.md、slides.html）交叉審查之後的修訂。ChatGPT 沒看到 run_log.md／reflection_draft.md，因此它「缺執行紀錄／缺反思檔」的指摘，只記作審查範圍限制，不當作繳交包缺檔。</p>
+<h2>FAQ 說明文件移除日期：維持 2026-06-15</h2>
+<p>ChatGPT 主張應改回 2026-06-12，並寫「官方更新紀錄把文件移除列在 June 12」。本次重新核對了兩處，都與 C2 的 06-15 一致，因此<strong>不改回 06-12</strong>：</p>
+<ol>
+<li>不可改的 raw：<code>run/raw/s5-google-docs-updates_2026-11-22.md</code>。條目順序是 June 15（llms.txt 澄清）→「Removing documentation for the FAQ rich result feature」→ June 12（New article for small business owners in Tennessee）。raw 因 HTML 擷取有重複片段，但相對順序與現場頁相同。</li>
+<li>現場頁 https://developers.google.com/search/updates（2026-11-22 再抓，HTTP 200）。HTML 結構是同一個 <code>&lt;dt&gt;June 15&lt;/dt&gt;</code> 底下的 <code>&lt;dd&gt;</code> 裡，連續放了兩個 <code>&lt;h3&gt;</code>：clarifying-guidance-on-llms.txt-files 與 removing-faq-rich-result。下一個 <code>&lt;dt&gt;June 12&lt;/dt&gt;</code> 才是田納西小型企業通知。摘錄存於 <code>run/checks/s5_live_2026-11-22_june15_faq_docs.html</code>。</li>
+</ol>
+<p>ChatGPT 應是把下一個日期標題往前套用了。Wiki、簡報、本 log 一律維持：功能自 2026-05-07 起不再顯示；2026-05-08 發棄用通知；說明文件於 2026-06-15 移除。</p>
+<h2>其他已做修改（見 <a href="wiki/log.html">wiki/log.md</a>）</h2>
+<ul>
+<li>補 S1 Table 5（24.1／21.9／26.2／29.1）與 Table 2（−22.9%／+99.7%／−20.6%／+97.9%）到 s1-aggarwal-geo.md，數字已對 S1 pdftotext。</li>
+<li>補 S3 原文「several days to several months」到 s3 與 robots 頁；簡報該句保留並維持 [S3]。</li>
+<li>campus-case-nccu.md 新增「原型規格與依據對照表」，簡報第 13 頁的對照表指引現在有對應頁面。</li>
+<li>補完 open-questions.md（原截斷於「10. RAG」）。</li>
+<li>修正 FAQPage「讓 AI 解析」的過度確定說法；釐清 Google-Extended 不影響 Google 搜尋（S5 2024-02-08；S3；並核對官方爬蟲說明頁語意，該頁非 ingest 來源）。</li>
+<li>小修正：overview／s8 的「待建立」、s4 的 json-sd 錯字、run_log「備份為」、簡報第 3、10、11、12、14、16、17 頁用語。</li>
+</ul>
+<h2>最終 lint（審查後）at 2026-11-22 13:17:08 CST (Asia/Taipei)</h2>
+<ul>
+<li>報告：<code>/workspace/genai_w10/run/checks/c2_lint_post_review.json</code>（同步寫入 <code>c2_lint.json</code>）</li>
+<li>20 頁；孤兒頁與 index 缺漏為空。</li>
+<li>自動 lint 列出 10 筆：9 筆仍是「不可視為已生效的網路標準」被正則誤判（否定句）；1 筆仍是 S8 方法限制用語對不上「不是直接測 ChatGPT」字樣（頁面已有等同意）。啟發式仍把 qa-writing.md 最後一行完整條目標成 truncated。以上都沒有改正文去遷就正則。</li>
+</ul></article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

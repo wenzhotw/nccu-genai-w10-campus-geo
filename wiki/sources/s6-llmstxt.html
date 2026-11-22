@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S6｜llms.txt 提案｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../../index.html">校園網站 GEO</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S6｜llms.txt 提案</h1>
+<article class='card'>
+<h1>來源：S6 - The /llms.txt file, v2 (llmstxt.org proposal + Changes page)</h1>
+<h2>基本資料</h2>
+<ul>
+<li><strong>標題</strong>：The /llms.txt file, v2</li>
+<li><strong>來源網站</strong>：llmstxt.org</li>
+<li><strong>URL</strong>：https://llmstxt.org/（主頁）、https://llmstxt.org/changes.md（變更頁）</li>
+<li><strong>來源類型</strong>：提案標準文件（非正式標準、非 IETF/W3C 標準）</li>
+<li><strong>頁面日期（page_date）</strong>：2024-09-03（主頁 metadata）[S6]</li>
+<li><strong>v2 發布月份</strong>：August 2026（Changes 頁標題，無具體日期）[S6]</li>
+<li><strong>擷取日期（fetched_at）</strong>：</li>
+<li>主頁：2026-11-22 11:32:52 CST [S6]</li>
+<li>Changes 頁：2026-11-22 11:36:09 CST [S6]</li>
+<li><strong>HTTP 狀態碼</strong>：200 [S6]</li>
+<li><strong>適用範圍</strong>：llms.txt 提案標準 v2 版本，建議網站在根目錄或子路徑放置 Markdown 格式索引檔，供大型語言模型（LLM）快速定位核心內容。適用於任何希望提供 LLM 友善內容的網站（文件、企業、個人、學校等）。<strong>不可視為已生效的網路標準</strong>。</li>
+</ul>
+<h2>重點</h2>
+<ol start="0">
+<li><strong>為什麼需要它</strong>：原文寫「An HTML page wraps its information in navigation, ads, and JavaScript, and converting it back into clean text is difficult and imprecise。」[S6]</li>
+<li><strong>llms.txt 是提案而非標準，v2 於 2026 年 8 月發布，回應兩年來的採用情況</strong> [S6]</li>
+<li><strong>v2 新增標準連結關係以解決可發現性</strong>：<code>rel="alternate" type="text/markdown"</code> 指向頁面 Markdown 版本，<code>rel="describedby"</code> 指向涵蓋該頁的 llms.txt [S6]</li>
+<li><strong>v2 允許兩種 Markdown 版本 URL 形式</strong>：<code>.md</code> 附加於完整 URL（<code>page.html.md</code>）或取代副檔名（<code>page.md</code>）[S6]</li>
+<li><strong>llms.txt 格式規範</strong>：H1 專案名稱（必要）、blockquote 簡短摘要、可選細節、H2 分組的檔案清單（含超連結與可選備註）[S6]</li>
+<li><strong>llms.txt 與 robots.txt、sitemap.xml 共存但用途不同</strong>：robots.txt 控制爬蟲存取，sitemap.xml 列出所有可索引頁面，llms.txt 為 LLM 提供策展概覽 [S6]</li>
+</ol>
+<h2>數字與日期</h2>
+<table>
+<thead>
+<tr>
+<th>數值</th>
+<th>單位/脈絡</th>
+<th>來源位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024-09-03</td>
+<td>主頁 page_date metadata</td>
+<td>S6 metadata [S6]</td>
+</tr>
+<tr>
+<td>September 2024</td>
+<td>v1 原始提案發布月份</td>
+<td>Changes 頁 [S6]</td>
+</tr>
+<tr>
+<td>August 2026</td>
+<td>v2 修訂發布月份（無具體日期）</td>
+<td>Changes 頁標題 [S6]</td>
+</tr>
+<tr>
+<td>two years</td>
+<td>採用觀察期長度</td>
+<td>Background 區段 [S6]</td>
+</tr>
+<tr>
+<td>thousands</td>
+<td>發布 llms.txt 的網站數量級</td>
+<td>Changes 頁 [S6]</td>
+</tr>
+<tr>
+<td>2026-11-22 11:32:52 CST</td>
+<td>S6 主頁擷取時間</td>
+<td>S6 metadata [S6]</td>
+</tr>
+<tr>
+<td>2026-11-22 11:36:09 CST</td>
+<td>S6-changes 擷取時間</td>
+<td>S6-changes metadata [S6]</td>
+</tr>
+</tbody>
+</table>
+<h2>作者或文件自述限制</h2>
+<ol>
+<li><strong>提案性質</strong>：llms.txt 為社群提案（由 Jeremy Howard 等人發起），非 IETF/W3C 正式標準，亦非 Google、Bing 等搜尋引擎官方採納標準 [S6]。</li>
+<li><strong>採用情況為觀察而非承諾</strong>：文件提到「thousands of sites publish」「documentation platforms generate automatically」「Chrome Lighthouse audits」「AI labs themselves publish」，屬於描述當前採用現象，不代表各平台承諾長期支援或以此為索引依據 [S6]。</li>
+<li><strong>v2 變更基於社群回饋</strong>：v2 修訂內容（連結關係、URL 形式、Optional 區段語意移除、消費模式說明）源自兩年來的社群採用經驗與請求，非自上而下的標準化流程 [S6]。</li>
+<li><strong>預期用途為推論而非訓練</strong>：作者預期 llms.txt 主要用於「inference 而非 training」，但承認訓練階段也可能利用 [S6]。</li>
+<li><strong>Well-Known URIs 替代方案未採用</strong>：文件說明考慮過 RFC 8615 <code>/.well-known/</code> 但因路徑限制（如 GitHub Pages 專案站點無法寫入宿主根目錄）而採用類似 <code>index.html</code> 的路徑相對方式 [S6]。</li>
+</ol>
+<h2>與其他來源的關係</h2>
+<ul>
+<li><strong>S2（Google 生成式 AI 指南）</strong>：S2 明確表示 Google 搜尋不使用 llms.txt 等「AI 專用機器可讀檔案」，建立與否對能見度與排名無正負影響 [S2]。S6 提到 AI 實驗室（OpenAI、Anthropic、Gemini）自行發布 llms.txt，但 S2/S5 僅代表 Google 立場，不代表其他平台。</li>
+<li><strong>S5（Google 文件更新）</strong>：S5 記錄 2026-06-15 於 AI 優化指南新增 llms.txt 澄清，重申「these files aren&rsquo;t needed for Google Search (and won&rsquo;t negatively or positively impact your visibility or rankings)」[S5]。與 S6 的採用現象描述形成張力，見矛盾記錄。</li>
+<li><strong>S7（OpenAI 爬蟲文件）</strong>：S7 文件未提及 llms.txt 為必要機制；S6 提到 OpenAI 發布自家開發者文件的 llms.txt，但不代表 OpenAI 爬蟲依賴此機制。</li>
+<li><strong>S8（學生前期研究）</strong>：S8 採用 llms.txt 提案格式部署於政大國際招生網站，但誠實說明非必要、非標準、成本低可放 [S8]。</li>
+<li><strong>S3（Google AI 功能）</strong>：S3 指出無需建立 AI 專用機器可讀檔案，與 S2/S5 一致 [S3]。</li>
+</ul>
+<h2>對校園網站 GEO 的意義（推論）</h2>
+<ul>
+<li><strong>低成本保險</strong>：部署 llms.txt 成本低（單一 Markdown 檔），可作為「不確定性下的保險」，但不應列為核心策略或 KPI [S6][S8]。</li>
+<li><strong>誠實標註必要性</strong>：在檔案或說明文件中明確標註「Google 搜尋忽略此檔案，其他 AI 平台讀取無保證」，避免內部誤判為必要標準 [S6][S2][S5][S8]。</li>
+<li><strong>內容策展機會</strong>：llms.txt 強制網站梳理核心內容結構（H1、摘要、分組連結），此過程本身有助內容治理與 AI 可理解度提升（推論，基於 S6 格式規範）[S6]。</li>
+<li><strong>可發現性輔助</strong>：若主要 AI 平台（非 Google）未來採納 <code>rel="alternate" type="text/markdown"</code> 與 <code>rel="describedby"</code>，預先部署可減少後續改造成本（推論，基於 S6 v2 變更）[S6]。</li>
+<li><strong>與 sitemap.xml、robots.txt 互補</strong>：三者用途不同，校網應同時維護：sitemap.xml 給搜尋爬蟲、robots.txt 給存取控制、llms.txt 給 LLM 策展概覽（推論，基於 S6 Existing standards 區段）[S6]。</li>
+</ul>
+<h2>待查</h2>
+<ol>
+<li>v2 確切發布日期（Changes 頁僅標示 &ldquo;August 2026&rdquo;，無日）[S6]</li>
+<li>llms.txt 是否會演進為 IETF/W3C 正式標準，或被主要 AI 平台正式採納為必要機制 [S6]</li>
+<li>OpenAI、Perplexity、Anthropic 等主流 AI 平台實際讀取 llms.txt 的頻率、方式與影響程度（缺乏公開實證）[S6][S7]</li>
+<li>Google 官方是否會在未來改變立場（目前 S2/S5 明確忽略）[S2][S5]</li>
+<li>教育/招生領域網站部署 llms.txt 的實際效益（無公開案例研究）[S6][S8]</li>
+<li>Optional 區段在 v2 中移除機械語意後，各工具實際處理方式是否一致 [S6]</li>
+<li><code>rel="describedby"</code> 與 <code>rel="alternate" type="text/markdown"</code> 在主流瀏覽器/爬蟲/代理中的實際支援度 [S6]</li>
+</ol>
+<h2>影響的頁面</h2>
+<ul>
+<li><a href="../concepts/llms-txt.html">wiki/concepts/llms-txt.md</a></li>
+<li><a href="../overview.html">wiki/overview.md</a></li>
+<li><a href="../index.html">wiki/index.md</a></li>
+<li><a href="../open-questions.html">wiki/open-questions.md</a></li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

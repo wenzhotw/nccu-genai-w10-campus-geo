@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S3｜AI features and your website｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../../index.html">校園網站 GEO</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S3｜AI features and your website</h1>
+<article class='card'>
+<h1>來源：S3 - AI features and your website</h1>
+<h2>基本資料</h2>
+<ul>
+<li><strong>標題</strong>：AI features and your website</li>
+<li><strong>發布單位</strong>：Google Search Central（Google 官方開發者文件）</li>
+<li><strong>URL</strong>：https://developers.google.com/search/docs/appearance/ai-features</li>
+<li><strong>來源類型</strong>：平台官方指引文件</li>
+<li><strong>頁面日期（page_date）</strong>：2025-12-10 UTC [S3]</li>
+<li><strong>擷取日期（fetched_at）</strong>：2026-11-22 11:32:50 CST [S3]</li>
+<li><strong>HTTP 狀態碼</strong>：200 [S3]</li>
+<li><strong>來源檔案大小</strong>：182016 bytes [S3]</li>
+<li><strong>SHA256</strong>：e1d217ca74bdb46890fff937430aca6cc49d28c372952d4984eeb701f3b63ebb [S3]</li>
+<li><strong>適用範圍</strong>：Google 搜尋的生成式 AI 功能（AI Overviews、AI Mode）對網站擁有者的運作說明與優化指引，僅代表 Google 搜尋官方立場 [S3]</li>
+</ul>
+<h2>重點</h2>
+<ol>
+<li><strong>SEO 最佳實踐仍適用，AI Overviews 與 AI Mode 無額外要求或特殊優化必要</strong> [S3]</li>
+<li><strong>AI Overviews 與 AI Mode 使用 query fan-out 技術拆解子查詢以發展回應</strong> [S3]</li>
+<li><strong>頁面必須先被索引且合乎 Google 搜尋片段顯示資格，才能出現在 AI 功能中</strong> [S3]</li>
+<li><strong>robots.txt 指令控制 Googlebot 爬取是網站擁有者管理搜尋存取的方式</strong> [S3]</li>
+<li><strong>來自 AI Overviews 的點擊品質較高，使用者較可能在網站停留更久</strong> [S3]</li>
+<li><strong>結構化資料須與頁面可見文字一致</strong>：SEO 最佳實踐包含「Making sure your structured data matches the visible text on the page」[S3]</li>
+<li><strong>Google-Extended 管的是其他系統，不是搜尋開關</strong>：限制「AI training and grounding in some of Google&rsquo;s other systems」時，另見 Google-Extended；Google 搜尋（含 AI 功能）的存取控制是 Googlebot 與 snippet／noindex 等機制 [S3]</li>
+<li><strong>預覽控制變更後，重新抓取可能要數天到數月</strong>：原文「crawling can take anywhere from several days to several months, depending on how often our systems determine a page needs to be refreshed」[S3]</li>
+</ol>
+<h2>數字與日期</h2>
+<table>
+<thead>
+<tr>
+<th>數值</th>
+<th>單位/脈絡</th>
+<th>來源位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025-12-10 UTC</td>
+<td>page_date metadata</td>
+<td>metadata page_date [S3]</td>
+</tr>
+<tr>
+<td>2026-11-22 11:32:50 CST</td>
+<td>fetched_at metadata</td>
+<td>metadata fetched_at [S3]</td>
+</tr>
+<tr>
+<td>200</td>
+<td>HTTP status code</td>
+<td>metadata http_code [S3]</td>
+</tr>
+<tr>
+<td>182016</td>
+<td>source file size in bytes</td>
+<td>metadata source_bytes [S3]</td>
+</tr>
+<tr>
+<td>e1d217ca74bdb46890fff937430aca6cc49d28c372952d4984eeb701f3b63ebb</td>
+<td>SHA256 hash</td>
+<td>metadata sha256 [S3]</td>
+</tr>
+</tbody>
+</table>
+<h2>作者或文件自述限制</h2>
+<ol>
+<li><strong>僅代表 Google 搜尋官方立場</strong>：不代表其他生成式引擎（Bing Copilot、Perplexity.ai 等）的運作方式 [S3]。</li>
+<li><strong>索引與顯示不保證</strong>：符合所有需求、最佳實踐與政策，不代表 Google 會爬取、索引或顯示內容 [S3]。</li>
+<li><strong>無額外技術要求</strong>：頁面符合搜尋技術需求、被索引且符合片段顯示資格即具備資格，無額外技術要求 [S3]。</li>
+<li><strong>AI Overviews 僅在系統判定具增益時顯示</strong>：常不觸發 [S3]。</li>
+<li><strong>AI Mode 與 AI Overviews 可能使用不同模型與技術</strong>：回應與連結集合會不同 [S3]。</li>
+</ol>
+<h2>與其他來源的關係</h2>
+<ul>
+<li><strong>S1 (Aggarwal et al., GEO)</strong>：S1 為學術定義 GEO 框架與指標；S3 為 Google 平台官方指引，說明 AI Overviews/AI Mode 運作機制（query fan-out），兩者互補。</li>
+<li><strong>S2 (Google 生成式 AI 指南)</strong>：S2 為較完整的優化指引文件；S3 專注於 AI 功能運作與顯示資格。兩者在 robots.txt 控制範圍與點擊品質主張上有差異（見矛盾記錄）。</li>
+<li><strong>S4 (Google 結構化資料文件)</strong>：S3 指出無特殊 schema.org 標記需求；S4 提供技術規範，兩者互補。</li>
+<li><strong>S5 (Google 文件更新 / FAQPage HowTo 變更)</strong>：S3 未提及 FAQPage/HowTo 複合式結果停用；S5 記錄 2023-08 政策變更，補充歷史脈絡。</li>
+<li><strong>S6 (llms.txt 提案)</strong>：S3 指出無需建立 AI 專用機器可讀檔案；S6 為提案標準，不可視為已生效網路標準。</li>
+<li><strong>S7 (OpenAI 爬蟲文件)</strong>：S3 著重 Google 爬蟲與索引；S7 可補充其他 AI 爬蟲行為。</li>
+<li><strong>S8 (學生前期研究)</strong>：S8 參考 S3 的 query fan-out 概念建議每頁涵蓋主問題與子問題，引用 S8 時必標「學生前期研究」並附基準方法限制。</li>
+</ul>
+<h2>對校園網站 GEO 的意義（推論）</h2>
+<ul>
+<li><strong>策略定調</strong>：以既有 SEO 最佳實踐為基礎，無需另闢「GEO 專用」技術棧；重點在內容品質與技術可及性（推論，基於 S3 核心訊息）[S3]。</li>
+<li><strong>內容架構因應 query fan-out</strong>：每頁涵蓋主問題與相關子問題，增加被多個子查詢檢索到的機會（推論，基於 S3 query fan-out 說明）[S3]。</li>
+<li><strong>技術清單</strong>：確保頁面可被索引、符合技術需求、在 Search Console 具備生成式 AI 功能資格、robots.txt 開放 Googlebot、重要內容為 HTML 文字、語意化 HTML、良好頁面體驗（推論，基於 S3 技術要求與 SEO 最佳實踐段落）[S3]。</li>
+<li><strong>結構化資料</strong>：保留 FAQPage、EducationalOccupationalProgram 等標記作為整體 SEO 與豐富搜尋結果策略，但不預期對生成式 AI 搜尋有額外加分（推論，基於 S3 明確指出無特殊 schema 需求）[S3]。</li>
+<li><strong>llms.txt</strong>：可放但非必要，成本低可作為保險，不應列為核心策略（推論，基於 S3 明確指出無需建立 AI 專用檔案）[S3]。</li>
+<li><strong>效能監測</strong>：納入 Search Console 效能報告（Web search type）作為月度追蹤指標；注意 AI Overviews 點擊併入自然搜尋流量（推論，基於 S3 測量段落）[S3]。</li>
+<li><strong>點擊品質</strong>：若 S3 主張屬實，AI Overviews 帶來的流量可能具備較高停留時間，有利招生轉換（推論，基於 S3 higher quality clicks 主張，但量化定義待查）[S3]。</li>
+</ul>
+<h2>待查</h2>
+<ol>
+<li>query fan-out 具體運作細節（如並行查詢數量、子主題選擇邏輯）[S3]</li>
+<li>higher quality clicks 的量化定義與測量方法[S3]</li>
+<li>indexed and eligible to be shown in Google Search with a snippet 的具體技術門檻[S3]</li>
+<li>AI 功能顯示與否的決定因素（何時觸發、何時不觸發）[S3]</li>
+<li>「要先能被 Google 索引」與 AI features 的關係：原文寫「must be indexed and eligible to be shown in Google Search with a snippet」，無額外技術要求[S3]</li>
+<li>robots.txt 指令 verbatim &ldquo;for Googlebot is&rdquo; 在原文確切位置（G1 核對未找到，標記待查）[S3]</li>
+</ol>
+<h2>影響的頁面</h2>
+<ul>
+<li><a href="../concepts/geo-vs-seo.html">wiki/concepts/geo-vs-seo.md</a></li>
+<li><a href="../concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a></li>
+<li><a href="../overview.html">wiki/overview.md</a></li>
+<li><a href="../index.html">wiki/index.md</a></li>
+<li><a href="../open-questions.html">wiki/open-questions.md</a></li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

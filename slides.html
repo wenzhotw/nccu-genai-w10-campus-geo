@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>校園網站 GEO 入門</title>
+<style>
+/* VOICE  教學簡報：給外行人看，清楚、穩重，一頁一個重點
+   IDEA   一份「自己也附引用」的 AI 答案：每個重點後面都掛著 Wiki 頁與來源標籤
+   PICTURE 封面是 AI 答案卡（政大不在引用裡）；內頁是流程圖、實驗長條、網頁解剖圖、10 題點陣
+   COLOUR 深海軍藍底、近白字；黃＝重點，青＝Wiki 標籤，紅＝誤解與限制
+   TYPE   系統內建中文黑體（可離線），標題粗體
+   LAYOUT 1280×720 畫布等比縮放；窄螢幕自動改成捲動閱讀，欄位改為單欄 */
+:root{color-scheme:dark;--bg:#0b1433;--ink:#f3f5ff;--mute:#b4bde3;--panel:#13204b;--panel2:#1a2a62;--line:#2d3f86;--yel:#f7e463;--teal:#4fc1c6;--red:#ff6b57;--blue:#3b4fd8;--b:28px}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink)}
+body{font-family:"Noto Sans TC","Noto Sans CJK TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+#deck{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}
+#stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:34px 58px 0;font-size:var(--b);line-height:1.45;background:var(--bg);overflow:hidden}
+.slide.on{display:flex}
+.tag{font-size:.7em;font-weight:700;color:var(--teal);margin:0 0 4px}
+h1,h2{margin:0;font-weight:800;line-height:1.15;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:1.72em;margin-bottom:.45em}
+h1{font-size:2.1em}
+main{flex:1;display:flex;flex-direction:column;gap:18px;min-height:0}
+footer.f{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--line);padding:9px 0 12px;font-size:.64em;color:var(--mute);margin-top:12px}
+footer.f b{color:var(--ink);font-weight:600}
+p{margin:0}
+em{font-style:normal;color:var(--yel);font-weight:700}
+.w,.s{display:inline-block;font-style:normal;font-weight:600;font-size:.66em;line-height:1;padding:.22em .45em;border-radius:6px;margin-left:.3em;vertical-align:.14em;white-space:nowrap}
+.w{border:1.5px solid var(--teal);color:var(--teal)}
+.s{background:#2a3a7a;color:#e8ecff}
+.inf{font-size:.72em;color:var(--mute);font-weight:400;white-space:nowrap}
+ul.pts{list-style:none;margin:0;padding:0}
+ul.pts>li{position:relative;padding-left:1em;margin:.32em 0}
+ul.pts>li::before{content:"";position:absolute;left:0;top:.58em;width:.42em;height:.42em;border-radius:2px;background:var(--yel)}
+ul.tight>li{margin:.18em 0}
+.cols{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:26px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+.panel h3{margin:0 0 .3em;font-size:1em;font-weight:800}
+.key{background:var(--yel);color:#141a33;border-radius:14px;padding:14px 22px;font-weight:700}
+.key .w{border-color:#141a33;color:#141a33}.key .s{background:#141a33;color:#fff}
+.warn{border:2px solid var(--red);border-radius:14px;padding:14px 20px}
+.warn h3{color:var(--red);margin:0 0 .25em;font-size:.95em}
+.small{font-size:.88em}.xs{font-size:.76em}
+.pn{display:none}body.read .pn{display:inline}
+.key .inf{color:#3d4366}
+table.cmp td:first-child{white-space:nowrap}
+table.bots td:first-child{white-space:nowrap;font-weight:700}
+table.apx{font-size:.64em}table.apx td,table.apx th{padding:.26em .55em}
+.mute{color:var(--mute)}
+pre{margin:0;background:#070d24;border:1px solid var(--line);border-radius:12px;padding:14px 18px;font:500 .62em/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#dfe6ff;overflow-x:auto;white-space:pre}
+pre .c{color:#8f9bd0}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:left;vertical-align:top;padding:.38em .55em;border-bottom:1px solid var(--line)}
+th{color:var(--teal);font-weight:700}
+/* cover */
+.cover{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:40px;align-items:center;flex:1}
+.cover .sub{font-size:1.15em;color:var(--yel);font-weight:700;margin:.5em 0 .9em}
+.cover .meta{font-size:.74em;color:var(--mute);line-height:1.6}
+.ans{background:#f3f5ff;color:#141a33;border-radius:18px;padding:22px 24px;box-shadow:0 18px 0 -6px #1f2f6c}
+.q{display:inline-block;background:var(--blue);color:#fff;border-radius:16px 16px 16px 4px;padding:.4em .8em;font-weight:700;font-size:.85em}
+.lines{margin:16px 0 14px}
+.lines i{display:block;height:13px;border-radius:7px;background:#c9d0ea;margin:10px 0}
+.cites{display:flex;flex-wrap:wrap;gap:10px}
+.cites span{font-size:.62em;font-weight:700;border-radius:999px;padding:.35em .8em;background:#dbe0f3;color:#1d2650}
+.cites .miss{background:transparent;border:2px dashed var(--red);color:#c0321f}
+.cap{font-size:.6em;color:var(--mute);margin-top:12px;line-height:1.5}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:34px;position:relative}
+.st{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;position:relative}
+.st .n{display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--teal);color:#0b1433;font-weight:800;font-size:.8em;margin-bottom:6px}
+.st h3{margin:0 0 .25em;font-size:.95em}
+.st p{font-size:.8em;color:var(--mute)}
+.st:not(:last-child)::after{content:"";position:absolute;right:-27px;top:50%;width:18px;height:18px;border-top:4px solid var(--yel);border-right:4px solid var(--yel);transform:translateY(-50%) rotate(45deg)}
+.fan{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.fan span{font-size:.56em;background:#24357a;border-radius:8px;padding:.25em .5em}
+/* bars */
+.bars{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px 14px;align-items:center;font-size:.8em}
+.bar{height:26px;border-radius:5px;background:var(--teal)}
+.bar.bad{background:var(--red)}.bar.base{background:#7e8ac0}
+.num{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.div{display:grid;grid-template-columns:6.4em minmax(0,1fr) minmax(0,1fr);gap:14px 0;align-items:center;font-size:.8em}
+.div .l{display:flex;justify-content:flex-end;align-items:center;gap:8px;border-right:3px solid var(--ink);padding-right:8px}
+.div .r{display:flex;align-items:center;gap:8px;padding-left:8px}
+.div .bar{height:30px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.stat{background:var(--panel2);border-radius:12px;padding:10px 14px}
+.stat b{display:block;font-size:1.5em;color:var(--yel);line-height:1.1}
+.stat span{font-size:.66em;color:var(--mute)}
+/* anatomy */
+.browser{background:#f3f5ff;color:#141a33;border-radius:14px;overflow:hidden}
+.browser .top{background:#d5dbf2;padding:8px 12px;display:flex;gap:6px}
+.browser .top i{width:11px;height:11px;border-radius:50%;background:#9aa6d6}
+.browser .in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:16px;padding:14px 16px 8px}
+.file{border:2px solid #b8c1e6;border-radius:10px;padding:7px 10px;margin-bottom:8px;font-size:.62em;background:#fff}
+.file b{display:block;font-size:1.15em}
+.pg{border:2px solid #b8c1e6;border-radius:10px;padding:10px 12px;background:#fff;font-size:.62em;margin-bottom:9px}
+.pg.hid{border-style:dashed;background:#eef1fb}
+.mk{display:inline-grid;place-items:center;width:1.45em;height:1.45em;border-radius:50%;background:#141a33;color:#fff;font-weight:800;font-size:.9em;margin-right:4px}
+.ev{display:inline-block;font-size:.85em;font-weight:700;border-radius:6px;padding:.1em .4em;margin-top:3px}
+.ev.hi{background:#c7f0ef;color:#0d4b4e}.ev.mid{background:#fdf3b5;color:#5a4d00}.ev.lo{background:#ffd9d2;color:#8a1d0c}
+/* example card */
+.qa{background:#f3f5ff;color:#141a33;border-radius:14px;padding:18px 22px}
+.qa h3{margin:0 0 .4em;font-size:.95em}
+.qa p{font-size:.9em;line-height:1.6}
+.note{font-size:.66em;color:#4a5482;margin-top:12px}
+/* dots */
+.dots{display:grid;grid-template-columns:repeat(5,66px);gap:16px}
+.dot{width:66px;height:66px;border-radius:50%;border:4px solid #6f7bb3}
+.dot.y{background:var(--teal);border-color:var(--teal)}
+.dot.x{border-color:var(--red)}
+.legend{display:flex;flex-direction:column;gap:6px;font-size:.7em;color:var(--mute);margin-top:16px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.qlist{list-style:none;margin:0;padding:0}
+.qlist li{border-left:5px solid var(--red);background:var(--panel);padding:.35em .7em;margin:0 0 .4em;border-radius:0 10px 10px 0;font-weight:700}
+/* rows */
+.row3{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.15fr);gap:12px 16px;font-size:.8em}
+.row3 .h{color:var(--teal);font-weight:800}
+.row3 div:not(.h){background:var(--panel);border-radius:10px;padding:10px 14px}
+.myth{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.myth .m{background:var(--panel);border-radius:14px;padding:18px 20px;border-top:5px solid var(--red)}
+.myth .m b{display:block;color:var(--red);font-size:.86em;margin-bottom:.35em}
+.myth .m p{font-size:.9em}
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:12px}
+summary{cursor:pointer;font-weight:700;font-size:.92em}
+details p{font-size:.84em;margin-top:.5em;color:#dfe5ff}
+.src{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px;font-size:.64em;line-height:1.45}
+.src div{background:var(--panel);border-radius:10px;padding:10px 14px}
+.src a{color:var(--teal);overflow-wrap:anywhere}
+.loop{display:grid;grid-template-columns:auto repeat(6,minmax(0,1fr));gap:10px;align-items:stretch;font-size:.72em}
+.loop .lab{font-weight:800;color:var(--yel);align-self:center;padding-right:8px;font-size:1.2em}
+.loop .bx{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 10px;text-align:center;display:grid;place-items:center;min-height:96px}
+.loop .ck{border:2px solid var(--yel)}
+.back{font-size:.8em;color:var(--mute);margin-top:2px}
+.back b{color:var(--red)}
+/* ui */
+.ui{position:fixed;z-index:9;display:flex;gap:8px;align-items:center}
+#ctl{right:14px;bottom:12px}
+.ui button{min-width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:#16245a;color:var(--ink);font:600 15px/1 inherit;font-family:inherit;padding:0 12px;cursor:pointer}
+.ui button:hover{background:#22357d}.ui button:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+#cnt{font:600 14px/1 inherit;font-family:inherit;color:var(--mute);min-width:56px;text-align:center}
+#prog{position:fixed;left:0;top:0;height:4px;background:var(--teal);z-index:9;transition:width .25s}
+/* reading mode */
+body.read{overflow:auto;--b:17px}
+body.read #deck{position:static;display:block;overflow:visible}
+body.read #stage{width:auto;height:auto;transform:none!important;max-width:1100px;margin:0 auto;padding:56px 0 24px}
+body.read .slide{position:relative;display:flex;inset:auto;padding:28px max(16px,4vw) 0;border-bottom:6px solid var(--panel2);overflow:visible}
+body.read #prog,body.read #prev,body.read #next,body.read #cnt{display:none}
+body.read #ctl{top:10px;bottom:auto}
+@media (max-width:760px){
+ body.read .cols,body.read .cover,body.read .flow,body.read .myth,body.read .src,body.read .browser .in{grid-template-columns:minmax(0,1fr)!important}
+ body.read .dots{grid-template-columns:repeat(5,44px)}
+ body.read .dot{width:44px;height:44px}
+ body.read .st::after{display:none}
+ body.read .row3{grid-template-columns:minmax(0,1fr)}
+ body.read .row3 .h{display:none}
+ body.read .loop{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.read .loop .lab{grid-column:1/-1}
+ body.read .w,body.read .s{font-size:.78em}
+ body.read .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+ body.read footer.f{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){#prog{transition:none}}
+@page{size:1280px 720px;margin:0}
+@media print{
+ body{overflow:visible}
+ #deck{position:static;display:block}
+ #stage{transform:none!important;height:auto}
+ .slide{display:flex!important;position:relative;height:720px;break-after:page}
+ .ui,#prog{display:none}
+ details{display:block}
+}
+
+/* C5: 10 筆來源會與頁尾重疊，附錄 B 單獨縮小間距與字級 */
+.slide[data-t="附錄 B 來源"] main{gap:10px}
+.slide[data-t="附錄 B 來源"] .src{gap:7px 14px;font-size:.58em}
+.slide[data-t="附錄 B 來源"] .src div{padding:7px 12px}
+.slide[data-t="附錄 B 來源"] footer.f{margin-top:8px;padding:6px 0 10px}
+
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="deck"><div id="stage">
+
+<!-- 1 封面 -->
+<section class="slide" data-t="封面">
+ <div class="cover">
+  <div>
+   <p class="tag">生成式 AI 文字與圖像生成｜第十週作業｜教學簡報</p>
+   <h1>讓 AI 找得到、<br>引用得到：<br>校園網站的 GEO 入門</h1>
+   <p class="sub">以政大國際招生網站為例</p>
+   <p class="meta">何則文（國立政治大學日本語文學系三年級）<br>知識來源：本主題 LLM Wiki（10 篇來源，見附錄 B；本次實際 ingest S1–S10）<br>操作：← → 換頁；窄螢幕會自動改成捲動閱讀</p>
+  </div>
+  <div>
+   <div class="ans">
+    <span class="q">台灣哪間大學適合國際生？</span>
+    <div class="lines"><i style="width:96%"></i><i style="width:88%"></i><i style="width:92%"></i><i style="width:60%"></i></div>
+    <div class="cites"><span>來源 1</span><span>來源 2</span><span>來源 3</span><span class="miss">政大？</span></div>
+   </div>
+   <p class="cap">示意圖：AI 搜尋把多個網頁濃縮成一段答案，並附上佐證連結。前期研究中，這一題的答案裡沒有政大。<i class="w">geo-vs-seo</i><i class="w">campus-case-nccu</i></p>
+  </div>
+ </div>
+ <footer class="f"><span>對應 Wiki：<b>overview</b>｜來源：S1、S2、S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 2 學習目標 -->
+<section class="slide" data-t="學習目標">
+ <p class="tag">開始之前</p>
+ <h2>看完這份簡報，你可以做到四件事</h2>
+ <main>
+  <div class="cols">
+   <ul class="pts">
+    <li>用一句話說出 <em>GEO</em> 和 SEO 的差別</li>
+    <li>說出 AI 搜尋從問題到答案的三個步驟</li>
+    <li>列出校園網站能做的四件事，以及每件事的<em>依據強弱</em></li>
+    <li>分辨哪些說法有根據、哪些是<em>誤解</em></li>
+   </ul>
+   <div class="panel">
+    <h3>路線</h3>
+    <p class="small">A　GEO 是什麼<br>B　為什麼校園網站要在意<br>C　四個做法<br>D　政大案例<br>E　誤解與限制，最後自我檢查</p>
+   </div>
+  </div>
+  <div class="panel">
+   <h3>怎麼讀標籤</h3>
+   <p class="small">每個重點後面都有標籤：<i class="w">qa-writing</i> 是這句話出自 Wiki 的哪一頁，<i class="s">S1</i> 是那一頁引用的來源（完整清單見附錄 B）。這份簡報只寫 Wiki 裡有的內容；標「推論」的是根據來源推出的看法，不是來源原話。</p>
+  </div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>index、overview</b></span><span class="pn"></span></footer>
+</section>
+
+<!-- 3 AI 搜尋怎麼回答 -->
+<section class="slide" data-t="AI 搜尋怎麼回答">
+ <p class="tag">A｜GEO 是什麼</p>
+ <h2>先看 AI 搜尋怎麼回答一個問題</h2>
+ <main>
+  <div class="flow">
+   <div class="st"><span class="n">1</span><h3>你問一個問題</h3><p>例如「台灣哪間大學適合國際生？」</p></div>
+   <div class="st"><span class="n">2</span><h3>拆成多個查詢</h3><p>以 Google AI Overviews／AI Mode 為例，系統可能把問題展開成多個相關子查詢（query fan-out）。<i class="s">S2</i><i class="s">S3</i></p><div class="fan"><span>英語授課碩士</span><span>國際生獎學金</span><span>國際關係學程</span></div></div>
+   <div class="st"><span class="n">3</span><h3>取回網頁</h3><p>搜尋排名系統從索引中找出相關、最新的網頁（檢索，也叫 grounding）。<i class="s">S2</i></p></div>
+   <div class="st"><span class="n">4</span><h3>寫答案、附連結</h3><p>根據取回的內容生成答案，並附上佐證網頁的連結。<i class="s">S2</i></p></div>
+  </div>
+  <p class="xs mute">第 2 步的三個查詢是示意，不是實際紀錄。</p>
+  <div class="key">所以第一關是「被找到」：網頁要先被索引、能以摘要顯示，才可能成為佐證連結。<i class="w">geo-vs-seo</i><i class="s">S3</i></div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>geo-vs-seo</b>｜來源：S2、S3</span><span class="pn"></span></footer>
+</section>
+
+<!-- 4 GEO 研究 -->
+<section class="slide" data-t="GEO 的定義與研究">
+ <p class="tag">A｜GEO 是什麼</p>
+ <h2>GEO：讓內容在 AI 答案裡被引用</h2>
+ <main>
+  <div class="cols" style="--n:2">
+   <ul class="pts small">
+    <li><em>GEO</em>（生成式引擎最佳化）：讓內容在 AI 生成的答案中被引用得更多、更前面。2023 年由 Aggarwal 等人提出，KDD 2024 發表。<i class="w">s1-aggarwal-geo</i><i class="s">S1</i></li>
+    <li>不看排名，看<em>能見度</em>：答案中和你的引用相連的字數與位置，加上評分模型的主觀印象。<i class="s">S1</i></li>
+    <li>用 10,000 題的 GEO-bench 測了 9 種改寫方法，最好的能見度最多提升約 <em>40%</em>。<i class="s">S1</i></li>
+   </ul>
+   <div>
+    <div class="panel">
+     <h3 class="small">在 Perplexity.ai 上的實驗</h3>
+     <div class="bars">
+      <span>未優化</span><div class="bar base" style="width:82.8%"></div><span class="num">24.1</span>
+      <span>堆關鍵字</span><div class="bar bad" style="width:75.3%"></div><span class="num">21.9</span>
+      <span>加統計數字</span><div class="bar" style="width:90%"></div><span class="num">26.2</span>
+      <span>加引言</span><div class="bar" style="width:100%"></div><span class="num">29.1</span>
+     </div>
+     <p class="xs mute" style="margin-top:10px">Position-Adjusted Word Count，越高越好（S1 Table 5，Perplexity.ai 實驗）。加引言、加數字有效；堆關鍵字比不改還差。</p>
+    </div>
+   </div>
+  </div>
+  <div class="key">給校園網站的意思：答案句附上來源、放進查得到的數字，不要堆關鍵字。<span class="inf">（推論）</span><i class="w">qa-writing</i><i class="s">S1</i></div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>s1-aggarwal-geo、geo-vs-seo</b>｜來源：S1</span><span class="pn"></span></footer>
+</section>
+
+<!-- 5 GEO vs SEO -->
+<section class="slide" data-t="GEO 和 SEO 差在哪">
+ <p class="tag">A｜GEO 是什麼</p>
+ <h2>GEO 和 SEO 差在哪？</h2>
+ <main>
+  <table class="xs cmp">
+   <tr><th></th><th>SEO</th><th>GEO</th></tr>
+   <tr><td class="mute">讀者看到什麼</td><td>一串排好順序的網頁連結</td><td>一段綜合多個來源的答案，附佐證連結<i class="s">S1</i><i class="s">S2</i></td></tr>
+   <tr><td class="mute">成功的樣子</td><td>在連結清單裡排得前面</td><td>被引用，而且引用得多、位置前面<i class="s">S1</i></td></tr>
+   <tr><td class="mute">怎麼量</td><td>Search Console 成效報表；AI 功能的流量也算在「網頁」類型裡<i class="s">S3</i></td><td>研究用能見度指標<i class="s">S1</i>；Google 另有生成式 AI 成效報表<i class="s">S2</i></td></tr>
+  </table>
+  <div class="cols">
+   <div class="panel" style="padding:12px 20px"><h3 class="small">Google 的立場</h3><p class="xs">Google 的 AI 功能建立在原本的排名與品質系統上，所以對 Google 搜尋來說，GEO <em>仍然是 SEO</em>。<i class="s">S2</i></p></div>
+   <div class="panel" style="padding:12px 20px"><h3 class="small">研究的立場</h3><p class="xs">GEO 有自己的指標與實驗；測的是一般生成式引擎，包含 Perplexity。<i class="s">S1</i></p></div>
+  </div>
+  <div class="key small">GEO 不取代 SEO：它在 SEO 之上多問一句「AI 能不能直接引用我這一句？」<span class="inf">（Wiki 整理）</span><i class="w">geo-vs-seo</i></div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>geo-vs-seo、open-questions</b>｜來源：S1、S2、S3</span><span class="pn"></span></footer>
+</section>
+
+<!-- 6 為什麼要在意 -->
+<section class="slide" data-t="為什麼要在意">
+ <p class="tag">B｜為什麼校園網站要在意</p>
+ <h2>不在佐證連結裡，讀者就看不到你</h2>
+ <main>
+  <div class="cols">
+   <ul class="pts">
+    <li>Google 觀察到：越來越多人改用生成式 AI 找資訊。<i class="w">geo-vs-seo</i><i class="s">S2</i></li>
+    <li>AI 把多個來源濃縮成一段答案，並附上佐證連結；網站不在裡面，讀者就不容易看到它。<span class="inf">（推論）</span><i class="s">S1</i><i class="s">S2</i></li>
+    <li>不是只有大學校有機會：實驗中，<em>原本排名較後</em>的網站改寫後受益最多。<i class="s">S1</i></li>
+   </ul>
+   <div class="panel">
+    <h3 class="small">改寫後能見度的相對變化</h3>
+    <div class="div">
+     <span></span><span class="xs mute" style="text-align:right;padding-right:8px">原排第 1</span><span class="xs mute" style="padding-left:8px">原排第 5</span>
+     <span>引用來源</span><div class="l"><span class="num">−30.3%</span><div class="bar bad" style="width:17.4%"></div></div><div class="r"><div class="bar" style="width:66%"></div><span class="num">+115.1%</span></div>
+     <span>加引言</span><div class="l"><span class="num">−22.9%</span><div class="bar bad" style="width:13.1%"></div></div><div class="r"><div class="bar" style="width:57.2%"></div><span class="num">+99.7%</span></div>
+     <span>加統計數字</span><div class="l"><span class="num">−20.6%</span><div class="bar bad" style="width:11.8%"></div></div><div class="r"><div class="bar" style="width:56.1%"></div><span class="num">+97.9%</span></div>
+    </div>
+    <p class="xs mute" style="margin-top:12px">S1 Table 2：不同 SERP 排名的相對變化。GEO-bench 實驗，不是招生領域實測。</p>
+   </div>
+  </div>
+  <div class="key">對政大的意思：不是 AI 答案的主角，也有改善空間；但幅度要用自己的基準重測才知道。<span class="inf">（推論）</span><i class="w">campus-case-nccu</i></div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>geo-vs-seo、s1-aggarwal-geo</b>｜來源：S1、S2</span><span class="pn"></span></footer>
+</section>
+
+<!-- 7 三個難題 -->
+<section class="slide" data-t="校園網站的難題">
+ <p class="tag">B｜為什麼校園網站要在意</p>
+ <h2>校園網站有三個特別的難題</h2>
+ <main>
+  <div class="cols" style="--n:3">
+   <div class="panel"><h3>資訊散落</h3><p class="small">學程、研究中心各有網站。政大強項在官網查得到，但散在各系所站，缺一個 AI 好引用的<em>整合入口</em>。<i class="w">campus-case-nccu</i><i class="s">S8</i></p></div>
+   <div class="panel"><h3>讀者用多種語言</h3><p class="small">原型提供 en／zh-Hant／ja 三語版本，並用 hreflang 標示。<i class="w">campus-case-nccu</i><i class="s">S8</i></p></div>
+   <div class="panel"><h3>數字要能查證</h3><p class="small">原型規定數字附官方來源與日期<i class="s">S8</i>；實驗中加統計數字、附來源也有助被引用。<i class="w">qa-writing</i><i class="s">S1</i></p></div>
+  </div>
+  <div class="key">前期研究：10 個國際學生常問問題中，政大只出現在 5 題。細節在 D 段。<i class="w">campus-case-nccu</i><i class="s">S8</i></div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>campus-case-nccu、qa-writing</b>｜來源：S1、S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 8 四件事總覽 -->
+<section class="slide" data-t="四件事總覽">
+ <p class="tag">C｜四個做法</p>
+ <h2>校園網站能做的四件事，依據強弱不同</h2>
+ <main>
+  <div class="cols" style="grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr)">
+   <div class="browser">
+    <div class="top"><i></i><i></i><i></i></div>
+    <div class="in">
+     <div>
+      <p class="xs" style="font-weight:800;margin-bottom:6px">網站根目錄的檔案</p>
+      <div class="file"><b><span class="mk">④</span>robots.txt</b>讓對的爬蟲進來<br><span class="ev hi">官方文件明確</span></div>
+      <div class="file"><b><span class="mk">③</span>llms.txt</b>給 AI 的網站清單<br><span class="ev lo">提案；Google 搜尋不用</span></div>
+      <div class="file"><b>sitemap.xml</b>原型有做<br><span class="ev mid">Wiki 待查</span></div>
+     </div>
+     <div>
+      <p class="xs" style="font-weight:800;margin-bottom:6px">一個學程頁</p>
+      <div class="pg"><b><span class="mk">①</span>看得到的：問答體內容</b><br>H2 寫問題，第一句直接回答<br><span class="ev hi">實驗支持＋Google 建議</span></div>
+      <div class="pg"><b><span class="mk">①</span>看得到的：數字的出處</b><br>每個數字標官方來源與日期<br><span class="ev hi">實驗支持</span></div>
+      <div class="pg hid"><b><span class="mk">②</span>看不到的：JSON-LD</b><br>用標準格式說明這頁是什麼<br><span class="ev mid">可做；AI 功能不需特殊 schema</span></div>
+     </div>
+    </div>
+   </div>
+   <div style="display:flex;flex-direction:column;gap:14px">
+    <div class="key small">前提：網頁先被索引、能以摘要顯示。<i class="s">S3</i></div>
+    <ul class="pts small tight">
+     <li>① 問答體<i class="w">qa-writing</i></li>
+     <li>② JSON-LD<i class="w">json-ld</i></li>
+     <li>③ llms.txt<i class="w">llms-txt</i></li>
+     <li>④ robots.txt<i class="w">robots-ai-crawlers</i></li>
+    </ul>
+    <div class="panel xs" style="line-height:1.7">
+     <b>標籤顏色（Wiki 整理）</b><br>
+     <span class="ev hi">青</span> 官方明確，或實驗支持<br>
+     <span class="ev mid">黃</span> 可做，但沒有特殊效果，或 Wiki 待查<br>
+     <span class="ev lo">紅</span> 提案階段，Google 搜尋不用
+    </div>
+   </div>
+  </div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>qa-writing、json-ld、llms-txt、robots-ai-crawlers、campus-case-nccu</b>｜來源：S1～S10</span><span class="pn"></span></footer>
+</section>
+
+<!-- 9 問答體 -->
+<section class="slide" data-t="① 問答體">
+ <p class="tag">C｜做法 ①</p>
+ <h2>問答體：把國際生的問題寫成標題</h2>
+ <main>
+  <div class="cols" style="grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)">
+   <div>
+    <div class="qa">
+     <h3>H2：政大有全英語授課的碩士學程嗎？</h3>
+     <p>有。政大 IMPIS、IMAS、IMBA 等碩士學程以英語授課；申請條件與期限以各學程官網公告為準（資料日期：待填）。</p>
+     <p class="note">示意範例，約 57 字。學程名稱取自學生前期研究 S8，上線前要再查證。</p>
+    </div>
+    <div class="fan" style="margin-top:14px;gap:10px"><span style="font-size:.7em;padding:.4em .7em">問題用國際生的說法</span><span style="font-size:.7em;padding:.4em .7em">第一句就回答</span><span style="font-size:.7em;padding:.4em .7em">附來源與日期</span></div>
+   </div>
+   <ul class="pts">
+    <li>H2 寫問題，下接 40 到 60 字直接答案（本案設計）。<i class="w">qa-writing</i><i class="s">S8</i></li>
+    <li>數字與說法附官方來源與日期；實驗中附來源、加數字效果最好。<i class="s">S8</i><i class="s">S1</i></li>
+    <li>用標題、段落把內容組織清楚。<i class="s">S2</i></li>
+    <li>不必把內容切碎，也沒有理想長度；<em>40 到 60 字是寫給讀者的紀律</em>，不是 AI 規格。<i class="s">S2</i></li>
+    <li>別堆關鍵字：實驗中比不改還差。<i class="s">S1</i></li>
+   </ul>
+  </div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>qa-writing</b>｜來源：S1、S2、S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 10 JSON-LD -->
+<section class="slide" data-t="② JSON-LD">
+ <p class="tag">C｜做法 ②</p>
+ <h2>結構化資料：給機器看的「這頁是什麼」</h2>
+ <main>
+  <div class="cols">
+   <ul class="pts" style="font-size:.95em">
+    <li>結構化資料是用標準格式說明頁面內容的資料。Google 支援三種格式，建議用 <em>JSON-LD</em>。<i class="w">json-ld</i><i class="s">S4</i></li>
+    <li>出現在 Google 的 AI 功能，不需要特殊 schema；但結構化資料仍值得當作 SEO 的一部分。<i class="s">S2</i><i class="s">S3</i></li>
+    <li>規則：標記的內容要和頁面上看得到的文字一致。<i class="s">S3</i><i class="s">S4</i></li>
+    <li>FAQ 複合式結果自 <em>2026-05-07</em> 起不再顯示。現有來源沒有證明 FAQPage 能增加 AI 引用，故不當作 GEO 必要策略；右方只是結構化資料示意，不是必要配置。<i class="s">S5</i><i class="s">S2</i><i class="s">S3</i></li>
+   </ul>
+<pre><span class="c">&lt;!-- 示意：放在頁面 HTML 裡 --&gt;</span>
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "政大有全英語授課的碩士學程嗎？",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "有。政大 IMPIS、IMAS、IMBA 等……"
+    }
+  }]
+}
+&lt;/script&gt;</pre>
+  </div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>json-ld</b>｜來源：S2、S3、S4、S5、S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 11 llms.txt -->
+<section class="slide" data-t="③ llms.txt">
+ <p class="tag">C｜做法 ③</p>
+ <h2>llms.txt：給 AI 的網站導覽清單</h2>
+ <main>
+  <div class="cols">
+   <ul class="pts" style="font-size:.95em">
+    <li>放在網站根目錄的 Markdown 檔，列出最重要的頁面。2024 年由 Jeremy Howard 提出，自稱是<em>提案</em>，不是標準。<i class="w">llms-txt</i><i class="s">S6</i></li>
+    <li>為什麼：網頁把資訊包在導覽、廣告與 JavaScript 裡，轉成乾淨文字既困難也不精確。<i class="s">S6</i></li>
+    <li>格式：只有 H1 網站名稱必填；可加摘要與 H2 連結清單。下方範例的 Optional 區段只是示意；v2 已不再賦予它機械語意。<i class="s">S6</i></li>
+    <li>Google 搜尋會<em>忽略</em>它：對可見度與排名不加分也不扣分。<i class="s">S2</i><i class="s">S5</i></li>
+    <li>本案定位：低成本選配，給會讀它的 AI 工具；不宣稱提升排名或引用。<i class="s">S8</i></li>
+   </ul>
+<pre><span class="c"># 示意：/llms.txt（網址待填）</span>
+# NCCU International Admissions（學生原型）
+&gt; 政治大學國際學位生的整合入口：
+&gt; 全英語學程、國際關係研究、華語學習。
+
+## Programs
+- [IMPIS](&lt;官網網址&gt;): 全英語授課碩士學程
+- [IMAS](&lt;官網網址&gt;): 全英語授課碩士學程
+- [IMBA](&lt;官網網址&gt;): 全英語授課碩士學程
+
+## Optional
+- [華語中心](&lt;官網網址&gt;): 華語課程</pre>
+  </div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>llms-txt</b>｜來源：S2、S5、S6、S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 12 robots -->
+<section class="slide" data-t="④ robots.txt">
+ <p class="tag">C｜做法 ④</p>
+ <h2>robots.txt：搜尋和訓練是兩個開關</h2>
+ <main>
+  <table class="xs bots">
+   <tr><th>爬蟲</th><th>做什麼</th><th>重點</th></tr>
+   <tr><td>OAI-SearchBot</td><td>讓網站出現在 ChatGPT 搜尋</td><td>封鎖就不會出現在 ChatGPT 搜尋答案<i class="s">S7</i></td></tr>
+   <tr><td>GPTBot</td><td>抓取可能用於訓練模型的內容</td><td>封鎖表示內容不應用於訓練<i class="s">S7</i></td></tr>
+   <tr><td>ChatGPT-User</td><td>使用者提問時代為造訪網頁</td><td>使用者觸發，robots.txt 可能不適用<i class="s">S7</i></td></tr>
+   <tr><td>Googlebot</td><td>Google 搜尋抓取</td><td>robots.txt 之外，CDN、主機也要放行<i class="s">S3</i></td></tr>
+   <tr><td>Google-Extended</td><td>控制內容在其他 Google 系統的訓練與 grounding</td><td>和搜尋顯示分開控制；不影響 Google 搜尋收錄或排名<i class="s">S3</i><i class="s">S5</i></td></tr>
+  </table>
+  <div class="cols" style="grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:start">
+<pre><span class="c"># 示意：分開設定，不是建議值</span>
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /</pre>
+   <div style="display:flex;flex-direction:column;gap:10px">
+    <div class="key small">「被 AI 搜尋引用」和「被拿去訓練」分開決定。<i class="w">robots-ai-crawlers</i><i class="s">S7</i><i class="s">S3</i></div>
+    <p class="xs">生效時間：OpenAI 約 24 小時<i class="s">S7</i>；Google 重新抓取可能數天到數月<i class="s">S3</i>。要不要開放訓練，是學校的政策選擇。</p>
+   </div>
+  </div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>robots-ai-crawlers</b>｜來源：S3、S5、S7、S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 13 案例背景 -->
+<section class="slide" data-t="政大案例背景">
+ <p class="tag">D｜政大案例</p>
+ <h2>案例：政大國際招生網站</h2>
+ <main>
+  <div class="warn"><p class="small">這是教學例證，不是給校方的提案。原型為學生自製，<b>不是政大官方網站</b>。<i class="w">campus-case-nccu</i><i class="s">S8</i></p></div>
+  <div class="panel">
+   <h3>學生前期研究（2026-11-12）的原型規格，對照 C 段</h3>
+   <div class="cols" style="--n:2;gap:8px 26px">
+    <ul class="pts tight">
+     <li>問答體：H2 問題＋40 到 60 字答案 ①</li>
+     <li>數字附官方來源與日期 ①</li>
+     <li>schema.org JSON-LD（含 FAQPage）②</li>
+     <li>llms.txt ③</li>
+    </ul>
+    <ul class="pts tight">
+     <li>robots.txt：開放 AI 搜尋爬蟲 ④</li>
+     <li>sitemap.xml<span class="inf">（Wiki 待查）</span></li>
+     <li>en／zh-Hant／ja 三語＋hreflang<span class="inf">（寫法見 S10）</span></li>
+    </ul>
+   </div>
+  </div>
+  <p class="small">每一項的外部依據與狀態，Wiki 的 campus-case-nccu 頁有完整對照表。<i class="w">campus-case-nccu</i><i class="s">S8</i></p>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>campus-case-nccu、s8-student-strategy</b>｜來源：S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 14 基準測試 -->
+<section class="slide" data-t="基準測試">
+ <p class="tag">D｜政大案例</p>
+ <h2>10 個常見問題，政大出現在 5 題</h2>
+ <main>
+  <div class="cols" style="grid-template-columns:auto minmax(0,1fr);gap:40px">
+   <div>
+    <div class="dots"><i class="dot y"></i><i class="dot y"></i><i class="dot y"></i><i class="dot y"></i><i class="dot y"></i><i class="dot x"></i><i class="dot x"></i><i class="dot x"></i><i class="dot x"></i><i class="dot"></i></div>
+    <div class="legend"><span><i style="background:var(--teal)"></i>答案中出現（5）</span><span><i style="border:3px solid var(--red)"></i>完全缺席的廣泛問題（4）</span><span><i style="border:3px solid #6f7bb3"></i>僅在來源（1）</span></div>
+   </div>
+   <div>
+    <p class="small" style="margin-bottom:8px">完全缺席的 4 題廣泛問題，答案多由台大、師大等主導：<i class="s">S8</i></p>
+    <ul class="qlist"><li>到東亞讀國際關係</li><li>台灣哪間大學適合國際生</li><li>台灣英語授課碩士</li><li>到台灣學漢學</li></ul>
+   </div>
+  </div>
+  <div class="warn">
+   <h3>讀這個數字之前</h3>
+   <p class="small">測的是「搜尋結果＋AI 自動摘要」這個替代指標，<b>不是直接測 ChatGPT 或 Google AI 摘要</b><i class="s">S8</i>。只有 10 題；只是一個時間點，生成式引擎與查詢都會變<i class="s">S1</i>。<i class="w">campus-case-nccu</i></p>
+  </div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>campus-case-nccu、s8-student-strategy</b>｜來源：S1、S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 15 從結果到設計 -->
+<section class="slide" data-t="從結果到設計">
+ <p class="tag">D｜政大案例</p>
+ <h2>從前期研究到原型設計</h2>
+ <main>
+  <div class="row3" style="font-size:.72em;gap:10px 14px">
+   <span class="h">前期研究</span><span class="h">原型的回應</span><span class="h">依據</span>
+   <div>強項（IMPIS／IMAS／IMBA、國關中心、華語中心）散在各系所網站，缺 AI 好引用的整合入口<i class="s">S8</i></div><div>做成一個整合入口，連到各學程與中心<span class="inf">（推論）</span></div><div>針對前期研究的判斷<i class="w">campus-case-nccu</i></div>
+   <div>4 題廣泛問題完全缺席<i class="s">S8</i></div><div>用問答體頁直接回答這類問題 ①<span class="inf">（推論）</span></div><div>用標題組織內容<i class="s">S2</i>；引用、數字有效<i class="s">S1</i></div>
+   <div>規格：數字附官方來源與日期<i class="s">S8</i></div><div>每個數字都標出處 ①</div><div>實驗中加數字、附來源有效<i class="w">qa-writing</i><i class="s">S1</i></div>
+   <div>規格：robots.txt 開放 AI 搜尋爬蟲<i class="s">S8</i></div><div>允許 OAI-SearchBot ④<span class="inf">（推論，待確認原意）</span></div><div>搜尋與訓練是不同爬蟲<i class="w">robots-ai-crawlers</i><i class="s">S7</i></div>
+  </div>
+  <div class="warn" style="padding:10px 18px"><p class="xs"><b>還沒驗證：</b>原型效果尚未測過。下一步應是上線後用同一組 10 題重測，並直接測 ChatGPT 搜尋與 Google AI 摘要（建議，尚未執行）。<i class="w">campus-case-nccu</i></p></div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>campus-case-nccu、qa-writing、robots-ai-crawlers</b>｜來源：S1、S2、S7、S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 16 誤解 -->
+<section class="slide" data-t="常見誤解">
+ <p class="tag">E｜誤解與限制</p>
+ <h2>六個常見誤解</h2>
+ <main>
+  <div class="myth">
+   <div class="m"><b>「GEO 會取代 SEO」</b><p>對 Google 搜尋而言 GEO 仍是 SEO，AI 功能建立在原本的排名系統上。<i class="w">geo-vs-seo</i><i class="s">S2</i></p></div>
+   <div class="m"><b>「放 llms.txt 就會被 AI 推薦」</b><p>Google 搜尋忽略它；它是提案，不是標準。<i class="w">llms-txt</i><i class="s">S2</i><i class="s">S6</i></p></div>
+   <div class="m"><b>「加 FAQPage 就有 FAQ 摘要」</b><p>Google 的 FAQ 複合式結果 2026-05-07 起不再顯示。<i class="w">json-ld</i><i class="s">S5</i></p></div>
+   <div class="m"><b>「封鎖 GPTBot 就從 ChatGPT 搜尋消失」</b><p>ChatGPT 搜尋看的是 OAI-SearchBot。<i class="w">robots-ai-crawlers</i><i class="s">S7</i></p></div>
+   <div class="m"><b>「內容要切碎、寫給 AI 看」</b><p>不需要切塊，沒有理想長度，也不必專為 AI 改寫。<i class="w">qa-writing</i><i class="s">S2</i></p></div>
+   <div class="m"><b>「論文說 +40%，我們也會」</b><p>那是 GEO-bench 實驗（模擬引擎與 Perplexity.ai 檔案上傳模式），效果依領域而異。<i class="w">s1-aggarwal-geo</i><i class="s">S1</i></p></div>
+  </div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>geo-vs-seo、llms-txt、json-ld、robots-ai-crawlers、qa-writing</b>｜來源：S1、S2、S5、S6、S7</span><span class="pn"></span></footer>
+</section>
+
+<!-- 17 限制 -->
+<section class="slide" data-t="限制">
+ <p class="tag">E｜誤解與限制</p>
+ <h2>這份簡報不能告訴你的事</h2>
+ <main>
+  <ul class="pts">
+   <li>知識只來自 Wiki 的 10 篇來源；Wiki 沒有的事，這裡不寫。<i class="w">overview</i></li>
+   <li>官方文件會改：例如 FAQ 複合式結果於 2026-05-07 起不再顯示，說明文件於 2026-06-15 移除（與 llms.txt 澄清同一日；June 12 是另一則條目）。要看每篇來源的取用日期。<i class="s">S5</i></li>
+   <li>ChatGPT、Perplexity 實際怎麼挑選引用來源，已讀的來源都沒有說明。<i class="w">open-questions</i></li>
+   <li>政大的數字是替代指標、只有 10 題、單一時間點；原型效果還沒驗證。<i class="w">campus-case-nccu</i><i class="s">S8</i></li>
+   <li>論文數字來自 GEO-bench 實驗，不是招生領域的實測。<i class="s">S1</i></li>
+  </ul>
+  <div class="key">怎麼用這份簡報：當入門地圖；要做決定時，回到 Wiki 與原始來源，並重跑自己的基準測試。<span class="inf">（建議）</span><i class="w">campus-case-nccu</i></div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>overview、open-questions、campus-case-nccu</b>｜來源：S1、S5、S8</span><span class="pn"></span></footer>
+</section>
+
+<!-- 18 回顧 -->
+<section class="slide" data-t="回顧與自我檢查">
+ <p class="tag">回顧</p>
+ <h2>三句話回顧，三題自我檢查</h2>
+ <main>
+  <div class="cols" style="grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)">
+   <ul class="pts">
+    <li>GEO 讓內容在 AI 答案裡被引用；對 Google 來說仍建立在 SEO 上。<i class="w">geo-vs-seo</i></li>
+    <li>先被找到，再被引用：可抓取、可索引、問答清楚、數字有來源。<i class="w">qa-writing</i></li>
+    <li>llms.txt 與 FAQPage 不會換到 Google 搜尋上的特殊效果。<i class="w">llms-txt</i><i class="w">json-ld</i></li>
+   </ul>
+   <div>
+    <details><summary>Q1　GEO 和 SEO 最大的差別？</summary><p>SEO 爭取在連結清單裡排得前面；GEO 爭取在 AI 答案裡被引用。對 Google 搜尋而言，兩者建立在同一套排名系統上。<i class="w">geo-vs-seo</i></p></details>
+    <details><summary>Q2　想被 ChatGPT 搜尋引用、但不想被拿去訓練，要分開處理哪兩個爬蟲？</summary><p>允許 OAI-SearchBot；GPTBot 另外決定。<i class="w">robots-ai-crawlers</i></p></details>
+    <details><summary>Q3　llms.txt 會提升 Google 排名嗎？</summary><p>不會。Google 搜尋忽略它，不加分也不扣分。<i class="w">llms-txt</i></p></details>
+    <p class="xs mute">點問題看答案。</p>
+   </div>
+  </div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>geo-vs-seo、qa-writing、llms-txt、json-ld、robots-ai-crawlers</b></span><span class="pn"></span></footer>
+</section>
+
+<!-- 19 附錄 A -->
+<section class="slide" data-t="附錄 A 對照表">
+ <p class="tag">附錄 A</p>
+ <h2>投影片 ↔ Wiki 頁 ↔ 來源</h2>
+ <main>
+  <table class="apx">
+   <tr><th>投影片</th><th>主題</th><th>Wiki 頁</th><th>來源</th></tr>
+   <tr><td>1～2</td><td>封面、學習目標</td><td>overview、index</td><td>S1、S2、S8</td></tr>
+   <tr><td>3</td><td>AI 搜尋怎麼回答</td><td>geo-vs-seo</td><td>S2、S3</td></tr>
+   <tr><td>4</td><td>GEO 的定義與研究</td><td>s1-aggarwal-geo、geo-vs-seo</td><td>S1</td></tr>
+   <tr><td>5</td><td>GEO 和 SEO 差在哪</td><td>geo-vs-seo、open-questions</td><td>S1、S2、S3</td></tr>
+   <tr><td>6</td><td>為什麼要在意</td><td>geo-vs-seo、s1-aggarwal-geo</td><td>S1、S2</td></tr>
+   <tr><td>7</td><td>校園網站的難題</td><td>campus-case-nccu、qa-writing</td><td>S1、S8</td></tr>
+   <tr><td>8</td><td>四件事總覽</td><td>四個做法頁、campus-case-nccu</td><td>S1～S10</td></tr>
+   <tr><td>9</td><td>① 問答體</td><td>qa-writing</td><td>S1、S2、S8</td></tr>
+   <tr><td>10</td><td>② JSON-LD</td><td>json-ld</td><td>S2、S3、S4、S5、S8</td></tr>
+   <tr><td>11</td><td>③ llms.txt</td><td>llms-txt</td><td>S2、S5、S6、S8</td></tr>
+   <tr><td>12</td><td>④ robots.txt</td><td>robots-ai-crawlers</td><td>S3、S7、S8</td></tr>
+   <tr><td>13～15</td><td>政大案例</td><td>campus-case-nccu、s8-student-strategy、qa-writing、robots-ai-crawlers</td><td>S1、S2、S7、S8</td></tr>
+   <tr><td>16～18</td><td>誤解、限制、回顧</td><td>各概念頁、overview、open-questions</td><td>S1、S2、S5～S8</td></tr>
+  </table>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>index</b></span><span class="pn"></span></footer>
+</section>
+
+<!-- 20 附錄 B -->
+<section class="slide" data-t="附錄 B 來源">
+ <p class="tag">附錄 B</p>
+ <h2>來源清單（Wiki 已 ingest 的 10 篇）</h2>
+ <main>
+  <div class="src">
+   <div><b>S1</b> Aggarwal et al.〈GEO: Generative Engine Optimization〉KDD 2024，arXiv v3 2024-06-28<br><a href="https://arxiv.org/abs/2311.09735">https://arxiv.org/abs/2311.09735</a></div>
+   <div><b>S2</b> Google〈Optimizing your website for generative AI features on Google Search〉更新 2026-07-10<br><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">developers.google.com/search/docs/fundamentals/ai-optimization-guide</a></div>
+   <div><b>S3</b> Google〈AI features and your website〉更新 2025-12-10<br><a href="https://developers.google.com/search/docs/appearance/ai-features">developers.google.com/search/docs/appearance/ai-features</a></div>
+   <div><b>S4</b> Google〈Intro to how structured data markup works〉更新 2025-12-10<br><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data">developers.google.com/search/docs/appearance/structured-data/intro-structured-data</a></div>
+   <div><b>S5</b> Google Search Central〈Latest documentation updates〉（2026-05-08、06-15 條目）<br><a href="https://developers.google.com/search/updates">developers.google.com/search/updates</a></div>
+   <div><b>S6</b> llms.txt 提案（Jeremy Howard），2024-09-03 發布；v2 標為 August 2026（Changes 頁未標出具體日）<br><a href="https://llmstxt.org/">https://llmstxt.org/</a></div>
+   <div><b>S7</b> OpenAI〈Overview of OpenAI Crawlers〉（頁面未標日期）<br><a href="https://developers.openai.com/api/docs/bots">developers.openai.com/api/docs/bots</a></div>
+   <div><b>S8</b> 何則文，政大國際招生網站 GEO 策略與原型（學生前期研究，非正式出版），2026-11-12</div>
+   <div><b>S9</b> Perplexity〈Perplexity Crawlers〉（頁面未標日期）<br><a href="https://docs.perplexity.ai/docs/resources/perplexity-crawlers">docs.perplexity.ai/docs/resources/perplexity-crawlers</a></div>
+   <div><b>S10</b> Google〈Localized versions of your page〉更新 2026-09-21<br><a href="https://developers.google.com/search/docs/specialty/international/localized-versions">developers.google.com/search/docs/specialty/international/localized-versions</a></div>
+  </div>
+  <p class="xs mute">取用日期：見 Wiki 各來源頁與 raw/SOURCES.md。</p>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>index、sources/</b></span><span class="pn"></span></footer>
+</section>
+
+<!-- 21 附錄 C -->
+<section class="slide" data-t="附錄 C 製作流程">
+ <p class="tag">附錄 C</p>
+ <h2>這份簡報怎麼從 Wiki 產生</h2>
+ <main>
+  <div class="loop">
+   <span class="lab">A 逐篇 ingest</span>
+   <div class="bx">存 raw<br>（只讀）</div><div class="bx">AI 先提重點與疑問</div><div class="bx ck">我確認才准寫</div><div class="bx">寫來源頁、更新概念頁</div><div class="bx ck">出處與矛盾檢查</div><div class="bx">記 log，下一篇</div>
+  </div>
+  <p class="back"><b>不通過</b>：回到「AI 先提重點」；來源互相矛盾就寫進 open-questions，不硬改。</p>
+  <div class="loop">
+   <span class="lab">B 產生簡報</span>
+   <div class="bx">查 index 與相關頁</div><div class="bx">排教學大綱</div><div class="bx ck">大綱檢查</div><div class="bx">生成 HTML</div><div class="bx ck">逐句對 Wiki 與來源</div><div class="bx ck">瀏覽測試後發布</div>
+  </div>
+  <p class="back"><b>Wiki 寫錯</b>：回 A 修 Wiki；<b>Wiki 沒有</b>：需要就回 raw 補 ingest，不需要就刪句；<b>表達不清</b>：只重生那一頁。</p>
+  <div class="panel"><p class="small">規則：簡報只用 Wiki；每個重點標 Wiki 頁與來源。本次已在作者電腦以 NVIDIA NIM（nvidia/nemotron-3-ultra-550b-a55b）實際跑過 ingest、G1 核對與 C2 修正；完整紀錄見 run_log.md。反思仍待作者用自己的話改寫。<i class="w">AGENTS.md</i><i class="w">log</i></p></div>
+ </main>
+ <footer class="f"><span>對應 Wiki：<b>AGENTS.md、log</b></span><span class="pn"></span></footer>
+</section>
+
+</div></div>
+
+<div id="ctl" class="ui">
+ <button id="prev" aria-label="上一張">‹</button><span id="cnt">1 / 1</span><button id="next" aria-label="下一張">›</button><button id="mode">捲動閱讀</button>
+</div>
+
+<script>
+{
+ const body=document.body,stage=document.getElementById('stage');
+ const slides=[...document.querySelectorAll('.slide')];
+ const N=slides.length;
+ const cnt=document.getElementById('cnt'),prog=document.getElementById('prog'),modeBtn=document.getElementById('mode');
+ let i=0,manual=false;
+ slides.forEach((s,k)=>{s.id='s'+(k+1);const p=s.querySelector('.pn');if(p)p.textContent=(k+1)+' / '+N;});
+ const fit=()=>{
+  if(body.classList.contains('read')){stage.style.transform='';return;}
+  const sc=Math.min(innerWidth/1280,innerHeight/720);
+  stage.style.transform='scale('+sc+')';
+ };
+ const show=n=>{
+  i=Math.max(0,Math.min(N-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('on',k===i));
+  cnt.textContent=(i+1)+' / '+N;
+  prog.style.width=((i+1)/N*100)+'%';
+  try{history.replaceState(null,'','#s'+(i+1));}catch(e){}
+ };
+ const setRead=on=>{
+  let best=i;
+  if(!on&&body.classList.contains('read')){
+   best=0;
+   slides.forEach((s,k)=>{if(s.getBoundingClientRect().top<=innerHeight*0.35)best=k;});
+  }
+  body.classList.toggle('read',on);
+  modeBtn.textContent=on?'簡報模式':'捲動閱讀';
+  fit();
+  if(on){slides[i].scrollIntoView({block:'start'});}
+  else{show(best);}
+ };
+ document.getElementById('prev').addEventListener('click',()=>show(i-1));
+ document.getElementById('next').addEventListener('click',()=>show(i+1));
+ modeBtn.addEventListener('click',()=>{manual=true;setRead(!body.classList.contains('read'));});
+ addEventListener('keydown',e=>{
+  if(body.classList.contains('read'))return;
+  if(e.target.closest&&e.target.closest('summary'))return;
+  const k=e.key;
+  if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();show(i+1);}
+  else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();show(i-1);}
+  else if(k==='Home'){show(0);}else if(k==='End'){show(N-1);}
+ });
+ let tx=null;
+ addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+ addEventListener('touchend',e=>{
+  if(tx===null||body.classList.contains('read'))return;
+  const dx=e.changedTouches[0].clientX-tx;tx=null;
+  if(Math.abs(dx)>50)show(i+(dx<0?1:-1));
+ });
+ const ro=new ResizeObserver(()=>{
+  if(!manual){const want=innerWidth<900;if(want!==body.classList.contains('read'))setRead(want);}
+  fit();
+ });
+ ro.observe(document.documentElement);
+ const m=/^#s(\d+)$/.exec(location.hash);
+ show(m?parseInt(m[1],10)-1:0);
+ if(innerWidth<900)setRead(true);
+ fit();
+}
+</script>
+</body>
+</html>

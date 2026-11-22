@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S1｜GEO 論文｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../../index.html">校園網站 GEO</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S1｜GEO 論文</h1>
+<article class='card'>
+<h1>來源：S1 - GEO: Generative Engine Optimization (Aggarwal et al., arXiv 2311.09735 v3)</h1>
+<h2>基本資料</h2>
+<ul>
+<li><strong>標題</strong>：GEO: Generative Engine Optimization</li>
+<li><strong>作者</strong>：Pranjal Aggarwal、Vishvak Murahari、Tanmay Rajpurohit、Ashwin Kalyan、Karthik Narasimhan、Ameet Deshpande</li>
+<li><strong>來源類型</strong>：arXiv 預印本（v3），已錄取 KDD 2024</li>
+<li><strong>arXiv 編號</strong>：2311.09735v3</li>
+<li><strong>DOI</strong>：10.1145/3637528.3671900（KDD 2024 論文集）</li>
+<li><strong>發布日期</strong>：</li>
+<li>v1 提交：2023-11-16 [S1]</li>
+<li>v2 修訂：2024-05-28 [S1]</li>
+<li>v3 修訂：2024-06-28 [S1]</li>
+<li>KDD 2024 會議：2024-08-25 至 2024-08-29 [S1]</li>
+<li><strong>擷取日期</strong>：2026-11-22 11:32:49 CST [S1]</li>
+<li><strong>授權</strong>：CC BY 4.0 [S1]</li>
+<li><strong>程式碼與資料</strong>：https://generative-engines.com/GEO/ [S1]</li>
+</ul>
+<h2>重點</h2>
+<ol>
+<li><strong>GEO 定義</strong>：提出 Generative Engine Optimization (GEO)，一個彈性的黑箱優化框架，用於提升網頁內容在生成式引擎回應中的能見度 [S1]。</li>
+<li><strong>GEO-bench 基準</strong>：建構包含 10,000 個查詢的大規模基準，涵蓋 9 個資料集、25 個領域、7 種分類標籤，查詢意圖分佈為 80% 資訊型、10% 交易型、10% 導航型 [S1]。</li>
+<li><strong>表現最佳的 GEO 方法</strong>：Cite Sources（引用來源）、Quotation Addition（加入引語）、Statistics Addition（加入統計數據）三種方法，在 Position-Adjusted Word Count 指標上達到 30-40% 相對提升，在 Subjective Impression 指標上達到 15-30% 相對提升 [S1]。</li>
+<li><strong>關鍵字堆砌效果有限</strong>：傳統 SEO 的關鍵字堆砌技術在生成式引擎中幾乎無提升效果（verbatim 待查：原文 &ldquo;offer little to no improvement on generative engine&rsquo;s responses&rdquo; 在 G1 核對時未找到，標記待查）[S1]。</li>
+<li><strong>降低排名網站受益較大</strong>：GEO 方法對搜尋引擎排名較低的網站（如第 5 名）提升顯著。S1 Table 2（Visibility changes through GEO methods for sources with different Rankings in Search Engine）記錄：Cite Sources 第 1 名 −30.3%、第 5 名 +115.1%；Quotation Addition 第 1 名 −22.9%、第 5 名 +99.7%；Statistics Addition 第 1 名 −20.6%、第 5 名 +97.9% [S1]。</li>
+<li><strong>真實環境驗證</strong>：在 Perplexity.ai 上測試，Quotation Addition 在 Position-Adjusted Word Count 上提升 22%，Statistics Addition 在 Subjective Impression 上提升 37%，驗證方法可泛化至實際部署的生成式引擎 [S1]。S1 Table 5 記錄該實驗的絕對能見度（Position-Adjusted Word Count）：No Optimization 24.1、Keyword Stuffing 21.9、Statistics Addition 26.2、Quotation Addition 29.1；對應 Subjective Impression 為 24.7、28.1、33.9、32.1 [S1]。</li>
+<li><strong>風格優化也有效</strong>：Fluency Optimization（流暢度優化）與 Easy-to-Understand（易懂優化）等風格調整也能帶來 15-30% 的能見度提升，顯示生成式引擎重視內容呈現方式 [S1]。</li>
+<li><strong>領域相依性</strong>：不同 GEO 方法在不同領域效果不同（如 Statistics Addition 在 Law &amp; Gov.、Debate、Opinion 領域表現最佳），建議網站擁有者針對目標領域選擇策略 [S1]。</li>
+<li><strong>組合策略更強</strong>：Fluency Optimization 與 Statistics Addition 組合優於任何單一策略，Cite Sources 與其他方法結合時平均提升 31.4% [S1]。</li>
+</ol>
+<h2>數字與日期</h2>
+<table>
+<thead>
+<tr>
+<th>數值</th>
+<th>單位/脈絡</th>
+<th>來源位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024/06/28</td>
+<td>page_date metadata</td>
+<td>metadata page_date [S1]</td>
+</tr>
+<tr>
+<td>2026-11-22 11:32:49 CST</td>
+<td>fetched_at metadata</td>
+<td>metadata fetched_at [S1]</td>
+</tr>
+<tr>
+<td>16 Nov 2023</td>
+<td>arXiv v1 提交日期</td>
+<td>Submission history v1 [S1]</td>
+</tr>
+<tr>
+<td>28 May 2024</td>
+<td>arXiv v2 修訂日期</td>
+<td>Submission history v2 [S1]</td>
+</tr>
+<tr>
+<td>28 Jun 2024</td>
+<td>arXiv v3 修訂日期</td>
+<td>Submission history v3 [S1]</td>
+</tr>
+<tr>
+<td>August 25–29, 2024</td>
+<td>KDD 2024 會議日期</td>
+<td>Conference header [S1]</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>GEO-bench 查詢總數</td>
+<td>1. Introduction [S1]</td>
+</tr>
+<tr>
+<td>8K, 1K, 1K</td>
+<td>訓練/驗證/測試分割</td>
+<td>3.2. Benchmark: GEO-bench [S1]</td>
+</tr>
+<tr>
+<td>80% / 10% / 10%</td>
+<td>查詢意圖分佈（資訊型/交易型/導航型）</td>
+<td>3.2. Benchmark: GEO-bench [S1]</td>
+</tr>
+<tr>
+<td>5</td>
+<td>每查詢檢索的前幾筆來源</td>
+<td>3.1. Evaluated Generative Engine [S1]</td>
+</tr>
+<tr>
+<td>25</td>
+<td>基準涵蓋的領域數</td>
+<td>3.2. Benchmark: GEO-bench [S1]</td>
+</tr>
+<tr>
+<td>9</td>
+<td>查詢類型數</td>
+<td>3.2. Benchmark: GEO-bench [S1]</td>
+</tr>
+<tr>
+<td>7</td>
+<td>分類標籤數</td>
+<td>3.2. Benchmark: GEO-bench [S1]</td>
+</tr>
+<tr>
+<td>40%</td>
+<td>摘要宣稱的最大能見度提升</td>
+<td>Abstract [S1]</td>
+</tr>
+<tr>
+<td>30-40% / 15-30%</td>
+<td>Position-Adjusted Word Count / Subjective Impression 相對提升</td>
+<td>4. Results [S1]</td>
+</tr>
+<tr>
+<td>115.1%</td>
+<td>第 5 名網站使用 Cite Sources 的能見度增幅</td>
+<td>Table 2 [S1]</td>
+</tr>
+<tr>
+<td>30.3%</td>
+<td>第 1 名網站使用 Cite Sources 的能見度降幅</td>
+<td>Table 2 [S1]</td>
+</tr>
+<tr>
+<td>−22.9% / +99.7%</td>
+<td>Quotation Addition 第 1 名／第 5 名能見度相對變化</td>
+<td>Table 2 [S1]</td>
+</tr>
+<tr>
+<td>−20.6% / +97.9%</td>
+<td>Statistics Addition 第 1 名／第 5 名能見度相對變化</td>
+<td>Table 2 [S1]</td>
+</tr>
+<tr>
+<td>24.1 / 21.9 / 26.2 / 29.1</td>
+<td>Perplexity.ai 實驗 Position-Adjusted Word Count（未優化／堆關鍵字／加統計／加引言）</td>
+<td>Table 5 [S1]</td>
+</tr>
+<tr>
+<td>24.7 / 28.1 / 33.9 / 32.1</td>
+<td>同上實驗的 Subjective Impression</td>
+<td>Table 5 [S1]</td>
+</tr>
+<tr>
+<td>22%</td>
+<td>Perplexity.ai 上 Quotation Addition 的 Position-Adjusted Word Count 提升</td>
+<td>6. GEO in the Wild [S1]</td>
+</tr>
+<tr>
+<td>37%</td>
+<td>Perplexity.ai 上 Statistics Addition 的 Subjective Impression 提升</td>
+<td>6. GEO in the Wild [S1]</td>
+</tr>
+<tr>
+<td>5</td>
+<td>實驗隨機種子數</td>
+<td>3.3. GEO Methods [S1]</td>
+</tr>
+<tr>
+<td>200</td>
+<td>Perplexity.ai 評估樣本數</td>
+<td>C.1. GEO in the Wild [S1]</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>回應採樣 temperature</td>
+<td>3.1. Evaluated Generative Engine [S1]</td>
+</tr>
+<tr>
+<td>gpt3.5-turbo</td>
+<td>生成式引擎使用的 LLM</td>
+<td>3.1. Evaluated Generative Engine [S1]</td>
+</tr>
+<tr>
+<td>GPT-4</td>
+<td>查詢標記使用的模型</td>
+<td>3.2. Benchmark: GEO-bench [S1]</td>
+</tr>
+</tbody>
+</table>
+<h2>作者或文件自述限制</h2>
+<ol>
+<li><strong>實驗環境為模擬</strong>：主要實驗使用「兩步驟」模擬生成式引擎（Google 搜尋前 5 筆 + GPT-3.5-turbo），非真實商業引擎完整流程 [S1]。</li>
+<li><strong>查詢分佈為通用領域</strong>：GEO-bench 查詢來自通用搜尋資料集，非針對校園招生或國際學生招生場景 [S1]。</li>
+<li><strong>能見度指標為代理指標</strong>：Position-Adjusted Word Count 與 Subjective Impression 為代理指標，實際流量、詢問度影響未知 [S1]。</li>
+<li><strong>Subjective Impression 經正規化</strong>：主觀印象分數已正規化至 Position-Adjusted Word Count 同均值變異數，限制獨立解讀 [S1]。</li>
+<li><strong>Perplexity.ai 實驗為檔案上傳模式</strong>：透過上傳檔案方式測試，非即時爬蟲索引，與實際部署情境有落差 [S1]。</li>
+<li><strong>黑箱搜尋引擎演算法未評估</strong>：未評估 GEO 方法對傳統搜尋排名的影響 [S1]。</li>
+<li><strong>查詢性質會隨時間變化</strong>：作者承認查詢分佈會演變，需持續更新基準 [S1]。</li>
+<li><strong>論文為會議論文</strong>：雖經同儕審查錄取 KDD 2024，但仍屬會議論文而非期刊論文 [S1]。</li>
+</ol>
+<h2>與其他來源的關係</h2>
+<ul>
+<li><strong>S2（Google 生成式 AI 指南）</strong>：S1 為學術定義 GEO 框架；S2 為平台官方指引，兩者互補。</li>
+<li><strong>S3（Google AI 功能）</strong>：S1 的模擬引擎設計參考了商業 GE（如 BingChat、Perplexity.ai），S3 可提供 Google 實際部署細節對照。</li>
+<li><strong>S4（結構化資料）</strong>：S1 未涵蓋結構化資料；S4 可補充技術實作面。</li>
+<li><strong>S5（Google 文件更新）</strong>：S5 記錄 FAQ 複合式結果政策變更（2026-05-08 公告、自 May 7, 2026 起不再出現於 Google 搜尋），S1 發表時間較早未涵蓋。[S5]</li>
+<li><strong>S6（llms.txt）</strong>：S1 未提及 llms.txt；S6 為新興提案，不可視為已生效標準。</li>
+<li><strong>S7（OpenAI 爬蟲）</strong>：S1 實驗用 Google 搜尋檢索；S7 可補充 AI 爬蟲行為。</li>
+<li><strong>S8（學生前期研究）</strong>：S8 為學生前期研究，引用時必標「學生前期研究」並附基準方法限制。</li>
+<li><strong>校園案例（campus-case-nccu）</strong>：S1 提供理論框架與通用方法，校園案例需推論適用性（見下）。</li>
+</ul>
+<h2>對校園網站 GEO 的意義（推論）</h2>
+<ul>
+<li><strong>理論基礎</strong>：S1 確立 GEO 為「黑箱優化框架」，校園網站可依此框架設計優化策略（推論，基於 S1 2.2 節）[S1]。</li>
+<li><strong>優先方法</strong>：Cite Sources、Quotation Addition、Statistics Addition 為高效能方法，校園招生頁面可優先導入引用來源、學生見證引語、就業率等統計數據（推論，基於 S1 4 節與 Table 1）[S1]。</li>
+<li><strong>避免關鍵字堆砌</strong>：傳統 SEO 的關鍵字堆砌在 GE 中無效，校園網站應轉向內容可信度與呈現品質（推論，基於 S1 4 節）[S1]。</li>
+<li><strong>長尾頁面受益大</strong>：排名較低的系所/專案頁面透過 GEO 可能獲得較大能見度提升，符合「民主化」潛力（推論，基於 S1 5.2 節 Table 2）[S1]。</li>
+<li><strong>領域特定策略</strong>：招生屬「Education」領域，需查證 S1 Table 3 中 Education 相關標籤表現（待查，S1 未明列 Education 類別）[S1]。</li>
+<li><strong>實際部署驗證</strong>：Perplexity.ai 實驗證實方法可泛化，但校網需進一步在 Google AI Overviews、Bing Copilot 等主流 GE 驗證（推論，基於 S1 6 節）[S1]。</li>
+<li><strong>指標落差</strong>：學術指標與實際招生詢問轉換率的關聯未知，需實地 A/B 測試（推論，基於 S1 Limitations）[S1]。</li>
+</ul>
+<h2>待查</h2>
+<ol>
+<li>GEO-bench 中是否包含 Education / 大學招生相關查詢類別與標籤表現（S1 Table 3 僅列 Debate, History, Science, Business, Health, Law &amp; Gov., Statement, Facts, People &amp; Society, Explanation, Opinion）[S1]。</li>
+<li>Subjective Impression 七個子指標的具體評分模板與 GPT-3.5 提示詞細節（附錄 B.3）[S1]。</li>
+<li>關鍵字堆砌 verbatim &ldquo;offer little to no improvement on generative engine&rsquo;s responses&rdquo; 在 v3 版本中確切位置（G1 核對未找到，標記待查）[S1]。</li>
+<li>組合策略實驗的 200 樣本子集選取方式與統計顯著性[S1]。</li>
+<li>Perplexity.ai 實驗的具體提示詞、檔案格式、上傳流程（附錄 C.1）[S1]。</li>
+<li>GEO 方法對傳統搜尋排名（SERP）的副作用（作者自述未評估）[S1]。</li>
+<li>校園網站實際內容套用 GEO 方法後的真實流量與詢問度變化（超出 S1 範圍）[S1]。</li>
+</ol>
+<h2>影響的頁面</h2>
+<ul>
+<li><a href="../concepts/geo-vs-seo.html">wiki/concepts/geo-vs-seo.md</a></li>
+<li><a href="../overview.html">wiki/overview.md</a></li>
+<li><a href="../index.html">wiki/index.md</a></li>
+<li><a href="../concepts/campus-case-nccu.html">wiki/concepts/campus-case-nccu.md</a></li>
+<li><a href="../open-questions.html">wiki/open-questions.md</a></li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

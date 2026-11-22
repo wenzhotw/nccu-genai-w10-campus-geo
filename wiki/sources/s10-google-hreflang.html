@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S10｜hreflang｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../../index.html">校園網站 GEO</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S10｜hreflang</h1>
+<article class='card'>
+<h1>來源：S10 - Tell Google about localized versions of your page</h1>
+<h2>基本資料</h2>
+<ul>
+<li><strong>標題</strong>：Tell Google about localized versions of your page</li>
+<li><strong>發布單位</strong>：Google Search Central（Google 官方開發者文件）</li>
+<li><strong>URL</strong>：https://developers.google.com/search/docs/specialty/international/localized-versions</li>
+<li><strong>來源類型</strong>：平台官方技術文件</li>
+<li><strong>頁面日期（page_date）</strong>：2026-09-21 UTC [S10]</li>
+<li><strong>擷取日期（fetched_at）</strong>：2026-11-22 11:32:53 CST [S10]</li>
+<li><strong>HTTP 狀態碼</strong>：200 [S10]</li>
+<li><strong>來源檔案大小</strong>：201219 bytes [S10]</li>
+<li><strong>SHA256</strong>：d26b29d5e83dbd2cc082847ab4f7dc238ea526530b647895157675b4b3d44f94 [S10]</li>
+<li><strong>適用範圍</strong>：Google 搜尋官方文件，說明如何透過 hreflang（HTML link 標籤、HTTP Header、Sitemap）告知 Google 多語言/多地區頁面版本，適用於國際化網站的語言與地區導向設定。</li>
+</ul>
+<h2>重點</h2>
+<ol>
+<li><strong>提供三種等效方法標示替代頁面</strong>：HTML link 標籤、HTTP Header、XML Sitemap，三選一即可，同時使用無額外搜尋效益 [S10]。</li>
+<li><strong>每個語言版本必須列出自身以及所有其他語言版本，且需雙向連結</strong>，否則標記會被忽略 [S10]。</li>
+<li><strong>替代網址必須為完整合格網址（含 http/https）</strong>，不可使用相對路徑 [S10]。</li>
+<li><strong>保留值 x-default 用於無符合語言/地區時的回退頁面</strong>，建議用於語言選擇頁 [S10]。</li>
+<li><strong>常見錯誤包含缺少回連結、語言代碼錯誤（需符合 ISO 639-1）、地區代碼錯誤（需符合 ISO 3166-1 Alpha 2）</strong> [S10]。</li>
+<li><strong>Google 不使用 hreflang 或 HTML lang 屬性偵測頁面語言，而是演算法判斷</strong> [S10]。（G1 核對未找到 verbatim &ldquo;Google doesn&rsquo;t use hreflang or the HTML lang attribute to detect the language of&rdquo;，標記待查）</li>
+</ol>
+<h2>數字與日期</h2>
+<table>
+<thead>
+<tr>
+<th>數值</th>
+<th>單位/脈絡</th>
+<th>來源位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-09-21 UTC</td>
+<td>page_date metadata</td>
+<td>metadata page_date [S10]</td>
+</tr>
+<tr>
+<td>2026-11-22 11:32:53 CST</td>
+<td>fetched_at metadata</td>
+<td>metadata fetched_at [S10]</td>
+</tr>
+<tr>
+<td>200</td>
+<td>HTTP status code</td>
+<td>metadata http_code [S10]</td>
+</tr>
+<tr>
+<td>201219</td>
+<td>source file size in bytes</td>
+<td>metadata source_bytes [S10]</td>
+</tr>
+<tr>
+<td>d26b29d5e83dbd2cc082847ab4f7dc238ea526530b647895157675b4b3d44f94</td>
+<td>SHA256 hash</td>
+<td>metadata sha256 [S10]</td>
+</tr>
+<tr>
+<td>ISO 639-1</td>
+<td>語言代碼標準</td>
+<td>Supported language and region codes [S10]</td>
+</tr>
+<tr>
+<td>ISO 3166-1 Alpha 2</td>
+<td>地區代碼標準</td>
+<td>Supported language and region codes [S10]</td>
+</tr>
+<tr>
+<td>ISO 15924</td>
+<td>語言腳本代碼標準</td>
+<td>Supported language and region codes [S10]</td>
+</tr>
+</tbody>
+</table>
+<h2>作者或文件自述限制</h2>
+<ol>
+<li><strong>僅代表 Google 搜尋官方立場</strong>：不代表其他搜尋引擎或生成式 AI 系統的運作方式 [S10]。</li>
+<li><strong>索引與顯示不保證</strong>：符合所有需求、最佳實踐與政策，不代表 Google 會爬取、索引或顯示內容 [S10]。</li>
+<li><strong>第三方除錯工具非 Google 維護</strong>：文件列出的 Aleyda Solis、Merkle SEO 工具非 Google 官方，可靠度待查 [S10]。</li>
+<li><strong>文件未涵蓋生成式 AI 功能</strong>：未說明 hreflang 對 AI Overviews、AI Mode 等生成式 AI 功能的具體影響 [S10]。</li>
+</ol>
+<h2>與其他來源的關係</h2>
+<ul>
+<li><strong>S2（Google 生成式 AI 指南）</strong>：S2 指出 SEO 最佳實踐仍適用於生成式 AI 搜尋；S10 為國際化 SEO 技術規範，兩者互補 [S2][S10]。</li>
+<li><strong>S3（Google AI 功能）</strong>：S3 確認 query fan-out 機制；S10 的 hreflang 設定可能影響子查詢的語言版本匹配（推論，待查）[S3][S10]。</li>
+<li><strong>S8（學生前期研究）</strong>：S8 規劃政大國際招生網站多語言分兩階段（en/zh-Hant/ja → ko/vi/id），需依 S10 部署 hreflang 雙向連結與 x-default [S8][S10]。</li>
+<li><strong>robots-ai-crawlers 概念頁</strong>：S10 的 hreflang 雙向連結強制要求與現有頁面未明確記錄此要求形成張力，見矛盾記錄。</li>
+</ul>
+<h2>對校園網站 GEO 的意義（推論）</h2>
+<ul>
+<li><strong>多語言部署技術基礎</strong>：政大國際招生網站規劃 en/zh-Hant/ja 第一階段、ko/vi/id 第二階段，必須依 S10 正確部署 hreflang（HTML link、HTTP Header 或 Sitemap 三選一），確保 Google 正確導向對應語言版本（推論，基於 S10、S8）[S10][S8]。</li>
+<li><strong>雙向連結強制性</strong>：每個語言版本必須列出自身與所有其他版本且雙向連結，否則標記被忽略；CMS 需自動化產生完整 hreflang 集合，避免人工疏漏（推論，基於 S10）[S10]。</li>
+<li><strong>x-default 回退策略</strong>：建議在語言選擇頁或首頁設定 x-default，處理無符合語言的使用者，符合政大多語言入口頁設計（推論，基於 S10）[S10]。</li>
+<li><strong>語言/地區代碼合規</strong>：需嚴格遵循 ISO 639-1（語言）、ISO 3166-1 Alpha 2（地區）、ISO 15924（腳本），如 zh-Hant、zh-Hans、en-US、ja-JP、ko-KR、vi-VN、id-ID 等（推論，基於 S10）[S10]。</li>
+<li><strong>生成式 AI 影響未知</strong>：S10 未提及 hreflang 對 AI Overviews、AI Mode 的影響；query fan-out 機制下子查詢如何匹配語言版本待查（推論，基於 S3、S10）[S3][S10]。</li>
+</ul>
+<h2>待查</h2>
+<ol>
+<li><strong>Google 不使用 hreflang 或 HTML lang 屬性偵測頁面語言的 verbatim 確切位置</strong>（G1 核對未找到 &ldquo;Google doesn&rsquo;t use hreflang or the HTML lang attribute to detect the language of&rdquo;，標記待查）[S10]。</li>
+<li><strong>x-default value verbatim 確切位置</strong>（G1 核對未找到 &ldquo;x-default value&rdquo;，標記待查）[S10]。</li>
+<li>hreflang 對 Google 生成式 AI 功能（AI Overviews、AI Mode）的具體影響，文件未提及 [S10]。</li>
+<li>x-default 頁面在生成式 AI 回應中的顯示邏輯 [S10]。</li>
+<li>多語言網站在 query fan-out 機制下，子查詢如何匹配語言版本 [S10][S3]。</li>
+<li>文件提及的第三方除錯工具（Aleyda Solis、Merkle SEO）非 Google 維護，可靠度待查 [S10]。</li>
+<li>「If it becomes difficult to maintain a complete set of bidirectional links for every language, you can omit some languages on some pages」的實際容忍度與邊界條件 [S10]。</li>
+</ol>
+<h2>影響的頁面</h2>
+<ul>
+<li><a href="../concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a></li>
+<li><a href="../overview.html">wiki/overview.md</a></li>
+<li><a href="../index.html">wiki/index.md</a></li>
+<li><a href="../open-questions.html">wiki/open-questions.md</a></li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

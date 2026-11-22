@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>概念｜AI 爬蟲與 robots｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../../index.html">校園網站 GEO</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>概念｜AI 爬蟲與 robots</h1>
+<article class='card'>
+<h1>概念：AI 爬蟲與 robots 設定</h1>
+<h2>一句話定義</h2>
+<p>控制 AI 爬蟲（如 Google-Extended、OAI-SearchBot、GPTBot、PerplexityBot 等）存取網站內容的技術設定，包含 robots.txt 規則、HTTP 標頭、防火牆/CDN 設定，確保關鍵內容可被索引並用於生成式 AI 回應。</p>
+<h2>重點</h2>
+<ol>
+<li><strong>主要 AI 爬蟲 User-Agent</strong>：<br />
+   - Google：Googlebot（Google 搜尋的爬取與存取，含搜尋中的 AI 功能）[S3]；Google-Extended（管理內容在部分 Google 其他系統中的訓練與 grounding；「doesn&rsquo;t affect Google Search」）[S3][S5]<br />
+   - OpenAI：OAI-SearchBot（搜尋檢索）、GPTBot（模型訓練）、ChatGPT-User（用戶即時請求）、OAI-AdsBot（廣告落地頁驗證）[S7]<br />
+   - Perplexity：PerplexityBot（索引）、Perplexity-User（用戶即時請求）[S9]</li>
+<li><strong>Google 官方指引（S2、S3、S5）</strong>：<br />
+   - 重要內容必須為 HTML 文字，才能被生成式 AI 系統理解與引用[S2][S3]。<br />
+   - robots.txt 指令控制 Googlebot 爬取是網站擁有者管理搜尋存取的方式[S3]。<br />
+   - robots.txt 以外的主機設定（CDN、防火牆、WAF、伺服器端封鎖）也可能擋住爬蟲，需確認整個鏈路開放[S2]。<br />
+   - 網站必須在 Search Console 具備「included in Search generative AI features」資格，才能在生成式 AI 功能中顯示[S2]。<br />
+   - <strong>Google-Extended</strong>：2023-09-28 新增權杖，供網站管理內容是否用於改進 Bard／Vertex AI 生成式 API [S5]。S5 於 2024-02-08 寫明 &ldquo;Google-Extended doesn&rsquo;t affect Google Search&rdquo; [S5]。S3：限制「AI training and grounding in some of Google&rsquo;s other systems」時才看 Google-Extended；搜尋（含 AI 功能）仍用 Googlebot 與 snippet／noindex 等控制 [S3]。<br />
+   - <strong>重新抓取時間</strong>：S3 寫預覽控制變更後，「crawling can take anywhere from several days to several months」[S3]。OpenAI 約 24 小時生效 [S7]。</li>
+<li><strong>OpenAI 官方文件（S7）</strong>：<br />
+   - OAI-SearchBot 用於 ChatGPT 搜尋功能檢索，允許則內容可能出現在搜尋答案中 [S7]。<br />
+   - GPTBot 用於基礎模型訓練，禁止則表示內容不應用於訓練 [S7]。<br />
+   - OAI-SearchBot 與 GPTBot 設定獨立，可分別允許或禁止 [S7]。<br />
+   - 若同時開放兩者，OpenAI 可能合併爬取避免重複 [S7]。<br />
+   - ChatGPT-User 由用戶動作觸發，非自動爬取，robots.txt 規則可能不適用 [S7]。<br />
+   - OAI-AdsBot 僅驗證廣告落地頁，不參與模型訓練 [S7]。<br />
+   - 各爬蟲發布 IP 範圍 JSON 供驗證：searchbot.json、gptbot.json、adsbot.json、chatgpt-user.json [S7]。<br />
+   - robots.txt 更新約需 24 小時生效於 OpenAI 系統 [S7]。</li>
+<li><strong>Perplexity 官方文件（S9）</strong>：<br />
+   - PerplexityBot 用於搜尋結果呈現與連結，不作為 AI 基礎模型訓練爬蟲，建議在 robots.txt 允許 [S9]。<br />
+   - Perplexity-User 由用戶即時請求觸發，非自動爬取，一般忽略 robots.txt 規則 [S9]。<br />
+   - 兩種爬蟲皆發布 IP 範圍 JSON 端點：perplexitybot.json、perplexity-user.json [S9]。<br />
+   - WAF 設定建議結合 User-Agent 比對與 IP 範圍驗證，提供 Cloudflare WAF 與 AWS WAF 具體步驟 [S9]。</li>
+<li><strong>國際化多語言導向（S10）</strong>：<br />
+   - 透過 hreflang（HTML link 標籤、HTTP Header、Sitemap 三選一）告知 Google 多語言/多地區頁面版本 [S10]。<br />
+   - <strong>每個語言版本必須列出自身以及所有其他語言版本，且需雙向連結，否則標記會被忽略</strong> [S10]。<br />
+   - 替代網址必須為完整合格網址（含 http/https），不可使用相對路徑 [S10]。<br />
+   - 保留值 x-default 用於無符合語言/地區時的回退頁面，建議用於語言選擇頁 [S10]。<br />
+   - 常見錯誤包含缺少回連結、語言代碼錯誤（需符合 ISO 639-1）、地區代碼錯誤（需符合 ISO 3166-1 Alpha 2）[S10]。<br />
+   - Google 不使用 hreflang 或 HTML lang 屬性偵測頁面語言，而是演算法判斷（verbatim 待查）[S10]。</li>
+<li><strong>政大案例（S8）</strong>：robots.txt 開放 Googlebot、Google-Extended、OAI-SearchBot、GPTBot、ChatGPT-User、PerplexityBot、Perplexity-User；需請資訊單位確認 CDN/防火牆未擋攔[S8]。多語言分兩階段（en/zh-Hant/ja → ko/vi/id），需依 S10 部署 hreflang 雙向連結與 x-default[S8][S10]。</li>
+<li><strong>技術可及性檢查清單</strong>：<br />
+   - robots.txt 允許目標 User-Agent<br />
+   - 無 meta robots noindex/nofollow 阻擋關鍵頁面<br />
+   - 伺服器回應 200 OK，無 403/429/5xx<br />
+   - CDN/WAF/防火牆規則未封鎖已知 AI 爬蟲 IP 與 User-Agent<br />
+   - 重要內容為靜態 HTML 文字（非僅在 JavaScript 渲染後出現、非圖片/PDF 嵌入文字）[S2][S3][S8]<br />
+   - hreflang 正確部署：三選一實作、雙向連結完整、代碼符合 ISO 標準、x-default 設定 [S10]</li>
+</ol>
+<h2>張力或誤解</h2>
+<table>
+<thead>
+<tr>
+<th>誤解/張力</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「robots.txt 開放就一定能被索引」</td>
+<td>仍需符合搜尋技術需求、被索引、具備 Search Console 生成式 AI 功能資格；索引與顯示不保證[S2][S3]。</td>
+</tr>
+<tr>
+<td>「封鎖 GPTBot 就能防止內容被訓練」</td>
+<td>內容可能已被其他管道（Common Crawl、第三方資料集）收錄；封鎖僅影響未來爬取[S7]。</td>
+</tr>
+<tr>
+<td>「Google-Extended 可以開關 Google 搜尋或 AI Overviews」</td>
+<td>S3 把搜尋存取交給 Googlebot；Google-Extended 管的是其他系統的訓練與 grounding。S5（2024-02-08）寫明它 doesn&rsquo;t affect Google Search [S3][S5]。</td>
+</tr>
+<tr>
+<td>「PDF/圖片文字也能被 AI 讀取」</td>
+<td>S2、S3 強調重要內容須為 HTML 文字；PDF/圖片文字可被索引但可及性較低，不建議作為關鍵資訊唯一載體[S2][S3]。</td>
+</tr>
+<tr>
+<td><strong>S3「robots.txt 指令控制 Googlebot 爬取是管理搜尋存取的方式」vs S2「robots.txt 以外的主機設定也可能擋住爬蟲」</strong></td>
+<td>S3 強調 robots.txt 為控制方式；S2 補充需確認整個鏈路（CDN、防火牆、WAF、伺服器端）開放。適用範圍：S3 為 AI 功能專頁指引；S2 為完整優化指引。兩者互補而非衝突，但操作上需同時滿足。見矛盾記錄。</td>
+</tr>
+<tr>
+<td><strong>S7「ChatGPT-User robots.txt 可能不適用」vs S8「robots.txt 開放 ChatGPT-User」</strong></td>
+<td>S7 明確說明 ChatGPT-User 由用戶觸發，robots.txt 規則可能不適用；S8 仍在 robots.txt 中開放 ChatGPT-User。適用範圍：S7 為 OpenAI 官方文件說明機制限制；S8 為學生前期研究的實作選擇，以示善意或相容性考量。見矛盾記錄。</td>
+</tr>
+<tr>
+<td><strong>S9「Perplexity-User 一般忽略 robots.txt」vs S8「robots.txt 開放 Perplexity-User」</strong></td>
+<td>S9 明確說明 Perplexity-User 由用戶觸發，一般忽略 robots.txt 規則；S8 仍在 robots.txt 中開放 Perplexity-User。適用範圍：S9 為 Perplexity 官方文件說明機制限制；S8 為學生前期研究的實作選擇。見矛盾記錄。</td>
+</tr>
+<tr>
+<td><strong>S10「hreflang 標記需雙向連結，缺少回連結會導致標記被忽略」vs 現有頁面未明確記錄此強制要求</strong></td>
+<td>S10 明確規定雙向連結為強制，否則標記被忽略；既有概念頁未強調此點。適用範圍：S10 為 Google 國際化 SEO 官方文件；既有頁面綜合多來源。見矛盾記錄。</td>
+</tr>
+</tbody>
+</table>
+<h2>本案怎麼用（政大國際招生網站）</h2>
+<ol>
+<li><strong>robots.txt 設定</strong>：允許 Googlebot、Google-Extended、OAI-SearchBot、GPTBot、ChatGPT-User、PerplexityBot、Perplexity-User；Disallow 僅針對管理後台、私密 API 等非公開路徑[S8]。</li>
+<li><strong>基礎設施確認</strong>：請資訊單位檢查 CDN（如 Cloudflare）、WAF、防火牆規則，確保未封鎖上述 User-Agent 或其 IP 範圍[S8]。</li>
+<li><strong>內容呈現</strong>：招生關鍵資訊（學程名稱、門檻、截止日期、獎學金金額、聯絡方式）均以 HTML 文字呈現，輔以 JSON-LD 結構化資料[S8]。</li>
+<li><strong>Search Console 監測</strong>：驗證網站、確認「included in Search generative AI features」狀態、定期檢查索引覆蓋率報告[S2][S8]。</li>
+<li><strong>定期審查</strong>：每季檢查 robots.txt、伺服器日誌中的 AI 爬蟲存取情況、Search Console 索引狀態[S8]。</li>
+<li><strong>OpenAI IP 範圍同步</strong>：定期下載 searchbot.json、gptbot.json、adsbot.json、chatgpt-user.json 更新防火牆白名單[S7]。</li>
+<li><strong>Perplexity IP 範圍同步</strong>：定期下載 perplexitybot.json、perplexity-user.json 更新防火牆白名單[S9]。</li>
+<li><strong>WAF 規則配置</strong>：參考 S9 提供的 Cloudflare WAF 與 AWS WAF 範例，結合 User-Agent 比對與 IP 範圍驗證，設定 Skip/Allow 規則並置於封鎖規則之前[S9]。</li>
+<li><strong>hreflang 部署</strong>：採用 HTML link 標籤法（或 Sitemap 法），每語言版本列出自身與所有其他版本，確保雙向連結完整；代碼遵循 ISO 639-1、ISO 3166-1 Alpha 2、ISO 15924；首頁與語言選擇頁設定 x-default；CMS 自動化產生避免人工疏漏[S10][S8]。</li>
+</ol>
+<h2>待查</h2>
+<ol>
+<li>Google-Extended 在各 Google 產品上的精確名單（S3、S5 已排除「作為 Google 搜尋開關」；更細的產品列表見官方爬蟲說明頁，該頁不是本次 ingest 來源）[S3][S5]。</li>
+<li>各 AI 爬蟲的 IP 範圍公開清單與更新頻率（OpenAI、Perplexity 等）[S7][S9]。</li>
+<li>「included in Search generative AI features in Search Console」的具體啟用條件、審核流程、常見拒絕原因[S2]。</li>
+<li>政大現有 CDN/防火牆對 AI 爬蟲的實際封鎖情形（需資訊單位協助掃描）[S8]。</li>
+<li>重要內容以 JavaScript 動態渲染時，Google 等爬蟲的實際抓取成功率[S2][S3]。</li>
+<li>robots.txt 指令 verbatim &ldquo;for Googlebot is&rdquo; 在 S3 原文確切位置（G1 核對未找到，標記待查）[S3]。</li>
+<li>ChatGPT-User 實際上是否完全忽略 robots.txt，還是部分遵循？[S7]</li>
+<li>OpenAI 合併爬取（one crawl for both use cases）的具體觸發條件與頻率 [S7]。</li>
+<li>OAI-AdsBot 是否與政大招生網站相關（僅廣告落地頁驗證）[S7]。</li>
+<li>IP 範圍 JSON 更新頻率與通知機制 [S7][S9]。</li>
+<li>User-Agent 版本號變更頻率與向後相容性 [S7][S9]。</li>
+<li>PerplexityBot 是否完全遵循 robots.txt（文件僅建議允許，未明確聲明遵循）[S9]。</li>
+<li>Perplexity-User 實際上是否完全忽略 robots.txt，還是部分遵循 [S9]。</li>
+<li><strong>hreflang 對 Google 生成式 AI 功能（AI Overviews、AI Mode）的具體影響</strong> [S10]。</li>
+<li><strong>x-default 頁面在生成式 AI 回應中的顯示邏輯</strong> [S10]。</li>
+<li><strong>多語言網站在 query fan-out 機制下，子查詢如何匹配語言版本</strong> [S10][S3]。</li>
+<li><strong>第三方除錯工具（Aleyda Solis、Merkle SEO）可靠度</strong> [S10]。</li>
+<li><strong>「Google 不使用 hreflang 或 HTML lang 屬性偵測頁面語言」的 verbatim 確切位置</strong> [S10]。</li>
+<li><strong>「x-default value」的 verbatim 確切位置</strong> [S10]。</li>
+<li><strong>「If it becomes difficult to maintain a complete set of bidirectional links for every language, you can omit some languages on some pages」的實際容忍度與邊界條件</strong> [S10]。</li>
+</ol>
+<h2>來源</h2>
+<ul>
+<li>[S2] Google: Optimizing your website for generative AI features on Google Search</li>
+<li>[S3] Google: AI features and your website</li>
+<li>[S5] Google Search Central: Latest documentation updates</li>
+<li>[S7] OpenAI crawlers documentation</li>
+<li>[S8] 政大國際招生網站 GEO 策略／提案（學生前期研究，非正式出版）</li>
+<li>[S9] Perplexity Crawlers</li>
+<li>[S10] Google: Tell Google about localized versions of your page</li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

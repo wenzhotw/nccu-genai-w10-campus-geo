@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>操作紀錄｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../index.html">校園網站 GEO</a>
+  <a href="../index.html">首頁</a> <a href="index.html">Wiki</a> <a href="../slides.html">教學簡報</a> <a href="../loop_graph.html">流程說明</a> <a href="../run_log.html">執行紀錄</a> <a href="../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='index.html'>Wiki 目錄</a></p><h1>操作紀錄</h1>
+<article class='card'>
+<h1>Wiki 操作 log</h1>
+<blockquote>
+<p>只能往下加。以下是本次真實 ingest 的紀錄。</p>
+</blockquote>
+<h2>[2026-11-22 11:42:24 CST (Asia/Taipei)] ingest | S1 GEO: Generative Engine Optimization (Aggarwal et al., arXiv 2311.09735 v3)</h2>
+<ul>
+<li>raw: s1-aggarwal-geo-v3.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm_with_deletions（ok=52 fail=1）</li>
+<li>寫入：<a href="sources/s1-aggarwal-geo.html">wiki/sources/s1-aggarwal-geo.md</a>, <a href="concepts/geo-vs-seo.html">wiki/concepts/geo-vs-seo.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="index.html">wiki/index.md</a>, <a href="concepts/campus-case-nccu.html">wiki/concepts/campus-case-nccu.md</a></li>
+<li>C1 unsourced lines：32</li>
+<li>discuss call：chatcmpl-a370678c-7a2b-4586-9c9b-edc5cca5a918</li>
+<li>generate call：chatcmpl-e52ec48d-b791-4dfc-883e-143805584631</li>
+</ul>
+<h2>[2026-11-22 11:47:23 CST (Asia/Taipei)] ingest | S8 學生 2026-11-12 GEO 策略／提案（非正式出版）</h2>
+<ul>
+<li>raw: s8-student-geo-strategy-2026-11-12.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm_with_deletions（ok=40 fail=6）</li>
+<li>寫入：<a href="sources/s8-student-strategy.html">wiki/sources/s8-student-strategy.md</a>, <a href="concepts/campus-case-nccu.html">wiki/concepts/campus-case-nccu.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="index.html">wiki/index.md</a>, <a href="open-questions.html">wiki/open-questions.md</a></li>
+<li>C1 unsourced lines：27</li>
+<li>discuss call：chatcmpl-f348e4c7-9ce6-4b08-bb74-7b32273f2b3c</li>
+<li>generate call：chatcmpl-37769a03-8243-4f8f-9549-76875cf17ee0</li>
+</ul>
+<h2>[2026-11-22 11:52:03 CST (Asia/Taipei)] ingest | S2 Google: Optimizing your website for generative AI features on Google Search</h2>
+<ul>
+<li>raw: s2-google-genai-guide_2026-11-22.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm_with_deletions（ok=10 fail=3）</li>
+<li>寫入：<a href="sources/s2-google-genai-guide.html">wiki/sources/s2-google-genai-guide.md</a>, <a href="concepts/geo-vs-seo.html">wiki/concepts/geo-vs-seo.md</a>, <a href="concepts/llms-txt.html">wiki/concepts/llms-txt.md</a>, <a href="concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a>, <a href="concepts/json-ld.html">wiki/concepts/json-ld.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="index.html">wiki/index.md</a>, <a href="open-questions.html">wiki/open-questions.md</a></li>
+<li>C1 unsourced lines：64</li>
+<li>discuss call：chatcmpl-0c57d1f1-ca84-4bdf-a122-da454cc1add4</li>
+<li>generate call：chatcmpl-d3ac44ad-738f-4ca1-82c9-a74f8ffde525</li>
+</ul>
+<h2>[2026-11-22 11:56:49 CST (Asia/Taipei)] ingest | S3 Google: AI features and your website</h2>
+<ul>
+<li>raw: s3-google-ai-features_2026-11-22.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm_with_deletions（ok=16 fail=1）</li>
+<li>寫入：<a href="sources/s3-google-ai-features.html">wiki/sources/s3-google-ai-features.md</a>, <a href="concepts/geo-vs-seo.html">wiki/concepts/geo-vs-seo.md</a>, <a href="concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="index.html">wiki/index.md</a>, <a href="open-questions.html">wiki/open-questions.md</a></li>
+<li>C1 unsourced lines：46</li>
+<li>discuss call：chatcmpl-0e4ce109-b85c-4469-b2f4-bc0b7f951c80</li>
+<li>generate call：chatcmpl-a47c9146-22f3-4f28-9432-a6c61b13ccf5</li>
+</ul>
+<h2>[2026-11-22 12:00:21 CST (Asia/Taipei)] ingest | S4 Google: Intro to how structured data markup works</h2>
+<ul>
+<li>raw: s4-google-structured-data_2026-11-22.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm_with_deletions（ok=39 fail=1）</li>
+<li>寫入：<a href="sources/s4-google-structured-data.html">wiki/sources/s4-google-structured-data.md</a>, <a href="concepts/json-ld.html">wiki/concepts/json-ld.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="index.html">wiki/index.md</a>, <a href="open-questions.html">wiki/open-questions.md</a></li>
+<li>C1 unsourced lines：39</li>
+<li>discuss call：chatcmpl-714c7b98-ae96-4e5d-8e15-61dac6ba3476</li>
+<li>generate call：chatcmpl-9c3d117a-19ec-4d2c-8ad6-0b407ef6e701</li>
+</ul>
+<h2>[2026-11-22 12:19:24 CST (Asia/Taipei)] ingest | S5 Google Search Central: Latest documentation updates (resumed after interrupted r2)</h2>
+<ul>
+<li>raw: s5-google-docs-updates_2026-11-22.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm_with_deletions after date-format fix (ok=45 fail=3)</li>
+<li>寫入：<a href="sources/s5-google-docs-updates.html">wiki/sources/s5-google-docs-updates.md</a>, <a href="concepts/json-ld.html">wiki/concepts/json-ld.md</a>, <a href="concepts/llms-txt.html">wiki/concepts/llms-txt.md</a>, <a href="concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="open-questions.html">wiki/open-questions.md</a></li>
+<li>C1 unsourced：46</li>
+<li>generate call：chatcmpl-005e0ed9-9f0b-42e9-b2ee-30f040ec08ae finish=length</li>
+</ul>
+<h2>[2026-11-22 12:22:49 CST (Asia/Taipei)] ingest | S6 llms.txt proposal (llmstxt.org) + Changes page</h2>
+<ul>
+<li>raw: s6-llmstxt_2026-11-22.md, s6-llmstxt-changes_2026-11-22.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm_with_deletions（ok=17 fail=4）</li>
+<li>寫入：<a href="sources/s6-llmstxt.html">wiki/sources/s6-llmstxt.md</a>, <a href="concepts/llms-txt.html">wiki/concepts/llms-txt.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="index.html">wiki/index.md</a>, <a href="open-questions.html">wiki/open-questions.md</a></li>
+<li>C1 unsourced lines：29</li>
+<li>discuss call：chatcmpl-d9ecad90-fc72-49a6-abc8-5391b5d4b563</li>
+<li>generate call：chatcmpl-6f31462e-fe50-4286-a703-a8fd6d80c601</li>
+</ul>
+<h2>[2026-11-22 12:25:25 CST (Asia/Taipei)] ingest | S7 OpenAI: Overview of OpenAI Crawlers</h2>
+<ul>
+<li>raw: s7-openai-crawlers_2026-11-22.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm（ok=17 fail=0）</li>
+<li>寫入：<a href="sources/s7-openai-crawlers.html">wiki/sources/s7-openai-crawlers.md</a>, <a href="concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="index.html">wiki/index.md</a>, <a href="open-questions.html">wiki/open-questions.md</a></li>
+<li>C1 unsourced lines：39</li>
+<li>discuss call：chatcmpl-07e65fc7-1189-4f30-9093-f4f47fd67439</li>
+<li>generate call：chatcmpl-2dc936b8-42b4-4f43-83a0-01c5eb78ff73</li>
+</ul>
+<h2>[2026-11-22 12:28:28 CST (Asia/Taipei)] ingest | S9 Perplexity Crawlers</h2>
+<ul>
+<li>raw: s9-perplexity-crawlers_2026-11-22.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm_with_deletions（ok=10 fail=1）</li>
+<li>寫入：<a href="sources/s9-perplexity-crawlers.html">wiki/sources/s9-perplexity-crawlers.md</a>, <a href="concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="index.html">wiki/index.md</a>, <a href="open-questions.html">wiki/open-questions.md</a></li>
+<li>C1 unsourced lines：31</li>
+<li>discuss call：chatcmpl-a7d2447e-ec8b-46f6-9a7c-d5d5f34a1cd8</li>
+<li>generate call：chatcmpl-4efcc85b-1993-461d-a9cd-718e9e220856</li>
+</ul>
+<h2>[2026-11-22 12:31:47 CST (Asia/Taipei)] ingest | S10 Google: Localized versions of your page (hreflang)</h2>
+<ul>
+<li>raw: s10-google-hreflang_2026-11-22.md</li>
+<li>模型：nvidia/nemotron-3-ultra-550b-a55b</li>
+<li>G1：confirm_with_deletions（ok=21 fail=3）</li>
+<li>寫入：<a href="sources/s10-google-hreflang.html">wiki/sources/s10-google-hreflang.md</a>, <a href="concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a>, <a href="overview.html">wiki/overview.md</a>, <a href="index.html">wiki/index.md</a>, <a href="open-questions.html">wiki/open-questions.md</a></li>
+<li>C1 unsourced lines：32</li>
+<li>discuss call：chatcmpl-7179b454-c3d9-4c67-b80a-9161f6edd2cd</li>
+<li>generate call：chatcmpl-317a38bc-6a33-471a-a33e-c73679e821bb</li>
+</ul>
+<h2>[2026-11-22 12:33:28 CST (Asia/Taipei)] C2 依 raw 修正</h2>
+<ul>
+<li>FAQ 說明文件移除日：2026-06-12 → 2026-06-15（對 S5 raw changelog）</li>
+<li>修正 overview.md、<a href="concepts/json-ld.html">concepts/json-ld.md</a>、<a href="sources/s5-google-docs-updates.html">sources/s5-google-docs-updates.md</a> 的日期與未通過 verbatim</li>
+<li>s1-aggarwal-geo.md 的 FAQ 日期補 [S5]</li>
+<li>campus-case-nccu.md 來源標籤更正</li>
+<li>新增 <a href="concepts/qa-writing.html">concepts/qa-writing.md</a>，更新 index</li>
+</ul>
+<h2>[2026-11-22 12:36:22 CST (Asia/Taipei)] 對話中斷說明（補記）</h2>
+<ul>
+<li>約 12:20–12:21 上層對話中斷時，S6 的 A2/A3 已在跑；本機 ingest 行程未被殺掉，於 12:31:47 完成 S6–S10。未重跑已完成來源。</li>
+</ul>
+<h2>[2026-11-22 13:16 CST (Asia/Taipei)] 審查後修訂</h2>
+<ul>
+<li>再核對 S5 raw 與現場頁 https://developers.google.com/search/updates（HTTP 200）：FAQ 說明文件移除與 llms.txt 澄清同屬 <code>&lt;dt&gt;June 15&lt;/dt&gt;</code> 的同一個 <code>&lt;dd&gt;</code>；<code>&lt;dt&gt;June 12&lt;/dt&gt;</code> 是田納西小型企業通知。維持 C2 的 2026-06-15，不改回 06-12。摘錄見 <code>run/checks/s5_live_2026-11-22_june15_faq_docs.html</code>。</li>
+<li>補齊被截斷的 open-questions.md（停在「10. RAG」）；條目來自各頁既有待查，未新造問題。</li>
+<li>依 S1 raw Table 5／Table 2 把簡報用到的數字補進 s1-aggarwal-geo.md；依 S3 raw 補「數天到數月」與 Google-Extended／可見文字規則。</li>
+<li>修正 FAQPage「讓 AI 解析」的過度確定說法；釐清 Google-Extended 不影響 Google 搜尋（S5 2024-02-08；S3 區分其他系統）。</li>
+<li>campus-case-nccu.md 補上原型規格與依據對照表。</li>
+</ul>
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>

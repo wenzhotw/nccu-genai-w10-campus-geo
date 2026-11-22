@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S7｜OpenAI 爬蟲｜校園網站 GEO</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1c2333;--mute:#5b6475;--card:#fff;--line:#d9d4c8;--link:#1a4f8b;--accent:#0b1433}
+*{box-sizing:border-box}
+html{font-size:18px}
+body{margin:0;font-family:"Iwanami Mincho","Noto Serif TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:52rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.site{background:var(--accent);color:#f3f5ff;padding:.85rem 1.25rem}
+header.site .bar{max-width:68rem;margin:0 auto;display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:baseline}
+header.site a{color:#c9d6ff;text-decoration:none}
+header.site a:hover{color:#fff}
+header.site .brand{font-weight:800;color:#fff;margin-right:auto;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+nav.local{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:1rem 0 1.4rem;font-size:.9rem;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+h1,h2,h3{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.3}
+h1{font-size:1.7rem;margin:0 0 .8rem}
+h2{font-size:1.25rem;margin:1.8rem 0 .6rem;padding-top:.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.4rem;margin:0 0 1rem}
+p.lead{font-size:1.05rem}
+ul.cards{list-style:none;padding:0;margin:0;display:grid;gap:.8rem}
+ul.cards li a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:var(--ink)}
+ul.cards li a:hover{border-color:#8aa0c8}
+ul.cards strong{display:block;color:var(--link);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.meta{color:var(--mute);font-size:.88rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0;overflow-x:auto;display:block}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;text-align:left;vertical-align:top;background:var(--card)}
+th{background:#ece8df}
+blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:4px solid #c5b896;color:#333}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+pre{background:#1c2333;color:#eef2ff;padding:1rem;border-radius:10px;overflow:auto}
+hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+footer.site{max-width:52rem;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.85rem}
+.warning{background:#fff6e5;border:1px solid #e6d2a0;border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem}
+</style>
+
+</head>
+<body>
+<header class="site"><div class="bar">
+  <a class="brand" href="../../index.html">校園網站 GEO</a>
+  <a href="../../index.html">首頁</a> <a href="../index.html">Wiki</a> <a href="../../slides.html">教學簡報</a> <a href="../../loop_graph.html">流程說明</a> <a href="../../run_log.html">執行紀錄</a> <a href="../../sources.html">來源清單</a>
+</div></header>
+<div class="wrap">
+<p class='meta'><a href='../index.html'>Wiki 目錄</a></p><h1>S7｜OpenAI 爬蟲</h1>
+<article class='card'>
+<h1>來源：S7 - Overview of OpenAI Crawlers</h1>
+<h2>基本資料</h2>
+<ul>
+<li><strong>標題</strong>：Overview of OpenAI Crawlers</li>
+<li><strong>發布單位</strong>：OpenAI 官方開發者文件</li>
+<li><strong>URL</strong>：https://developers.openai.com/api/docs/bots</li>
+<li><strong>來源類型</strong>：平台官方技術文件</li>
+<li><strong>頁面日期（page_date）</strong>：未在 metadata 中提供</li>
+<li><strong>擷取日期（fetched_at）</strong>：2026-11-22 11:32:52 CST [S7]</li>
+<li><strong>HTTP 狀態碼</strong>：200 [S7]</li>
+<li><strong>來源檔案大小</strong>：386675 bytes [S7]</li>
+<li><strong>SHA256</strong>：055e1a2823a39ca879e38b43fc36a501c7dbe51fdb86a5f3981a74be2232b5b6 [S7]</li>
+<li><strong>適用範圍</strong>：OpenAI 官方文件，說明四種爬蟲/用戶代理（OAI-SearchBot、OAI-AdsBot、GPTBot、ChatGPT-User）的用途、User-Agent 字串、IP 範圍、robots.txt 控制方式與生效時間，適用於網站管理者決定是否開放 OpenAI 爬蟲存取。</li>
+</ul>
+<h2>重點</h2>
+<ol>
+<li><strong>OpenAI 提供四種獨立爬蟲/用戶代理</strong>，分別用於搜尋、廣告驗證、模型訓練與用戶即時請求 [S7]。</li>
+<li><strong>OAI-SearchBot 控制 ChatGPT 搜尋結果顯示</strong>，GPTBot 控制是否用於基礎模型訓練，兩者可獨立設定 [S7]。</li>
+<li><strong>ChatGPT-User 由用戶動作觸發，非自動爬取</strong>，robots.txt 規則可能不適用 [S7]。</li>
+<li><strong>OpenAI 發布各爬蟲 IP 範圍 JSON 供驗證</strong>，若同時開放 OAI-SearchBot 與 GPTBot 可能合併爬取避免重複 [S7]。</li>
+<li><strong>robots.txt 更新約需 24 小時生效於 OpenAI 系統</strong> [S7]。</li>
+</ol>
+<h2>數字與日期</h2>
+<table>
+<thead>
+<tr>
+<th>數值</th>
+<th>單位/脈絡</th>
+<th>來源位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~24 hours</td>
+<td>robots.txt 更新傳播至 OpenAI 系統所需時間</td>
+<td>開頭段落 [S7]</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>OAI-SearchBot 與 GPTBot User-Agent 字串版本號（可能變更）</td>
+<td>OAI-SearchBot 表格列、GPTBot 表格列 [S7]</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>OAI-AdsBot 與 ChatGPT-User User-Agent 字串版本號</td>
+<td>OAI-AdsBot 表格列、ChatGPT-User 表格列 [S7]</td>
+</tr>
+<tr>
+<td>2026-11-22 11:32:52 CST</td>
+<td>raw 擷取時間</td>
+<td>metadata [S7]</td>
+</tr>
+<tr>
+<td>386675</td>
+<td>原始 HTML 位元組數</td>
+<td>metadata [S7]</td>
+</tr>
+</tbody>
+</table>
+<h2>作者或文件自述限制</h2>
+<ol>
+<li><strong>User-Agent 版本號可能變更</strong>：文件明確標示版本號可能變更，網站管理者不應依賴特定版本號進行識別 [S7]。</li>
+<li><strong>IP 範圍 JSON 為發布時點快照</strong>：OpenAI 發布 IP 範圍 JSON 供驗證，但未說明更新頻率與通知機制 [S7]。</li>
+<li><strong>ChatGPT-User robots.txt 可能不適用</strong>：文件明確說明「Because these actions are initiated by a user, robots.txt rules may not apply」[S7]。</li>
+<li><strong>合併爬取為可能而非保證</strong>：「we may use the results from just one crawl」表示視情況合併，非強制 [S7]。</li>
+<li><strong>~24 小時為估算值</strong>：robots.txt 更新生效時間標示為「~24 hours」，非精確承諾 [S7]。</li>
+<li><strong>僅代表 OpenAI 平台</strong>：不代表 Google、Perplexity 等其他 AI 平台的爬蟲行為 [S7]。</li>
+</ol>
+<h2>與其他來源的關係</h2>
+<ul>
+<li><strong>S2（Google 生成式 AI 指南）</strong>：S2 討論 Google-Extended 與 Googlebot；S7 討論 OpenAI 爬蟲，兩者互補，適用平台不同。</li>
+<li><strong>S3（Google AI 功能）</strong>：S3 強調 robots.txt 控制 Googlebot；S7 說明 OpenAI 爬蟲的 robots.txt 控制，機制類似但平台不同。</li>
+<li><strong>S5（Google 文件更新）</strong>：S5 記錄 Google-Extended 新增（2023-09-28）；S7 為 OpenAI 同類控制機制的文件。</li>
+<li><strong>S6（llms.txt 提案）</strong>：S6 為提案標準；S7 為平台官方爬蟲控制機制，兩者用途不同。</li>
+<li><strong>S8（學生前期研究）</strong>：S8 robots.txt 開放 OAI-SearchBot、GPTBot、ChatGPT-User，參考 S7 爬蟲用途說明 [S8][S7]。</li>
+<li><strong>robots-ai-crawlers 概念頁</strong>：S7 為該概念頁提供 OpenAI 爬蟲的具體 User-Agent、IP 範圍、控制方式等技術細節。</li>
+</ul>
+<h2>對校園網站 GEO 的意義（推論）</h2>
+<ul>
+<li><strong>搜尋能見度與訓練授權分離</strong>：政大可允許 OAI-SearchBot 讓招生內容出現在 ChatGPT 搜尋結果，同時封鎖 GPTBot 表示不授權內容用於模型訓練（推論，基於 S7 獨立控制說明）[S7]。</li>
+<li><strong>ChatGPT-User 需基礎設施層放行</strong>：因 robots.txt 可能不適用，政大需確認 CDN/WAF 未封鎖 ChatGPT-User 的 IP 範圍與 User-Agent，確保用戶即時請求能取得內容（推論，基於 S7 robots.txt 可能不適用）[S7]。</li>
+<li><strong>IP 範圍驗證機制</strong>：政大可定期下載 OpenAI 發布的 IP 範圍 JSON（searchbot.json、gptbot.json、adsbot.json、chatgpt-user.json）更新防火牆白名單（推論，基於 S7 Published IP addresses）[S7]。</li>
+<li><strong>~24 小時生效時間納入驗證清單</strong>：robots.txt 變更後需等待約 24 小時才能在 OpenAI 系統生效，上線驗證需預留時間（推論，基於 S7 ~24 hours）[S7]。</li>
+<li><strong>OAI-AdsBot 僅廣告落地頁驗證</strong>：若政大未在 ChatGPT 投放廣告，OAI-AdsBot 存取頻率極低，可視情況開放（推論，基於 S7 OAI-AdsBot 用途）[S7]。</li>
+</ul>
+<h2>待查</h2>
+<ol>
+<li>ChatGPT-User 實際上是否完全忽略 robots.txt，還是部分遵循？[S7]</li>
+<li>OpenAI 合併爬取（one crawl for both use cases）的具體觸發條件與頻率 [S7]。</li>
+<li>OAI-AdsBot 是否與政大招生網站相關（僅廣告落地頁驗證）[S7]。</li>
+<li>IP 範圍 JSON 更新頻率與通知機制 [S7]。</li>
+<li>User-Agent 版本號變更頻率與向後相容性 [S7]。</li>
+</ol>
+<h2>影響的頁面</h2>
+<ul>
+<li><a href="../concepts/robots-ai-crawlers.html">wiki/concepts/robots-ai-crawlers.md</a></li>
+<li><a href="../overview.html">wiki/overview.md</a></li>
+<li><a href="../index.html">wiki/index.md</a></li>
+<li><a href="../open-questions.html">wiki/open-questions.md</a></li>
+</ul>
+<hr />
+</article>
+</div>
+<footer class="site">政治大學「生成式AI：文字與圖像生成的原理與實務」第十週作業｜何則文（113506023，日文三）。本站為課程教學成果，不是政治大學官方網站。Wiki 與簡報僅使用已公開或學生自撰來源。</footer>
+</body>
+</html>
